@@ -55,7 +55,7 @@
             this.btnInfo.Location = new System.Drawing.Point(12, 115);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(259, 82);
-            this.btnInfo.TabIndex = 0;
+            this.btnInfo.TabIndex = 1;
             this.btnInfo.Text = "Instrukcja";
             this.btnInfo.UseVisualStyleBackColor = true;
             // 
@@ -65,7 +65,7 @@
             this.btnEnd.Location = new System.Drawing.Point(12, 269);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(259, 82);
-            this.btnEnd.TabIndex = 0;
+            this.btnEnd.TabIndex = 2;
             this.btnEnd.Text = "Koniec";
             this.btnEnd.UseVisualStyleBackColor = true;
             // 
