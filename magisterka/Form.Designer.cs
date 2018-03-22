@@ -36,6 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gbAbout = new System.Windows.Forms.GroupBox();
+            this.txtPath = new System.Windows.Forms.TextBox();
+            this.lPath = new System.Windows.Forms.Label();
             this.gbAbout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnLoad.Location = new System.Drawing.Point(12, 12);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(259, 82);
+            this.btnLoad.Size = new System.Drawing.Size(277, 82);
             this.btnLoad.TabIndex = 0;
             this.btnLoad.Text = "Wczytaj";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -54,7 +56,7 @@
             this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnInfo.Location = new System.Drawing.Point(12, 115);
             this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(259, 82);
+            this.btnInfo.Size = new System.Drawing.Size(277, 82);
             this.btnInfo.TabIndex = 1;
             this.btnInfo.Text = "Instrukcja";
             this.btnInfo.UseVisualStyleBackColor = true;
@@ -64,7 +66,7 @@
             this.btnEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnEnd.Location = new System.Drawing.Point(12, 269);
             this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(259, 82);
+            this.btnEnd.Size = new System.Drawing.Size(277, 82);
             this.btnEnd.TabIndex = 2;
             this.btnEnd.Text = "Koniec";
             this.btnEnd.UseVisualStyleBackColor = true;
@@ -72,9 +74,9 @@
             // gbGraph
             // 
             this.gbGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.gbGraph.Location = new System.Drawing.Point(300, 12);
+            this.gbGraph.Location = new System.Drawing.Point(300, 48);
             this.gbGraph.Name = "gbGraph";
-            this.gbGraph.Size = new System.Drawing.Size(832, 479);
+            this.gbGraph.Size = new System.Drawing.Size(832, 443);
             this.gbGraph.TabIndex = 1;
             this.gbGraph.TabStop = false;
             this.gbGraph.Text = "Graf:";
@@ -118,15 +120,36 @@
             this.gbAbout.Controls.Add(this.lNameProgram);
             this.gbAbout.Location = new System.Drawing.Point(12, 357);
             this.gbAbout.Name = "gbAbout";
-            this.gbAbout.Size = new System.Drawing.Size(259, 134);
+            this.gbAbout.Size = new System.Drawing.Size(277, 134);
             this.gbAbout.TabIndex = 3;
             this.gbAbout.TabStop = false;
+            // 
+            // txtPath
+            // 
+            this.txtPath.Enabled = false;
+            this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtPath.Location = new System.Drawing.Point(474, 12);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(658, 30);
+            this.txtPath.TabIndex = 4;
+            // 
+            // lPath
+            // 
+            this.lPath.AutoSize = true;
+            this.lPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lPath.Location = new System.Drawing.Point(295, 13);
+            this.lPath.Name = "lPath";
+            this.lPath.Size = new System.Drawing.Size(160, 25);
+            this.lPath.TabIndex = 0;
+            this.lPath.Text = "Ścieżka do pliku:";
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 503);
+            this.Controls.Add(this.lPath);
+            this.Controls.Add(this.txtPath);
             this.Controls.Add(this.gbAbout);
             this.Controls.Add(this.gbGraph);
             this.Controls.Add(this.btnEnd);
@@ -137,6 +160,7 @@
             this.gbAbout.ResumeLayout(false);
             this.gbAbout.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -150,6 +174,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbAbout;
+        private System.Windows.Forms.TextBox txtPath;
+        private System.Windows.Forms.Label lPath;
     }
 }
 
