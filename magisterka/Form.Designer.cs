@@ -156,7 +156,7 @@
             this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.btnLoad);
             this.Name = "Form";
-            this.Text = "Form1";
+            this.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
             this.gbAbout.ResumeLayout(false);
             this.gbAbout.PerformLayout();
             this.ResumeLayout(false);
