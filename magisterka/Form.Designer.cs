@@ -50,6 +50,7 @@
             this.btnLoad.TabIndex = 0;
             this.btnLoad.Text = "Wczytaj";
             this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // btnInfo
             // 
@@ -70,6 +71,7 @@
             this.btnEnd.TabIndex = 2;
             this.btnEnd.Text = "Koniec";
             this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
             // gbGraph
             // 
