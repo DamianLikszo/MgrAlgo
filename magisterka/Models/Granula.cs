@@ -12,5 +12,10 @@ namespace magisterka.Models
         {
             Inside = new List<int>();
         }
+
+        public void AddToInside(int value)
+        {
+            Inside.Add(value);
+        }
     }
 }

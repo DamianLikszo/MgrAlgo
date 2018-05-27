@@ -9,7 +9,7 @@ namespace magisterka
     public partial class Form : System.Windows.Forms.Form
     {
         public List<List<int>> Data { get; set; }
-        public List<Granula> Granules { get; set; }
+        public ZbGran ZbGran { get; set; }
 
         public Form()
         {
@@ -27,7 +27,7 @@ namespace magisterka
         private void Restart()
         {
             Data = new List<List<int>>();
-            Granules = new List<Granula>();
+            ZbGran = new ZbGran();
         }
 
         private void GenerateGran()
@@ -58,9 +58,9 @@ namespace magisterka
                     {
                         result = Math.Min(result, Data[u][index]);
                     }
-                    granule.Inside.Add(result);
+                    granule.AddToInside(result);
                 }
-                Granules.Add(granule);
+                ZbGran.Add(granule);
             }
         }
 
