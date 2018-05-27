@@ -2,13 +2,14 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
+using magisterka.Models;
 
 namespace magisterka
 {
     public partial class Form : System.Windows.Forms.Form
     {
         public List<List<int>> Data { get; set; }
-        public List<List<int>> Granules { get; set; }
+        public List<Granula> Granules { get; set; }
 
         public Form()
         {
@@ -26,7 +27,7 @@ namespace magisterka
         private void Restart()
         {
             Data = new List<List<int>>();
-            Granules = new List<List<int>>();
+            Granules = new List<Granula>();
         }
 
         private void GenerateGran()
@@ -49,7 +50,7 @@ namespace magisterka
             for (int u = 0; u < Data.Count; u++)
             {
                 int result;
-                var ganule = new List<int>();
+                var granule = new Granula();
                 for (int i = 0; i < Data.Count; i++)
                 {
                     result = 1;
@@ -57,9 +58,9 @@ namespace magisterka
                     {
                         result = Math.Min(result, Data[u][index]);
                     }
-                    ganule.Add(result);
+                    granule.Inside.Add(result);
                 }
-                Granules.Add(ganule);
+                Granules.Add(granule);
             }
         }
 
