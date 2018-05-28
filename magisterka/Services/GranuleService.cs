@@ -44,50 +44,5 @@ namespace magisterka.Services
 
             return zbGran;
         }
-        
-        public Granula SearchMin(ZbGran zbGran)
-        {
-            Granula result = zbGran.Granules[0];
-
-            for (int i = 0; i < zbGran.Granules.Count; i++)
-            {
-                var gran = zbGran.Granules[i];
-
-                if (gran.IsLesser(result))
-                {
-                    result = gran;
-                    i = 0;
-                }
-            }
-
-            return result;
-        }
-        
-        public ZbGran BuildSortedTree(ZbGran zbGran)
-        {
-            var result = new ZbGran();
-            
-            while (zbGran.Granules.Count > 0)
-            {
-                var gran = SearchMin(zbGran);
-                zbGran.Remove(gran);
-
-                if(result.Granules.Count != 0)
-                {
-                    foreach (var granMax in result.GetMax())
-                    {
-                        if(gran.IsGreaterOrEqual(granMax))
-                        {
-                            granMax.Parent.Add(gran);
-                            gran.Child.Add(granMax);
-                        }
-                    }
-                }
-                
-                result.Add(gran);
-            }
-
-            return result;
-        }
     }
 }

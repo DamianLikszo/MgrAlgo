@@ -38,6 +38,8 @@
             this.gbAbout = new System.Windows.Forms.GroupBox();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.lPath = new System.Windows.Forms.Label();
+            this.lResult = new System.Windows.Forms.Label();
+            this.gbGraph.SuspendLayout();
             this.gbAbout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +77,7 @@
             // 
             // gbGraph
             // 
+            this.gbGraph.Controls.Add(this.lResult);
             this.gbGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.gbGraph.Location = new System.Drawing.Point(300, 48);
             this.gbGraph.Name = "gbGraph";
@@ -145,6 +148,16 @@
             this.lPath.TabIndex = 0;
             this.lPath.Text = "Ścieżka do pliku:";
             // 
+            // lResult
+            // 
+            this.lResult.AutoSize = true;
+            this.lResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.8F);
+            this.lResult.Location = new System.Drawing.Point(6, 30);
+            this.lResult.Name = "lResult";
+            this.lResult.Size = new System.Drawing.Size(128, 26);
+            this.lResult.TabIndex = 0;
+            this.lResult.Text = "Wczytaj plik";
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -159,6 +172,8 @@
             this.Controls.Add(this.btnLoad);
             this.Name = "Form";
             this.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
+            this.gbGraph.ResumeLayout(false);
+            this.gbGraph.PerformLayout();
             this.gbAbout.ResumeLayout(false);
             this.gbAbout.PerformLayout();
             this.ResumeLayout(false);
@@ -178,6 +193,7 @@
         private System.Windows.Forms.GroupBox gbAbout;
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Label lPath;
+        private System.Windows.Forms.Label lResult;
     }
 }
 
