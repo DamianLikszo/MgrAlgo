@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace magisterka.Models
 {
+    //ienumerator po granules
     public class ZbGran
     {
         public List<Granula> Granules { get; set; }
@@ -11,9 +13,8 @@ namespace magisterka.Models
             Granules = new List<Granula>();
         }
 
-        public void Add(Granula gran)
-        {
-            Granules.Add(gran);
-        }
+        public void Add(Granula gran) => Granules.Add(gran);
+        public void Remove(Granula gran) => Granules.Remove(gran);
+        public List<Granula> GetMax() => Granules.Where(o => o.isMax).ToList();
     }
 }
