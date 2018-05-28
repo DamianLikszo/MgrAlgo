@@ -52,5 +52,22 @@ namespace magisterka.Models
 
             return true;
         }
+
+        public override string ToString()
+        {
+            var result = "{";
+            
+            for (int i = 0; i < Inside.Count; i++)
+            {
+                if (i != 0)
+                    result += ", ";
+
+                result += Inside[i];
+            }
+
+            result += "}";
+
+            return result;
+        }
     }
 }
