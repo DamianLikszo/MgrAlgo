@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using magisterka.Models;
 
 namespace magisterka.Interfaces
 {
     public interface IFileReader
     {
-        List<List<int>> OpenAndReadFile();
+        CoverageFile OpenAndReadFile();
     }
 }

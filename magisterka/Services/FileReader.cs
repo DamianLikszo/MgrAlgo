@@ -2,15 +2,16 @@
 using System.IO;
 using System.Windows.Forms;
 using magisterka.Interfaces;
+using magisterka.Models;
 
 namespace magisterka.Services
 {
     public class FileReader : IFileReader
     {
 
-        public List<List<int>> OpenAndReadFile()
+        public CoverageFile OpenAndReadFile()
         {
-            var result = new List<List<int>>();
+            var result = new CoverageFile();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Plik tekstowe|*.csv";
@@ -18,6 +19,7 @@ namespace magisterka.Services
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                result.Path = openFileDialog.FileName;
                 //try
                 using (StreamReader sr = new StreamReader(openFileDialog.FileName))
                 {
@@ -33,7 +35,7 @@ namespace magisterka.Services
                             row.Add(int.Parse(aLine[i]));
                         }
 
-                        result.Add(row);
+                        result.Insert(row);
                     }
                 }
             }

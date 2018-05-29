@@ -54,6 +54,7 @@
     <Compile Include="Interfaces\IFileReader.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
     <Compile Include="Interfaces\IZbGranService.cs" />
+    <Compile Include="Models\CoverageFile.cs" />
     <Compile Include="Models\Granula.cs" />
     <Compile Include="Models\ZbGran.cs" />
     <Compile Include="Program.cs" />

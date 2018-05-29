@@ -18,9 +18,10 @@ namespace magisterka
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            var data = FileReader.OpenAndReadFile();
-            var zbGran = GranuleService.GenerateGran(data);
+            var file = FileReader.OpenAndReadFile();
+            var zbGran = GranuleService.GenerateGran(file.Data);
             var treeGran = ZbGranService.BuildSortedTree(zbGran);
+            txtPath.Text = file.Path;
             lResult.Text = ZbGranService.ReadResult(treeGran);
         }
         
