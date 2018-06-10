@@ -13,8 +13,14 @@ namespace magisterka.Models
             Granules = new List<Granula>();
         }
 
+        public ZbGran(ZbGran zbGran) : base()
+        {
+            Granules = zbGran.Granules.ToList();
+        }
+
         public void Add(Granula gran) => Granules.Add(gran);
         public void Remove(Granula gran) => Granules.Remove(gran);
         public List<Granula> GetMax() => Granules.Where(o => o.isMax).ToList();
+        public int Count() => Granules.Count();
     }
 }

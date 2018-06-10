@@ -168,6 +168,7 @@
             this.btnSaveGran.TabIndex = 1;
             this.btnSaveGran.Text = "Zapisz Geanule";
             this.btnSaveGran.UseVisualStyleBackColor = true;
+            this.btnSaveGran.Click += new System.EventHandler(this.btnSaveGran_Click);
             // 
             // Form
             // 

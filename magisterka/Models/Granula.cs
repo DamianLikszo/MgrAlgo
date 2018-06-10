@@ -53,6 +53,7 @@ namespace magisterka.Models
             return true;
         }
 
+        public int Count() => Inside.Count;
         public override string ToString() => "{" + string.Join(", ", Inside) + "}";
     }
 }

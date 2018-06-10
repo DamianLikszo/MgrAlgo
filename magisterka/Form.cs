@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using magisterka.Interfaces;
+using magisterka.Models;
 using magisterka.Services;
 
 namespace magisterka
@@ -11,6 +12,8 @@ namespace magisterka
         public readonly IGranuleService GranuleService = new GranuleService();
         public readonly IZbGranService ZbGranService = new ZbGranService();
 
+        private ZbGran _zbGran { get; set; }
+
         public Form()
         {
             InitializeComponent();
@@ -18,16 +21,24 @@ namespace magisterka
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            var file = FileReader.OpenAndReadFile();
-            var zbGran = GranuleService.GenerateGran(file.Data);
-            var treeGran = ZbGranService.BuildSortedTree(zbGran);
-            txtPath.Text = file.Path;
+            var coverage = FileReader.OpenAndReadFile();
+            _zbGran = GranuleService.GenerateGran(coverage.Data);
+            var treeGran = ZbGranService.BuildSortedTree(_zbGran);
+            txtPath.Text = coverage.Path;
             lResult.Text = ZbGranService.ReadResult(treeGran);
         }
         
         private void btnEnd_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnSaveGran_Click(object sender, EventArgs e)
+        {
+            if (_zbGran == null)
+                return;
+
+            FileReader.SaveFile(_zbGran.Granules);
         }
     }
 }

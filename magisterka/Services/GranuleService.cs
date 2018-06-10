@@ -30,12 +30,17 @@ namespace magisterka.Services
             {
                 int result;
                 var granule = new Granula();
+
                 for (int i = 0; i < data.Count; i++)
                 {
                     result = 1;
-                    foreach (var index in indexSelect[i])
+                    foreach (var index in indexSelect[u])
                     {
-                        result = Math.Min(result, data[u][index]);
+                        if (result == 0)
+                            break;
+
+                        var test = data[i][index];
+                        result = Math.Min(result, data[i][index]);
                     }
                     granule.AddToInside(result);
                 }

@@ -24,8 +24,9 @@ namespace magisterka.Services
             return result;
         }
 
-        public ZbGran BuildSortedTree(ZbGran zbGran)
+        public ZbGran BuildSortedTree(ZbGran zbGranOrg)
         {
+            var zbGran = new ZbGran(zbGranOrg);
             var result = new ZbGran();
 
             while (zbGran.Granules.Count > 0)
