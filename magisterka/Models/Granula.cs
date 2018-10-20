@@ -20,39 +20,6 @@ namespace magisterka.Models
         }
 
         public void AddToInside(int value) => Inside.Add(value);
-
-        public bool IsLesser(Granula gran)
-        {
-            if (Inside.Count != gran.Inside.Count)
-                return false;
-
-            for (int i = 0; i < Inside.Count; i++)
-            {
-                if (gran.Inside[i] >= Inside[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public bool IsGreaterOrEqual(Granula gran)
-        {
-            if (Inside.Count != gran.Inside.Count)
-                return false;
-
-            for (int i = 0; i < Inside.Count; i++)
-            {
-                if (gran.Inside[i] < Inside[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public int Count() => Inside.Count;
         public override string ToString() => "{" + string.Join(", ", Inside) + "}";
     }

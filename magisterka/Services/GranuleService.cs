@@ -40,5 +40,37 @@ namespace magisterka.Services
 
             return zbGran;
         }
+
+        public bool IsGreaterOrEqual(Granula gran1, Granula gran2)
+        {
+            if (gran1.Inside.Count != gran2.Inside.Count)
+                return false;
+
+            for (int i = 0; i < gran1.Inside.Count; i++)
+            {
+                if (gran2.Inside[i] < gran1.Inside[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool IsLesser(Granula gran1, Granula gran2)
+        {
+            if (gran1.Inside.Count != gran2.Inside.Count)
+                return false;
+
+            for (int i = 0; i < gran1.Inside.Count; i++)
+            {
+                if (gran2.Inside[i] > gran1.Inside[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

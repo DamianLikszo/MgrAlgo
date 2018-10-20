@@ -10,14 +10,16 @@ namespace magisterka.Services
         {
             Granula result = zbGran.Granules[0];
 
-            for (int i = 0; i < zbGran.Granules.Count; i++)
+            //if count > 2
+
+            for (int i = 1; i < zbGran.Granules.Count; i++)
             {
                 var gran = zbGran.Granules[i];
 
-                if (gran.IsLesser(result))
+                if (result.IsLesser(gran))
                 {
                     result = gran;
-                    i = 0;
+                    i = 0; // moze jakas optymalizacja
                 }
             }
 
@@ -44,6 +46,10 @@ namespace magisterka.Services
                             gran.Child.Add(granMax);
                         }
                     }
+
+                    // a co jeżeli nie będzie zawierania na maks ?
+                    // Powienienem wtedy sprawdzić wzdłuż łańcucha i dodać gdzieś element
+                    // Trzeba się też zastanowić czy mogę mieć 2 elementy minimalne
                 }
 
                 result.Add(gran);
