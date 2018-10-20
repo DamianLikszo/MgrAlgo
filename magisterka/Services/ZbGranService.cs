@@ -6,6 +6,8 @@ namespace magisterka.Services
 {
     public class ZbGranService : IZbGranService
     {
+        public readonly IGranuleService GranuleService = new GranuleService();
+
         public Granula SearchMin(ZbGran zbGran)
         {
             Granula result = zbGran.Granules[0];
@@ -16,7 +18,7 @@ namespace magisterka.Services
             {
                 var gran = zbGran.Granules[i];
 
-                if (result.IsLesser(gran))
+                if(GranuleService.IsLesser(result, gran))
                 {
                     result = gran;
                     i = 0; // moze jakas optymalizacja
@@ -40,7 +42,7 @@ namespace magisterka.Services
                 {
                     foreach (var granMax in result.GetMax())
                     {
-                        if (gran.IsGreaterOrEqual(granMax))
+                        if(GranuleService.IsGreaterOrEqual(gran, granMax))
                         {
                             granMax.Parent.Add(gran);
                             gran.Child.Add(granMax);
