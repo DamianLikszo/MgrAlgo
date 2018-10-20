@@ -21,6 +21,7 @@ namespace magisterka.Models
 
         public void AddToInside(int value) => Inside.Add(value);
         public int Count() => Inside.Count;
+
         public override string ToString() => "{" + string.Join(", ", Inside) + "}";
     }
 }

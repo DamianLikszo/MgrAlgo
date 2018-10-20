@@ -1,31 +1,22 @@
 ﻿using magisterka.Interfaces;
 using magisterka.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace magisterka.Services
 {
     public class ZbGranService : IZbGranService
     {
         public readonly IGranuleService GranuleService = new GranuleService();
-
+        
         public Granula SearchMin(ZbGran zbGran)
         {
-            Granula result = zbGran.Granules[0];
-
-            //if count > 2
-
-            for (int i = 1; i < zbGran.Granules.Count; i++)
+            if(zbGran.Granules.Count == 0)
             {
-                var gran = zbGran.Granules[i];
-
-                if(GranuleService.IsLesser(result, gran))
-                {
-                    result = gran;
-                    i = 0; // moze jakas optymalizacja
-                }
+                return null;
             }
 
-            return result;
+            return zbGran.Granules[0];
         }
 
         public ZbGran BuildSortedTree(ZbGran zbGranOrg)
@@ -36,6 +27,12 @@ namespace magisterka.Services
             while (zbGran.Granules.Count > 0)
             {
                 var gran = SearchMin(zbGran);
+
+                if (gran == null)
+                {
+                    break;
+                }
+
                 zbGran.Remove(gran);
 
                 if (result.Granules.Count != 0)
@@ -97,6 +94,11 @@ namespace magisterka.Services
             {
                 getRoute(child[i], listOfRoute, previous);
             }
+        }
+
+        public void SortZbGran(ZbGran zbGran)
+        {
+            zbGran.Granules.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
         }
     }
 }

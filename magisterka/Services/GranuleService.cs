@@ -48,7 +48,7 @@ namespace magisterka.Services
 
             for (int i = 0; i < gran1.Inside.Count; i++)
             {
-                if (gran2.Inside[i] < gran1.Inside[i])
+                if (gran1.Inside[i] < gran2.Inside[i])
                 {
                     return false;
                 }
