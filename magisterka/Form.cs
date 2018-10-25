@@ -11,6 +11,7 @@ namespace magisterka
         public readonly IFileReader FileReader = new FileReader();
         public readonly IGranuleService GranuleService = new GranuleService();
         public readonly IZbGranService ZbGranService = new ZbGranService();
+        public readonly IDevService devService = new DevService();
 
         private ZbGran _zbGran { get; set; }
 
@@ -23,6 +24,8 @@ namespace magisterka
         {
             var coverage = FileReader.OpenAndReadFile();
             _zbGran = GranuleService.GenerateGran(coverage.Data);
+            //DEV 
+            _zbGran = devService.pushGran();
             ZbGranService.SortZbGran(_zbGran);
             var treeGran = ZbGranService.BuildSortedTree(_zbGran);
             txtPath.Text = coverage.Path;

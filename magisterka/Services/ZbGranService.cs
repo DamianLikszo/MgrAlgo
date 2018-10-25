@@ -8,10 +8,10 @@ namespace magisterka.Services
     public class ZbGranService : IZbGranService
     {
         public readonly IGranuleService GranuleService = new GranuleService();
-        
+
         public Granula SearchMin(ZbGran zbGran)
         {
-            if(zbGran.Granules.Count == 0)
+            if (zbGran.Granules.Count == 0)
             {
                 return null;
             }
@@ -26,32 +26,24 @@ namespace magisterka.Services
 
             while (zbGran.Granules.Count > 0)
             {
-                var gran = SearchMin(zbGran);
+                var granNew = SearchMin(zbGran);
 
-                if (gran == null)
+                if (granNew == null)
                 {
                     break;
                 }
 
-                zbGran.Remove(gran);
+                zbGran.Remove(granNew);
 
                 if (result.Granules.Count != 0)
                 {
                     foreach (var granMax in result.GetMax())
                     {
-                        if(GranuleService.IsGreaterOrEqual(gran, granMax))
-                        {
-                            granMax.Parent.Add(gran);
-                            gran.Child.Add(granMax);
-                        }
+                        BuildSortedTreeRef(granNew, granMax);       
                     }
-
-                    // a co jeżeli nie będzie zawierania na maks ?
-                    // Powienienem wtedy sprawdzić wzdłuż łańcucha i dodać gdzieś element
-                    // Trzeba się też zastanowić czy mogę mieć 2 elementy minimalne
                 }
 
-                result.Add(gran);
+                result.Add(granNew);
             }
 
             return result;
@@ -78,6 +70,11 @@ namespace magisterka.Services
             return result;
         }
 
+        public void SortZbGran(ZbGran zbGran)
+        {
+            zbGran.Granules.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
+        }
+
         private void getRoute(Granula gran, List<string> listOfRoute, List<string> previous)
         {
             var child = gran.Child;
@@ -96,9 +93,24 @@ namespace magisterka.Services
             }
         }
 
-        public void SortZbGran(ZbGran zbGran)
+        private void BuildSortedTreeRef(Granula granNew, Granula gran)
         {
-            zbGran.Granules.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
+            if (GranuleService.IsGreaterOrEqual(granNew, gran))
+            {
+                //duplicat z innej gałęzi max
+                if(!gran.Parent.Contains(granNew))
+                {
+                    gran.Parent.Add(granNew);
+                    granNew.Child.Add(gran);
+                }
+
+                return;
+            }
+
+            foreach (var granChild in gran.Child)
+            {
+                BuildSortedTreeRef(granNew, granChild);
+            }
         }
     }
 }
