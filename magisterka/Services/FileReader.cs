@@ -55,7 +55,7 @@ namespace magisterka.Services
                 //try
                 using (StreamWriter writer = new StreamWriter(saveFileDialog.OpenFile()))
                 {
-                    printHeader(writer, data);
+                    _printHeader(writer, data);
                     
                     if(data.Count != 0)
                     {
@@ -80,7 +80,7 @@ namespace magisterka.Services
             return true;
         }
 
-        private void printHeader(StreamWriter writer, List<Granula> data)
+        private void _printHeader(StreamWriter writer, List<Granula> data)
         {
             writer.Write("obiekt/g(obiekt)");
 

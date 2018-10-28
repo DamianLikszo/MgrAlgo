@@ -40,7 +40,7 @@ namespace magisterka.Services
                 {
                     foreach (var granMax in result.GetMax())
                     {
-                        BuildSortedTreeRef(granNew, granMax);       
+                        _buildSortedTreeRef(granNew, granMax);       
                     }
                 }
 
@@ -62,7 +62,7 @@ namespace magisterka.Services
 
                 var listOfRoute = new List<string>();
                 var previous = new List<string>();
-                getRoute(granMax[i], listOfRoute, previous);
+                _getRoute(granMax[i], listOfRoute, previous);
                 result += "{" + string.Join(", ", listOfRoute) + "}";
             }
 
@@ -79,7 +79,7 @@ namespace magisterka.Services
             {
                 var listOfRoute = new List<TreeNode>();
                 var previous = new List<TreeNode>();
-                getBranchTree(gran, listOfRoute, previous);
+                _getBranchTree(gran, listOfRoute, previous);
 
                 var branch = new TreeNode(gran.ToString());
                 listOfRoute.Remove(listOfRoute.FirstOrDefault());
@@ -96,7 +96,7 @@ namespace magisterka.Services
             zbGran.Granules.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
         }
 
-        private void getRoute(Granula gran, List<string> listOfRoute, List<string> previous)
+        private void _getRoute(Granula gran, List<string> listOfRoute, List<string> previous)
         {
             var child = gran.Child;
             previous.Add(gran.ToString());
@@ -110,11 +110,11 @@ namespace magisterka.Services
 
             for (int i = 0; i < child.Count; i++)
             {
-                getRoute(child[i], listOfRoute, previous);
+                _getRoute(child[i], listOfRoute, previous);
             }
         }
 
-        private void getBranchTree(Granula gran, List<TreeNode> listOfRoute, List<TreeNode> previous)
+        private void _getBranchTree(Granula gran, List<TreeNode> listOfRoute, List<TreeNode> previous)
         {
             var child = gran.Child;
             previous.Add(new TreeNode(gran.ToString()));
@@ -127,11 +127,11 @@ namespace magisterka.Services
 
             foreach (var item in child)
             {
-                getBranchTree(item, listOfRoute, previous);
+                _getBranchTree(item, listOfRoute, previous);
             }
         }
 
-        private void BuildSortedTreeRef(Granula granNew, Granula gran)
+        private void _buildSortedTreeRef(Granula granNew, Granula gran)
         {
             if (GranuleService.IsGreaterOrEqual(granNew, gran))
             {
@@ -147,7 +147,7 @@ namespace magisterka.Services
 
             foreach (var granChild in gran.Child)
             {
-                BuildSortedTreeRef(granNew, granChild);
+                _buildSortedTreeRef(granNew, granChild);
             }
         }
     }
