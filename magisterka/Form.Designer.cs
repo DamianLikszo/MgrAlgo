@@ -32,7 +32,7 @@
             this.btnInfo = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
             this.gbGraph = new System.Windows.Forms.GroupBox();
-            this.lResult = new System.Windows.Forms.Label();
+            this.treeResult = new System.Windows.Forms.TreeView();
             this.lNameProgram = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,6 +48,7 @@
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnLoad.Location = new System.Drawing.Point(12, 12);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(277, 82);
             this.btnLoad.TabIndex = 0;
@@ -59,6 +60,7 @@
             // 
             this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnInfo.Location = new System.Drawing.Point(12, 212);
+            this.btnInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(277, 82);
             this.btnInfo.TabIndex = 1;
@@ -69,6 +71,7 @@
             // 
             this.btnEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnEnd.Location = new System.Drawing.Point(12, 310);
+            this.btnEnd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(277, 82);
             this.btnEnd.TabIndex = 2;
@@ -78,30 +81,30 @@
             // 
             // gbGraph
             // 
-            this.gbGraph.Controls.Add(this.lResult);
+            this.gbGraph.Controls.Add(this.treeResult);
             this.gbGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.gbGraph.Location = new System.Drawing.Point(300, 48);
+            this.gbGraph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbGraph.Name = "gbGraph";
+            this.gbGraph.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbGraph.Size = new System.Drawing.Size(832, 489);
             this.gbGraph.TabIndex = 1;
             this.gbGraph.TabStop = false;
-            this.gbGraph.Text = "Graf:";
+            this.gbGraph.Text = "Wynik:";
             // 
-            // lResult
+            // treeResult
             // 
-            this.lResult.AutoSize = true;
-            this.lResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.8F);
-            this.lResult.Location = new System.Drawing.Point(6, 30);
-            this.lResult.Name = "lResult";
-            this.lResult.Size = new System.Drawing.Size(128, 26);
-            this.lResult.TabIndex = 0;
-            this.lResult.Text = "Wczytaj plik";
+            this.treeResult.Location = new System.Drawing.Point(7, 33);
+            this.treeResult.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeResult.Name = "treeResult";
+            this.treeResult.Size = new System.Drawing.Size(820, 440);
+            this.treeResult.TabIndex = 1;
             // 
             // lNameProgram
             // 
             this.lNameProgram.AutoSize = true;
             this.lNameProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.lNameProgram.Location = new System.Drawing.Point(6, 18);
+            this.lNameProgram.Location = new System.Drawing.Point(5, 18);
             this.lNameProgram.MaximumSize = new System.Drawing.Size(244, 60);
             this.lNameProgram.MinimumSize = new System.Drawing.Size(244, 60);
             this.lNameProgram.Name = "lNameProgram";
@@ -113,7 +116,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.label1.Location = new System.Drawing.Point(6, 98);
+            this.label1.Location = new System.Drawing.Point(5, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 2;
@@ -134,8 +137,10 @@
             this.gbAbout.Controls.Add(this.label2);
             this.gbAbout.Controls.Add(this.label1);
             this.gbAbout.Controls.Add(this.lNameProgram);
-            this.gbAbout.Location = new System.Drawing.Point(12, 403);
+            this.gbAbout.Location = new System.Drawing.Point(12, 402);
+            this.gbAbout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbAbout.Name = "gbAbout";
+            this.gbAbout.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbAbout.Size = new System.Drawing.Size(277, 134);
             this.gbAbout.TabIndex = 3;
             this.gbAbout.TabStop = false;
@@ -144,16 +149,17 @@
             // 
             this.txtPath.Enabled = false;
             this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtPath.Location = new System.Drawing.Point(474, 12);
+            this.txtPath.Location = new System.Drawing.Point(475, 12);
+            this.txtPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(658, 30);
+            this.txtPath.Size = new System.Drawing.Size(657, 30);
             this.txtPath.TabIndex = 4;
             // 
             // lPath
             // 
             this.lPath.AutoSize = true;
             this.lPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lPath.Location = new System.Drawing.Point(295, 13);
+            this.lPath.Location = new System.Drawing.Point(295, 14);
             this.lPath.Name = "lPath";
             this.lPath.Size = new System.Drawing.Size(160, 25);
             this.lPath.TabIndex = 0;
@@ -163,6 +169,7 @@
             // 
             this.btnSaveGran.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnSaveGran.Location = new System.Drawing.Point(12, 114);
+            this.btnSaveGran.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSaveGran.Name = "btnSaveGran";
             this.btnSaveGran.Size = new System.Drawing.Size(277, 82);
             this.btnSaveGran.TabIndex = 1;
@@ -183,10 +190,10 @@
             this.Controls.Add(this.btnSaveGran);
             this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.btnLoad);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form";
             this.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
             this.gbGraph.ResumeLayout(false);
-            this.gbGraph.PerformLayout();
             this.gbAbout.ResumeLayout(false);
             this.gbAbout.PerformLayout();
             this.ResumeLayout(false);
@@ -206,8 +213,8 @@
         private System.Windows.Forms.GroupBox gbAbout;
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Label lPath;
-        private System.Windows.Forms.Label lResult;
         private System.Windows.Forms.Button btnSaveGran;
+        private System.Windows.Forms.TreeView treeResult;
     }
 }
 

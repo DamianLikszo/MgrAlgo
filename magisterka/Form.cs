@@ -29,7 +29,8 @@ namespace magisterka
             ZbGranService.SortZbGran(_zbGran);
             var treeGran = ZbGranService.BuildSortedTree(_zbGran);
             txtPath.Text = coverage.Path;
-            lResult.Text = ZbGranService.ReadResult(treeGran);
+            treeResult.Nodes.Clear();
+            treeResult.Nodes.AddRange(ZbGranService.DrawTreeView(treeGran));
         }
         
         private void btnEnd_Click(object sender, EventArgs e)

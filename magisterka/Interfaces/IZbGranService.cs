@@ -1,4 +1,5 @@
 ﻿using magisterka.Models;
+using System.Windows.Forms;
 
 namespace magisterka.Interfaces
 {
@@ -8,5 +9,6 @@ namespace magisterka.Interfaces
         void SortZbGran(ZbGran zbGran);
         ZbGran BuildSortedTree(ZbGran zbGranOrg);
         string ReadResult(ZbGran treeGran);
+        TreeNode[] DrawTreeView(ZbGran zbGran);
     }
 }

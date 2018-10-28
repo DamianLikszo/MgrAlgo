@@ -2,6 +2,7 @@
 using magisterka.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace magisterka.Services
 {
@@ -70,6 +71,26 @@ namespace magisterka.Services
             return result;
         }
 
+        public TreeNode[] DrawTreeView(ZbGran zbGran)
+        {
+            var result = new List<TreeNode>();
+
+            foreach (var gran in zbGran.GetMax())
+            {
+                var listOfRoute = new List<TreeNode>();
+                var previous = new List<TreeNode>();
+                getBranchTree(gran, listOfRoute, previous);
+
+                var branch = new TreeNode(gran.ToString());
+                listOfRoute.Remove(listOfRoute.FirstOrDefault());
+
+                branch.Nodes.AddRange(listOfRoute.ToArray());
+                result.Add(branch);
+            }
+
+            return result.ToArray();
+        }
+
         public void SortZbGran(ZbGran zbGran)
         {
             zbGran.Granules.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
@@ -90,6 +111,23 @@ namespace magisterka.Services
             for (int i = 0; i < child.Count; i++)
             {
                 getRoute(child[i], listOfRoute, previous);
+            }
+        }
+
+        private void getBranchTree(Granula gran, List<TreeNode> listOfRoute, List<TreeNode> previous)
+        {
+            var child = gran.Child;
+            previous.Add(new TreeNode(gran.ToString()));
+            
+            if(child.Count == 0)
+            {
+                listOfRoute.AddRange(previous);
+                return;
+            }
+
+            foreach (var item in child)
+            {
+                getBranchTree(item, listOfRoute, previous);
             }
         }
 
