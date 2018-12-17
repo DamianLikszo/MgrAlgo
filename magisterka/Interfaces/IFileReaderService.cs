@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace magisterka.Interfaces
 {
-    public interface IFileReader
+    public interface IFileReaderService
     {
         CoverageFile OpenAndReadFile();
         bool SaveFile(List<Granula> data);

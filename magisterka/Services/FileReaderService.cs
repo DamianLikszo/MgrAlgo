@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using magisterka.Interfaces;
 using magisterka.Models;
 
 namespace magisterka.Services
 {
-    public class FileReader : IFileReader
+    public class FileReaderService : Interfaces.IFileReaderService
     {
         private readonly char _separator = ';';
 

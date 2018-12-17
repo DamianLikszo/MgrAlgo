@@ -2,35 +2,39 @@
 using System.Windows.Forms;
 using magisterka.Interfaces;
 using magisterka.Models;
-using magisterka.Services;
 
 namespace magisterka
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        public readonly IFileReader FileReader = new FileReader();
-        public readonly IGranuleService GranuleService = new GranuleService();
-        public readonly IZbGranService ZbGranService = new ZbGranService();
-        public readonly IDevService devService = new DevService();
+        private readonly Interfaces.IFileReaderService fileReaderService;
+        private readonly IGranuleService granuleService;
+        private readonly IZbGranService zbGranService;
+        private readonly IDevService devService;
 
         private ZbGran _zbGran { get; set; }
 
-        public Form()
+        public Form(Interfaces.IFileReaderService fileReaderService, IGranuleService granuleService, IZbGranService zbGranService,
+            IDevService devService)
         {
+            this.fileReaderService = fileReaderService;
+            this.granuleService = granuleService;
+            this.zbGranService = zbGranService;
+            this.devService = devService;
             InitializeComponent();
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            var coverage = FileReader.OpenAndReadFile();
-            _zbGran = GranuleService.GenerateGran(coverage.Data);
+            var coverage = fileReaderService.OpenAndReadFile();
+            _zbGran = granuleService.GenerateGran(coverage.Data);
             //DEV 
             //_zbGran = devService.pushGran();
-            ZbGranService.SortZbGran(_zbGran);
-            var treeGran = ZbGranService.BuildSortedTree(_zbGran);
+            zbGranService.SortZbGran(_zbGran);
+            var treeGran = zbGranService.BuildSortedTree(_zbGran);
             txtPath.Text = coverage.Path;
             treeResult.Nodes.Clear();
-            treeResult.Nodes.AddRange(ZbGranService.DrawTreeView(treeGran));
+            treeResult.Nodes.AddRange(zbGranService.DrawTreeView(treeGran));
         }
         
         private void btnEnd_Click(object sender, EventArgs e)
@@ -43,7 +47,7 @@ namespace magisterka
             if (_zbGran == null)
                 return;
 
-            FileReader.SaveFile(_zbGran.Granules);
+            fileReaderService.SaveFile(_zbGran.Granules);
         }
     }
 }

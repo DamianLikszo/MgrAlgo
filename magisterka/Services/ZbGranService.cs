@@ -8,7 +8,12 @@ namespace magisterka.Services
 {
     public class ZbGranService : IZbGranService
     {
-        public readonly IGranuleService GranuleService = new GranuleService();
+        private readonly IGranuleService granuleService;
+
+        public ZbGranService(IGranuleService granuleService)
+        {
+            this.granuleService = granuleService;
+        }
 
         public Granula SearchMin(ZbGran zbGran)
         {
@@ -134,7 +139,7 @@ namespace magisterka.Services
         private void _buildSortedTreeRef(Granula granNew, Granula gran)
         {
             // NOWE: sprawdzić czy powinno byc equal
-            if (GranuleService.IsGreaterOrEqual(granNew, gran))
+            if (granuleService.IsGreaterOrEqual(granNew, gran))
             {
                 //duplicat z innej gałęzi max
                 if(!gran.Parent.Contains(granNew))
