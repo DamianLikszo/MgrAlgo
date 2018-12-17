@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using magisterka.Interfaces;
@@ -21,23 +22,28 @@ namespace magisterka.Services
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 result.Path = openFileDialog.FileName;
-                //try
-                using (StreamReader sr = new StreamReader(openFileDialog.FileName))
+                try
                 {
-                    while (!sr.EndOfStream)
+                    using (StreamReader sr = new StreamReader(openFileDialog.FileName))
                     {
-                        // maybe header
-                        // check length row
-                        var aLine = sr.ReadLine().Split(_separator);
-                        var row = new List<int>();
-
-                        for (int i = 0; i < aLine.Length - 1; i++)
+                        while (!sr.EndOfStream)
                         {
-                            row.Add(int.Parse(aLine[i]));
-                        }
+                            // maybe header
+                            // check length row
+                            var aLine = sr.ReadLine().Split(_separator);
+                            var row = new List<int>();
 
-                        result.Insert(row);
+                            for (int i = 0; i < aLine.Length - 1; i++)
+                            {
+                                row.Add(int.Parse(aLine[i]));
+                            }
+
+                            result.Insert(row);
+                        }
                     }
+                } catch( Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
 
@@ -52,28 +58,34 @@ namespace magisterka.Services
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //try
-                using (StreamWriter writer = new StreamWriter(saveFileDialog.OpenFile()))
+                try
                 {
-                    _printHeader(writer, data);
-                    
-                    if(data.Count != 0)
+                    using (StreamWriter writer = new StreamWriter(saveFileDialog.OpenFile()))
                     {
-                        var length = data[0].Count();
+                        _printHeader(writer, data);
 
-                        for (int i = 0; i < length; i++)
+                        if (data.Count != 0)
                         {
-                            writer.Write($"u{i+1}");
+                            var length = data[0].Count();
 
-                            foreach (var granula in data)
+                            for (int i = 0; i < length; i++)
                             {
-                                writer.Write(_separator + granula.Inside[i].ToString());
+                                writer.Write($"u{i + 1}");
+
+                                foreach (var granula in data)
+                                {
+                                    writer.Write(_separator + granula.Inside[i].ToString());
+                                }
+                                writer.WriteLine();
                             }
-                            writer.WriteLine();
                         }
+
+                        writer.Close();
                     }
-                    
-                    writer.Close();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
 

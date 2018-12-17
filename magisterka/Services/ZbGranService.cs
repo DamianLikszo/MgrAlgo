@@ -133,6 +133,7 @@ namespace magisterka.Services
 
         private void _buildSortedTreeRef(Granula granNew, Granula gran)
         {
+            // NOWE: sprawdzić czy powinno byc equal
             if (GranuleService.IsGreaterOrEqual(granNew, gran))
             {
                 //duplicat z innej gałęzi max

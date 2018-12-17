@@ -25,7 +25,7 @@ namespace magisterka
             var coverage = FileReader.OpenAndReadFile();
             _zbGran = GranuleService.GenerateGran(coverage.Data);
             //DEV 
-            _zbGran = devService.pushGran();
+            //_zbGran = devService.pushGran();
             ZbGranService.SortZbGran(_zbGran);
             var treeGran = ZbGranService.BuildSortedTree(_zbGran);
             txtPath.Text = coverage.Path;
