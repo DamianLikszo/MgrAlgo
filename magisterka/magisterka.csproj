@@ -57,6 +57,8 @@
     <Compile Include="Interfaces\IDevService.cs" />
     <Compile Include="Interfaces\IFileReaderService.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
+    <Compile Include="Interfaces\IMyMessageBox.cs" />
+    <Compile Include="Interfaces\IStreamReader.cs" />
     <Compile Include="Interfaces\IZbGranService.cs" />
     <Compile Include="Models\CoverageFile.cs" />
     <Compile Include="Models\Granula.cs" />
@@ -65,8 +67,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DevService.cs" />
     <Compile Include="Services\FileReaderService.cs" />
+    <Compile Include="Services\FileStreamReader.cs" />
     <Compile Include="Services\GranuleService.cs" />
+    <Compile Include="Services\MyMessageBox.cs" />
     <Compile Include="Services\ZbGranService.cs" />
+    <Compile Include="Validators\CoverageFileValidator.cs" />
+    <Compile Include="Validators\ICoverageFileValidator.cs" />
     <EmbeddedResource Include="Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
     </EmbeddedResource>

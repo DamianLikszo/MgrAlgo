@@ -7,11 +7,10 @@ namespace magisterka.Models
         public List<List<int>> Data { get; set; }
         public string Path { get; set; }
 
-        public CoverageFile()
+        public CoverageFile(string path, List<List<int>> data)
         {
-            Data = new List<List<int>>();
+            Path = path;
+            Data = data;
         }
-
-        public void Insert(List<int> row) => Data.Add(row);
     }
 }

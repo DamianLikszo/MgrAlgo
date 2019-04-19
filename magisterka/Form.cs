@@ -27,16 +27,20 @@ namespace magisterka
         private void btnLoad_Click(object sender, EventArgs e)
         {
             var coverage = fileReaderService.OpenAndReadFile();
+            if(coverage == null)
+                return;
+
+            //TODO: tu chyba tez bedzie check null
             _zbGran = granuleService.GenerateGran(coverage.Data);
-            //DEV 
-            //_zbGran = devService.pushGran();
             zbGranService.SortZbGran(_zbGran);
+
             var treeGran = zbGranService.BuildSortedTree(_zbGran);
-            txtPath.Text = coverage.Path;
+            txtPath.Text = coverage?.Path ?? "";
+
             treeResult.Nodes.Clear();
             treeResult.Nodes.AddRange(zbGranService.DrawTreeView(treeGran));
         }
-        
+
         private void btnEnd_Click(object sender, EventArgs e)
         {
             Application.Exit();

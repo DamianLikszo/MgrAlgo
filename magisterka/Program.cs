@@ -1,9 +1,9 @@
 ﻿using magisterka.Interfaces;
 using magisterka.Services;
 using SimpleInjector;
-using SimpleInjector.Lifestyles;
 using System;
 using System.Windows.Forms;
+using magisterka.Validators;
 
 namespace magisterka
 {
@@ -31,6 +31,9 @@ namespace magisterka
             container.Register<IGranuleService, GranuleService>();
             container.Register<IZbGranService, ZbGranService>();
             container.Register<IDevService, DevService>();
+            container.Register<IStreamReader, FileStreamReader>();
+            container.Register<IMyMessageBox, MyMessageBox>();
+            container.Register<ICoverageFileValidator, CoverageFileValidator>();
 
             container.Verify();
         }
