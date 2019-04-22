@@ -18,14 +18,14 @@ namespace magisterka.Validators
             {
                 errorMessage = "Ścieżka do pliku jest pusta.";
             }
-            else if (coverageFile.CoverageData?.Data == null || coverageFile.CoverageData.Data.Count == 0)
+            else if (coverageFile.CoverageData == null || coverageFile.CoverageData.Count == 0)
             {
                 errorMessage = "Wczytany plik nie zawiera poprawnych danych.";
             }
             else
             {
-                var length = coverageFile.CoverageData.Data[0].Count;
-                if (coverageFile.CoverageData.Data.Any(x => x.Count != length))
+                var length = coverageFile.CoverageData[0].Count;
+                if (coverageFile.CoverageData.Any(x => x.Count != length))
                 {
                     errorMessage = "Wiersze muszą mieć jednakową ilość liczb.";
                 }

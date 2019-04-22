@@ -7,6 +7,6 @@ namespace magisterka.Interfaces
     {
         bool IsGreaterOrEqual(Granula gran1, Granula gran2);
         bool IsLesser(Granula gran1, Granula gran2);
-        ZbGran GenerateGran(List<List<int>> data);
+        ZbGran GenerateGran(CoverageData coverageData);
     }
 }

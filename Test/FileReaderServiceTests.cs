@@ -38,7 +38,7 @@ namespace Test
             // Assert
             var expect = new CoverageData(new List<List<int>>
                 {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
-            Assert.Equal(expect.Data, result.Data);
+            Assert.Equal(expect, result);
         }
 
         [Fact]
