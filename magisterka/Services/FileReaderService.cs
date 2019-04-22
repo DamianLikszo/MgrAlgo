@@ -13,14 +13,16 @@ namespace magisterka.Services
         private readonly IMyMessageBox _myMessageBox;
         private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IFileService _fileService;
+        private readonly ICoverageDataConverter _coverageDataConverter;
         private readonly char _separator = ';';
 
         public FileReaderService(IMyMessageBox myMessageBox, ICoverageFileValidator coverageFileValidator,
-            IFileService fileService)
+            IFileService fileService, ICoverageDataConverter coverageDataConverter)
         {
             _myMessageBox = myMessageBox;
             _coverageFileValidator = coverageFileValidator;
             _fileService = fileService;
+            _coverageDataConverter = coverageDataConverter;
         }
 
         public CoverageFile OpenAndReadFile()
@@ -32,7 +34,7 @@ namespace magisterka.Services
             if(path != null)
             {
                 var content = _fileService.ReadFile(path);
-                var data = ConvertContentToCoverageData(content);
+                var data = _coverageDataConverter.Convert(content);
 
                 if (data == null)
                     return null;
@@ -46,32 +48,6 @@ namespace magisterka.Services
             }
 
             return result;
-        }
-
-        public CoverageData ConvertContentToCoverageData(List<string> content)
-        {
-            var data = new List<List<int>>();
-
-            foreach (var line in content)
-            {
-                var columns = line.Split(_separator);
-                var row = new List<int>();
-
-                foreach (var item in columns)
-                {
-                    if (!int.TryParse(item, out var column))
-                    {
-                        _myMessageBox.Show("Nieprawidłowy zestaw danych. Wiersze zawierają inne dane niż liczby.");
-                        return null;
-                    }
-
-                    row.Add(column);
-                }
-
-                data.Add(row);
-            }
-            
-            return new CoverageData(data);
         }
 
         //TODO: other File

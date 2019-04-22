@@ -3,27 +3,20 @@ using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Services;
 using Moq;
-using magisterka.Validators;
 using magisterka.Wrappers;
 using Xunit;
 
 namespace Test
 {
-    public class FileReaderServiceTests
+    public class CoverageDataConverterTests
     {
         private readonly Mock<IMyMessageBox> _myMessageBoxMock;
-        private readonly Mock<ICoverageFileValidator> _coverageFileValidatorMock;
-        private readonly Mock<IFileService> _fileServiceMock;
-        private readonly FileReaderService _fileReaderService;
+        private readonly ICoverageDataConverter _coverageDataConverter;
 
-        public FileReaderServiceTests()
+        public CoverageDataConverterTests()
         {
-            _myMessageBoxMock = new Mock<IMyMessageBox>();
-            _coverageFileValidatorMock = new Mock<ICoverageFileValidator>();
-            _fileServiceMock = new Mock<IFileService>();
-
-            _fileReaderService = new FileReaderService(_myMessageBoxMock.Object, _coverageFileValidatorMock.Object,
-                _fileServiceMock.Object);
+            _myMessageBoxMock = new Mock<IMyMessageBox>();    
+            _coverageDataConverter = new CoverageDataConverter(_myMessageBoxMock.Object);
         }
 
         [Fact]
@@ -33,7 +26,7 @@ namespace Test
             var content = new List<string>{"1;2;3", "1;2;3", "1;2;3"};
             
             // Act
-            var result = _fileReaderService.ConvertContentToCoverageData(content);
+            var result = _coverageDataConverter.Convert(content);
 
             // Assert
             var expect = new CoverageData(new List<List<int>>
@@ -48,7 +41,7 @@ namespace Test
             var content = new List<string> { "1;b;3", "1;2;3", "a;2;3" };
             
             // Act
-            var result = _fileReaderService.ConvertContentToCoverageData(content);
+            var result = _coverageDataConverter.Convert(content);
 
             // Assert
             Assert.Null(result);
@@ -59,9 +52,9 @@ namespace Test
         {
             // Arrange
             var content = new List<string> { "1;b;3", "1;2;3", "a;2;3" };
-            
+
             // Act
-            _fileReaderService.ConvertContentToCoverageData(content);
+            _coverageDataConverter.Convert(content);
 
             // Assert
             _myMessageBoxMock.Verify(x => x.Show(It.IsAny<string>()), Times.Once);

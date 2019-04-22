@@ -54,11 +54,13 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICoverageDataConverter.cs" />
     <Compile Include="Interfaces\IDevService.cs" />
     <Compile Include="Interfaces\IFileReaderService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
     <Compile Include="Models\CoverageData.cs" />
+    <Compile Include="Services\CoverageDataConverter.cs" />
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMyStreamReader.cs" />

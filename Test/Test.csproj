@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoverageFileValidatorTests.cs" />
-    <Compile Include="FileReaderServiceTests.cs" />
+    <Compile Include="CoverageDataConverterTests.cs" />
     <Compile Include="FileServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
