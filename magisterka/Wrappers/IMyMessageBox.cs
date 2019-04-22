@@ -1,4 +1,4 @@
-﻿namespace magisterka.Interfaces
+﻿namespace magisterka.Wrappers
 {
     public interface IMyMessageBox
     {

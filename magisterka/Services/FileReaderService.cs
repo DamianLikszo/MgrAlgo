@@ -1,41 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
+using magisterka.Wrappers;
 
 namespace magisterka.Services
 {
     public class FileReaderService : Interfaces.IFileReaderService
     {
-        private readonly IStreamReader _streamReader;
         private readonly IMyMessageBox _myMessageBox;
         private readonly ICoverageFileValidator _coverageFileValidator;
+        private readonly IFileService _fileService;
         private readonly char _separator = ';';
 
-        public FileReaderService(IStreamReader streamReader, IMyMessageBox myMessageBox,
-            ICoverageFileValidator coverageFileValidator)
+        public FileReaderService(IMyMessageBox myMessageBox, ICoverageFileValidator coverageFileValidator,
+            IFileService fileService)
         {
-            _streamReader = streamReader;
             _myMessageBox = myMessageBox;
             _coverageFileValidator = coverageFileValidator;
+            _fileService = fileService;
         }
 
         public CoverageFile OpenAndReadFile()
         {
             CoverageFile result = null;
 
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Plik tekstowe|*.csv";
-            openFileDialog.Title = "Wybierz plik";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            var path = _fileService.SelectFile();
+            
+            if(path != null)
             {
-                var path = openFileDialog.FileName;
-                var content = ReadFile(path);
+                var content = _fileService.ReadFile(path);
                 var data = ConvertContentToData(content);
+
+                if (data == null)
+                    return null;
 
                 result = new CoverageFile(path, data);
 
@@ -43,30 +43,6 @@ namespace magisterka.Services
                 {
                     return null;
                 }
-            }
-
-            return result;
-        }
-
-        public List<string> ReadFile(string path)
-        {
-            var result = new List<string>();
-            
-            try
-            {
-                using (var sr = _streamReader.GetReader(path))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        var line = sr.ReadLine();
-                        result.Add(line);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _myMessageBox.Show(ex.Message);
-                return null;
             }
 
             return result;

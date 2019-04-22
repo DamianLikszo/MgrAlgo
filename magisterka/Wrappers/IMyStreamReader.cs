@@ -1,8 +1,8 @@
 ﻿using System.IO;
 
-namespace magisterka.Interfaces
+namespace magisterka.Wrappers
 {
-    public interface IStreamReader
+    public interface IMyStreamReader
     {
         StreamReader GetReader(string path);
     }

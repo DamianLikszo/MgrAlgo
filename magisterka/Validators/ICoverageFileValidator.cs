@@ -1,5 +1,5 @@
-﻿using magisterka.Interfaces;
-using magisterka.Models;
+﻿using magisterka.Models;
+using magisterka.Wrappers;
 
 namespace magisterka.Validators
 {

@@ -4,6 +4,7 @@ using SimpleInjector;
 using System;
 using System.Windows.Forms;
 using magisterka.Validators;
+using magisterka.Wrappers;
 
 namespace magisterka
 {
@@ -31,9 +32,11 @@ namespace magisterka
             container.Register<IGranuleService, GranuleService>();
             container.Register<IZbGranService, ZbGranService>();
             container.Register<IDevService, DevService>();
-            container.Register<IStreamReader, FileStreamReader>();
+            container.Register<IMyStreamReader, MyStreamReader>();
             container.Register<IMyMessageBox, MyMessageBox>();
             container.Register<ICoverageFileValidator, CoverageFileValidator>();
+            container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
+            container.Register<IFileService, FileService>();
 
             container.Verify();
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
+using magisterka.Wrappers;
 using Moq;
 using Xunit;
 

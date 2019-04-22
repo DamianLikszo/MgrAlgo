@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using magisterka.Interfaces;
 using magisterka.Models;
+using magisterka.Wrappers;
 
 namespace magisterka.Validators
 {
@@ -18,7 +18,7 @@ namespace magisterka.Validators
             {
                 errorMessage = "Ścieżka do pliku jest pusta.";
             }
-            else if (coverageFile.Data.Count == 0)
+            else if (coverageFile.Data == null || coverageFile.Data.Count == 0)
             {
                 errorMessage = "Wczytany plik nie zawiera poprawnych danych.";
             }

@@ -1,7 +1,6 @@
-﻿using magisterka.Interfaces;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace magisterka.Services
+namespace magisterka.Wrappers
 {
     public class MyMessageBox : IMyMessageBox
     {

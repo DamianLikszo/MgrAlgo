@@ -1,9 +1,8 @@
-﻿using magisterka.Interfaces;
-using System.IO;
+﻿using System.IO;
 
-namespace magisterka.Services
+namespace magisterka.Wrappers
 {
-    public class FileStreamReader : IStreamReader
+    public class MyStreamReader : IMyStreamReader
     {
         public StreamReader GetReader(string path)
         {
