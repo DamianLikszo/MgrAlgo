@@ -31,7 +31,7 @@ namespace magisterka
                 return;
 
             //TODO: tu chyba tez bedzie check null
-            _zbGran = granuleService.GenerateGran(coverage.Data);
+            _zbGran = granuleService.GenerateGran(coverage.CoverageData.Data);
             zbGranService.SortZbGran(_zbGran);
 
             var treeGran = zbGranService.BuildSortedTree(_zbGran);

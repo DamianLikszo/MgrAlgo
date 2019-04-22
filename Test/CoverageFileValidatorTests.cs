@@ -23,8 +23,9 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            var data = new List<List<int>> {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}};
-            var coverageFile = new CoverageFile(path, data);
+            var coverageData = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
+            var coverageFile = new CoverageFile(path, coverageData);
             
             //Act
             var result = _coverageFileValidator.Valid(coverageFile, out var errorMessage);
@@ -50,8 +51,9 @@ namespace Test
         public void Valid_WhenPutNullLikePathInCoverageFile_ThenShouldReturnFalseAndError()
         {
             //Arrange
-            var data = new List<List<int>> {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}};
-            var coverageFile = new CoverageFile(null, data);
+            var coverageData = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
+            var coverageFile = new CoverageFile(null, coverageData);
 
             //Act
             var result = _coverageFileValidator.Valid(coverageFile, out var errorMessage);
@@ -66,8 +68,8 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            var data = new List<List<int>>();
-            var coverageFile = new CoverageFile(path, data);
+            var coverageData = new CoverageData(new List<List<int>>());
+            var coverageFile = new CoverageFile(path, coverageData);
 
             //Act
             var result = _coverageFileValidator.Valid(coverageFile, out var errorMessage);
@@ -82,8 +84,9 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            var data = new List<List<int>> {new List<int> {1, 2, 3}, new List<int> {1, 2, 3, 4}, new List<int> {1, 2}};
-            var coverageFile = new CoverageFile(path, data);
+            var coverageData = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3, 4}, new List<int> {1, 2}});
+            var coverageFile = new CoverageFile(path, coverageData);
 
             //Act
             var result = _coverageFileValidator.Valid(coverageFile, out var errorMessage);
@@ -98,8 +101,9 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            var data = new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 1, 2, 3 }, new List<int> { 1, 2, 3 } };
-            var coverageFile = new CoverageFile(path, data);
+            var coverageData = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
+            var coverageFile = new CoverageFile(path, coverageData);
 
             //Act
             var result = _coverageFileValidator.ValidAndShow(coverageFile, _myMessageBoxMock.Object);
@@ -113,8 +117,9 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            var wrongData = new List<List<int>> { new List<int> { 1, 2, 3 }, new List<int> { 1, 2, 3, 4 } };
-            var coverageFile = new CoverageFile(path, wrongData);
+            var wrongCoverageData = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3, 4}});
+            var coverageFile = new CoverageFile(path, wrongCoverageData);
 
             //Act
             var result = _coverageFileValidator.ValidAndShow(coverageFile, _myMessageBoxMock.Object);

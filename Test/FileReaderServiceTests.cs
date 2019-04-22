@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using magisterka.Interfaces;
+using magisterka.Models;
 using magisterka.Services;
 using Moq;
 using magisterka.Validators;
@@ -32,12 +33,12 @@ namespace Test
             var content = new List<string>{"1;2;3", "1;2;3", "1;2;3"};
             
             // Act
-            var result = _fileReaderService.ConvertContentToData(content);
+            var result = _fileReaderService.ConvertContentToCoverageData(content);
 
             // Assert
-            var expect = new List<List<int>>
-                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}};
-            Assert.Equal(expect, result);
+            var expect = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
+            Assert.Equal(expect.Data, result.Data);
         }
 
         [Fact]
@@ -47,7 +48,7 @@ namespace Test
             var content = new List<string> { "1;b;3", "1;2;3", "a;2;3" };
             
             // Act
-            var result = _fileReaderService.ConvertContentToData(content);
+            var result = _fileReaderService.ConvertContentToCoverageData(content);
 
             // Assert
             Assert.Null(result);
@@ -60,7 +61,7 @@ namespace Test
             var content = new List<string> { "1;b;3", "1;2;3", "a;2;3" };
             
             // Act
-            _fileReaderService.ConvertContentToData(content);
+            _fileReaderService.ConvertContentToCoverageData(content);
 
             // Assert
             _myMessageBoxMock.Verify(x => x.Show(It.IsAny<string>()), Times.Once);

@@ -32,7 +32,7 @@ namespace magisterka.Services
             if(path != null)
             {
                 var content = _fileService.ReadFile(path);
-                var data = ConvertContentToData(content);
+                var data = ConvertContentToCoverageData(content);
 
                 if (data == null)
                     return null;
@@ -48,30 +48,30 @@ namespace magisterka.Services
             return result;
         }
 
-        public List<List<int>> ConvertContentToData(List<string> content)
+        public CoverageData ConvertContentToCoverageData(List<string> content)
         {
-            var result = new List<List<int>>();
-           
+            var data = new List<List<int>>();
+
             foreach (var line in content)
             {
-                var data = line.Split(_separator);
+                var columns = line.Split(_separator);
                 var row = new List<int>();
 
-                foreach (var item in data)
+                foreach (var item in columns)
                 {
-                    if (!int.TryParse(item, out var number))
+                    if (!int.TryParse(item, out var column))
                     {
                         _myMessageBox.Show("Nieprawidłowy zestaw danych. Wiersze zawierają inne dane niż liczby.");
                         return null;
                     }
 
-                    row.Add(number);
+                    row.Add(column);
                 }
 
-                result.Add(row);
+                data.Add(row);
             }
             
-            return result;
+            return new CoverageData(data);
         }
 
         //TODO: other File

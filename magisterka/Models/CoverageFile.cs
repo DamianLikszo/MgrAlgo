@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace magisterka.Models
+﻿namespace magisterka.Models
 {
     public class CoverageFile
     {
-        public List<List<int>> Data { get; set; }
+        public CoverageData CoverageData { get; set; }
         public string Path { get; set; }
 
-        public CoverageFile(string path, List<List<int>> data)
+        public CoverageFile(string path, CoverageData coverageData)
         {
             Path = path;
-            Data = data;
+            CoverageData = coverageData;
         }
     }
 }

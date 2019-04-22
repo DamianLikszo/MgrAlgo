@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IFileReaderService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
+    <Compile Include="Models\CoverageData.cs" />
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMyStreamReader.cs" />
