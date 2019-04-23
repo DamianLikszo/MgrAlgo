@@ -10,17 +10,15 @@ namespace magisterka
         private readonly Interfaces.IFileReaderService fileReaderService;
         private readonly IGranuleService granuleService;
         private readonly IZbGranService zbGranService;
-        private readonly IDevService devService;
 
         private ZbGran _zbGran { get; set; }
 
-        public Form(Interfaces.IFileReaderService fileReaderService, IGranuleService granuleService, IZbGranService zbGranService,
-            IDevService devService)
+        public Form(Interfaces.IFileReaderService fileReaderService, IGranuleService granuleService,
+            IZbGranService zbGranService)
         {
             this.fileReaderService = fileReaderService;
             this.granuleService = granuleService;
             this.zbGranService = zbGranService;
-            this.devService = devService;
             InitializeComponent();
         }
 

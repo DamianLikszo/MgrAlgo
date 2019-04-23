@@ -34,13 +34,14 @@ namespace magisterka.Services
             if(path != null)
             {
                 var content = _fileService.ReadFile(path);
-                var data = _coverageDataConverter.Convert(content);
+                if (content == null)
+                    return null;
 
+                var data = _coverageDataConverter.Convert(content);
                 if (data == null)
                     return null;
 
                 result = new CoverageFile(path, data);
-
                 if (!_coverageFileValidator.ValidAndShow(result, _myMessageBox))
                 {
                     return null;
