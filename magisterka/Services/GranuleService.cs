@@ -7,6 +7,7 @@ namespace magisterka.Services
 {
     public class GranuleService : IGranuleService
     {
+        //TODO: move to GranSetService
         public GranuleSet GenerateGran(CoverageData coverageData)
         {
             var granuleSet = new GranuleSet();
@@ -31,38 +32,6 @@ namespace magisterka.Services
             }
 
             return granuleSet;
-        }
-
-        public bool IsGreaterOrEqual(Granule gran1, Granule gran2)
-        {
-            if (gran1.Count() != gran2.Count())
-                return false;
-
-            for (var i = 0; i < gran1.Count(); i++)
-            {
-                if (gran1[i] < gran2[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public bool IsLesser(Granule gran1, Granule gran2)
-        {
-            if (gran1.Count() != gran2.Count())
-                return false;
-
-            for (var i = 0; i < gran1.Count(); i++)
-            {
-                if (gran2[i] > gran1[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }

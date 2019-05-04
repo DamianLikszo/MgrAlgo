@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace magisterka.Services
 {
+    //TODO: rename to GranSetservice
     public class ZbGranService : IZbGranService
     {
         private readonly IGranuleService granuleService;
@@ -141,17 +142,18 @@ namespace magisterka.Services
         private void _buildSortedTreeRef(Granule granNew, Granule gran)
         {
             // NOWE: sprawdzić czy powinno byc equal
-            if (granuleService.IsGreaterOrEqual(granNew, gran))
-            {
-                //duplicat z innej gałęzi max
-                if(!gran.Parent.Contains(granNew))
-                {
-                    gran.Parent.Add(granNew);
-                    granNew.Child.Add(gran);
-                }
+            //TODO: fix it
+            //if (granuleService.IsGreaterOrEqual(granNew, gran))
+            //{
+            //    //duplicat z innej gałęzi max
+            //    if(!gran.Parent.Contains(granNew))
+            //    {
+            //        gran.Parent.Add(granNew);
+            //        granNew.Child.Add(gran);
+            //    }
 
-                return;
-            }
+            //    return;
+            //}
 
             foreach (var granChild in gran.Child)
             {

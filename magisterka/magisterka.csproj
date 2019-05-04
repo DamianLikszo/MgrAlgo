@@ -48,12 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\GranuleComparerResult.cs" />
     <Compile Include="Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="GranuleComparer.cs" />
     <Compile Include="Interfaces\IActionService.cs" />
     <Compile Include="Interfaces\ICoverageDataConverter.cs" />
     <Compile Include="Interfaces\IDevService.cs" />
