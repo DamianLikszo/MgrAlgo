@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using magisterka.Models;
 using magisterka.Interfaces;
 
@@ -7,48 +7,40 @@ namespace magisterka.Services
 {
     public class GranuleService : IGranuleService
     {
-        //TODO: rename t i t1
-        public ZbGran GenerateGran(CoverageData coverageData)
+        public GranuleSet GenerateGran(CoverageData coverageData)
         {
-            var zbGran = new ZbGran();
+            var granuleSet = new GranuleSet();
             
-            foreach (var t1 in coverageData)
+            foreach (var row in coverageData)
             {
-                var granule = new Granula();
-                var indexSelect = new List<int>();
-
-                for (var j = 0; j < t1.Count; j++)
+                var granule = new Granule();
+                var indexes = new List<int>();
+                
+                for (var j = 0; j < row.Count; j++)
                 {
-                    if (t1[j] == 1)
-                        indexSelect.Add(j);
+                    if (row[j] == 1)
+                        indexes.Add(j);
                 }
                 
-                foreach (var t in coverageData)
+                foreach (var checkRow in coverageData)
                 {
-                    var result = 1;
-                    foreach (var index in indexSelect)
-                    {
-                        if (result == 0)
-                            break;
-
-                        result = Math.Min(result, t[index]);
-                    }
+                    var result = indexes.All(x => checkRow[x] == 1) ? 1 : 0;
                     granule.AddToInside(result);
                 }
-                zbGran.Add(granule);
+                granuleSet.Add(granule);
             }
 
-            return zbGran;
+            return granuleSet;
         }
 
-        public bool IsGreaterOrEqual(Granula gran1, Granula gran2)
+        public bool IsGreaterOrEqual(Granule gran1, Granule gran2)
         {
-            if (gran1.Inside.Count != gran2.Inside.Count)
+            if (gran1.Count() != gran2.Count())
                 return false;
 
-            for (int i = 0; i < gran1.Inside.Count; i++)
+            for (var i = 0; i < gran1.Count(); i++)
             {
-                if (gran1.Inside[i] < gran2.Inside[i])
+                if (gran1[i] < gran2[i])
                 {
                     return false;
                 }
@@ -57,14 +49,14 @@ namespace magisterka.Services
             return true;
         }
 
-        public bool IsLesser(Granula gran1, Granula gran2)
+        public bool IsLesser(Granule gran1, Granule gran2)
         {
-            if (gran1.Inside.Count != gran2.Inside.Count)
+            if (gran1.Count() != gran2.Count())
                 return false;
 
-            for (int i = 0; i < gran1.Inside.Count; i++)
+            for (var i = 0; i < gran1.Count(); i++)
             {
-                if (gran2.Inside[i] > gran1.Inside[i])
+                if (gran2[i] > gran1[i])
                 {
                     return false;
                 }

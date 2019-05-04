@@ -14,8 +14,8 @@ namespace Test
 
         public CoverageFileValidatorTests()
         {
-            _coverageFileValidator = new CoverageFileValidator();
             _myMessageBoxMock = new Mock<IMyMessageBox>();
+            _coverageFileValidator = new CoverageFileValidator(_myMessageBoxMock.Object);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace Test
             var coverageFile = new CoverageFile(path, coverageData);
 
             //Act
-            var result = _coverageFileValidator.ValidAndShow(coverageFile, _myMessageBoxMock.Object);
+            var result = _coverageFileValidator.ValidAndShow(coverageFile);
 
             //Assert
             Assert.True(result);
@@ -122,7 +122,7 @@ namespace Test
             var coverageFile = new CoverageFile(path, wrongCoverageData);
 
             //Act
-            var result = _coverageFileValidator.ValidAndShow(coverageFile, _myMessageBoxMock.Object);
+            var result = _coverageFileValidator.ValidAndShow(coverageFile);
 
             //Assert
             Assert.False(result);

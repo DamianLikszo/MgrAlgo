@@ -5,10 +5,10 @@ namespace magisterka.Interfaces
 {
     public interface IZbGranService
     {
-        Granula SearchMin(ZbGran zbGran);
-        void SortZbGran(ZbGran zbGran);
-        ZbGran BuildSortedTree(ZbGran zbGranOrg);
-        string ReadResult(ZbGran treeGran);
-        TreeNode[] DrawTreeView(ZbGran zbGran);
+        Granule SearchMin(GranuleSet granuleSet);
+        void SortZbGran(GranuleSet granuleSet);
+        GranuleSet BuildSortedTree(GranuleSet granuleSetOrg);
+        string ReadResult(GranuleSet treeGran);
+        TreeNode[] DrawTreeView(GranuleSet granuleSet);
     }
 }

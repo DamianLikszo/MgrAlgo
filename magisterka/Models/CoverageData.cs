@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace magisterka.Models
 {
+    //TODO: maybe collection ?
     public class CoverageData : IList<List<int>>
     {
         private readonly IList<List<int>> _data;

@@ -6,17 +6,18 @@ namespace magisterka.Services
 {
     public class DevService : IDevService
     {
-        public ZbGran pushGran()
+        public GranuleSet pushGran()
         {
-            return new ZbGran
+            return new GranuleSet
             {
-                Granules = new List<Granula> {
-                new Granula { Inside = new List<int> { 0, 0, 0, 1 } },
-                new Granula { Inside = new List<int> { 0, 0, 1, 1 } },
-                new Granula { Inside = new List<int> { 0, 1, 1, 1 } },
-                new Granula { Inside = new List<int> { 1, 0, 1, 1 } },
-                new Granula { Inside = new List<int> { 1, 1, 0, 1 } }
-            }
+                Granules = new List<Granule>
+                {
+                    new Granule(new List<int> {0, 0, 0, 1}),
+                    new Granule(new List<int> {0, 0, 1, 1}),
+                    new Granule(new List<int> {0, 1, 1, 1}),
+                    new Granule(new List<int> {1, 0, 1, 1}),
+                    new Granule(new List<int> {1, 1, 0, 1})
+                }
             };
         }
     }

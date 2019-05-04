@@ -54,20 +54,24 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IActionService.cs" />
     <Compile Include="Interfaces\ICoverageDataConverter.cs" />
     <Compile Include="Interfaces\IDevService.cs" />
     <Compile Include="Interfaces\IFileReaderService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
+    <Compile Include="Interfaces\IFormData.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
     <Compile Include="Models\CoverageData.cs" />
+    <Compile Include="Services\ActionsService.cs" />
     <Compile Include="Services\CoverageDataConverter.cs" />
+    <Compile Include="Services\FormData.cs" />
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMyStreamReader.cs" />
     <Compile Include="Interfaces\IZbGranService.cs" />
     <Compile Include="Models\CoverageFile.cs" />
-    <Compile Include="Models\Granula.cs" />
-    <Compile Include="Models\ZbGran.cs" />
+    <Compile Include="Models\Granule.cs" />
+    <Compile Include="Models\GranuleSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DevService.cs" />

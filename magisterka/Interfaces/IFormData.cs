@@ -2,8 +2,8 @@
 
 namespace magisterka.Interfaces
 {
-    public interface IDevService
+    public interface IFormData
     {
-        GranuleSet pushGran();
+        GranuleSet GranuleSet { get; set; }
     }
 }

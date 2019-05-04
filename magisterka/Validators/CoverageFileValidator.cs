@@ -6,6 +6,13 @@ namespace magisterka.Validators
 {
     public class CoverageFileValidator : ICoverageFileValidator
     {
+        private readonly IMyMessageBox _myMessageBox;
+
+        public CoverageFileValidator(IMyMessageBox myMessageBox)
+        {
+            _myMessageBox = myMessageBox;
+        }
+
         public bool Valid(CoverageFile coverageFile, out string errorMessage)
         {
             errorMessage = null;
@@ -33,14 +40,14 @@ namespace magisterka.Validators
             
             return string.IsNullOrEmpty(errorMessage);
         }
-
-        public bool ValidAndShow(CoverageFile coverageFile, IMyMessageBox myMessageBox)
+        
+        public bool ValidAndShow(CoverageFile coverageFile)
         {
             var result = Valid(coverageFile, out string errorMessage);
 
             if (!result)
             {
-                myMessageBox.Show(errorMessage);
+                _myMessageBox.Show(errorMessage);
             }
 
             return result;

@@ -4,22 +4,19 @@ using System.Windows.Forms;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
-using magisterka.Wrappers;
 
 namespace magisterka.Services
 {
     public class FileReaderService : Interfaces.IFileReaderService
     {
-        private readonly IMyMessageBox _myMessageBox;
         private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IFileService _fileService;
         private readonly ICoverageDataConverter _coverageDataConverter;
         private readonly char _separator = ';';
 
-        public FileReaderService(IMyMessageBox myMessageBox, ICoverageFileValidator coverageFileValidator,
-            IFileService fileService, ICoverageDataConverter coverageDataConverter)
+        public FileReaderService(ICoverageFileValidator coverageFileValidator, IFileService fileService,
+            ICoverageDataConverter coverageDataConverter)
         {
-            _myMessageBox = myMessageBox;
             _coverageFileValidator = coverageFileValidator;
             _fileService = fileService;
             _coverageDataConverter = coverageDataConverter;
@@ -42,7 +39,7 @@ namespace magisterka.Services
                     return null;
 
                 result = new CoverageFile(path, data);
-                if (!_coverageFileValidator.ValidAndShow(result, _myMessageBox))
+                if (!_coverageFileValidator.ValidAndShow(result))
                 {
                     return null;
                 }
@@ -52,7 +49,7 @@ namespace magisterka.Services
         }
 
         //TODO: other File
-        public bool SaveFile(List<Granula> data)
+        public bool SaveFile(List<Granule> data)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Plik tekstowe|*.csv";
@@ -74,7 +71,7 @@ namespace magisterka.Services
 
                             foreach (var granula in data)
                             {
-                                writer.Write(_separator + granula.Inside[i].ToString());
+                                writer.Write(_separator + granula[i].ToString());
                             }
 
                             writer.WriteLine();
@@ -88,7 +85,7 @@ namespace magisterka.Services
             return true;
         }
 
-        private void _printHeader(StreamWriter writer, List<Granula> data)
+        private void _printHeader(StreamWriter writer, List<Granule> data)
         {
             writer.Write("obiekt/g(obiekt)");
 

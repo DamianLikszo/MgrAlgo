@@ -15,20 +15,20 @@ namespace magisterka.Services
             this.granuleService = granuleService;
         }
 
-        public Granula SearchMin(ZbGran zbGran)
+        public Granule SearchMin(GranuleSet granuleSet)
         {
-            if (zbGran.Granules.Count == 0)
+            if (granuleSet.Granules.Count == 0)
             {
                 return null;
             }
 
-            return zbGran.Granules[0];
+            return granuleSet.Granules[0];
         }
 
-        public ZbGran BuildSortedTree(ZbGran zbGranOrg)
+        public GranuleSet BuildSortedTree(GranuleSet granuleSetOrg)
         {
-            var zbGran = new ZbGran(zbGranOrg);
-            var result = new ZbGran();
+            var zbGran = new GranuleSet(granuleSetOrg);
+            var result = new GranuleSet();
 
             while (zbGran.Granules.Count > 0)
             {
@@ -55,11 +55,11 @@ namespace magisterka.Services
             return result;
         }
 
-        public string ReadResult(ZbGran treeGran)
+        public string ReadResult(GranuleSet granuleSet)
         {
             var result = "{\n";
 
-            var granMax = treeGran.GetMax();
+            var granMax = granuleSet.GetMax();
             for (int i = 0; i < granMax.Count; i++)
             {
                 if (i != 0)
@@ -76,11 +76,11 @@ namespace magisterka.Services
             return result;
         }
 
-        public TreeNode[] DrawTreeView(ZbGran zbGran)
+        public TreeNode[] DrawTreeView(GranuleSet granuleSet)
         {
             var result = new List<TreeNode>();
 
-            foreach (var gran in zbGran.GetMax())
+            foreach (var gran in granuleSet.GetMax())
             {
                 var listOfRoute = new List<TreeNode>();
                 var previous = new List<TreeNode>();
@@ -96,12 +96,14 @@ namespace magisterka.Services
             return result.ToArray();
         }
 
-        public void SortZbGran(ZbGran zbGran)
+        public void SortZbGran(GranuleSet granuleSet)
         {
-            zbGran.Granules.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
+            //TODO: check it
+           // zbGran = zbGran.OrderBy(x => x.Inside.Count(p => p == 1));
+            //zbGran.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
         }
 
-        private void _getRoute(Granula gran, List<string> listOfRoute, List<string> previous)
+        private void _getRoute(Granule gran, List<string> listOfRoute, List<string> previous)
         {
             var child = gran.Child;
             previous.Add(gran.ToString());
@@ -119,7 +121,7 @@ namespace magisterka.Services
             }
         }
 
-        private void _getBranchTree(Granula gran, List<TreeNode> listOfRoute, List<TreeNode> previous)
+        private void _getBranchTree(Granule gran, List<TreeNode> listOfRoute, List<TreeNode> previous)
         {
             var child = gran.Child;
             previous.Add(new TreeNode(gran.ToString()));
@@ -136,7 +138,7 @@ namespace magisterka.Services
             }
         }
 
-        private void _buildSortedTreeRef(Granula granNew, Granula gran)
+        private void _buildSortedTreeRef(Granule granNew, Granule gran)
         {
             // NOWE: sprawdzić czy powinno byc equal
             if (granuleService.IsGreaterOrEqual(granNew, gran))

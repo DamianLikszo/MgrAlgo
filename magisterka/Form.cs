@@ -7,36 +7,38 @@ namespace magisterka
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        private readonly Interfaces.IFileReaderService fileReaderService;
-        private readonly IGranuleService granuleService;
-        private readonly IZbGranService zbGranService;
+        private readonly Interfaces.IFileReaderService _fileReaderService;
+        private readonly IZbGranService _zbGranService;
+        private readonly IFormData _formData;
+        private readonly IActionService _actionService;
 
-        private ZbGran _zbGran { get; set; }
+        private GranuleSet _granuleSet { get; set; }
 
-        public Form(Interfaces.IFileReaderService fileReaderService, IGranuleService granuleService,
-            IZbGranService zbGranService)
+        public Form(Interfaces.IFileReaderService fileReaderService, IZbGranService zbGranService, IFormData formData,
+            IActionService actionService)
         {
-            this.fileReaderService = fileReaderService;
-            this.granuleService = granuleService;
-            this.zbGranService = zbGranService;
+            _fileReaderService = fileReaderService;
+            _zbGranService = zbGranService;
+            _actionService = actionService;
+            _formData = formData;
             InitializeComponent();
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            var coverage = fileReaderService.OpenAndReadFile();
-            if(coverage == null)
+            if (!_actionService.Load())
                 return;
 
             //TODO: tu chyba tez bedzie check null
-            _zbGran = granuleService.GenerateGran(coverage.CoverageData);
-            zbGranService.SortZbGran(_zbGran);
+            _granuleSet = _formData.GranuleSet;
+            _zbGranService.SortZbGran(_granuleSet);
 
-            var treeGran = zbGranService.BuildSortedTree(_zbGran);
-            txtPath.Text = coverage?.Path ?? "";
+            var treeGran = _zbGranService.BuildSortedTree(_granuleSet);
+            //TODO: change path
+            //txtPath.Text = coverage?.Path ?? "";
 
             treeResult.Nodes.Clear();
-            treeResult.Nodes.AddRange(zbGranService.DrawTreeView(treeGran));
+            treeResult.Nodes.AddRange(_zbGranService.DrawTreeView(treeGran));
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
@@ -46,10 +48,11 @@ namespace magisterka
 
         private void btnSaveGran_Click(object sender, EventArgs e)
         {
-            if (_zbGran == null)
+            if (_granuleSet == null)
                 return;
 
-            fileReaderService.SaveFile(_zbGran.Granules);
+            //TODO: fix
+            //_fileReaderService.SaveFile(_zbGran);
         }
     }
 }

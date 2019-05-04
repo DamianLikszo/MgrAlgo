@@ -6,6 +6,6 @@ namespace magisterka.Interfaces
     public interface IFileReaderService
     {
         CoverageFile OpenAndReadFile();
-        bool SaveFile(List<Granula> data);
+        bool SaveFile(List<Granule> data);
     }
 }
