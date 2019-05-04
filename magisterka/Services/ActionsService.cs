@@ -26,28 +26,27 @@ namespace magisterka.Services
         public bool Load()
         {
             var path = _fileService.SelectFile();
+            if (path == null)
+                return false;
 
-            if (path != null)
+            var content = _fileService.ReadFile(path);
+            if (content == null)
+                return false;
+
+            var data = _coverageDataConverter.Convert(content);
+            if (data == null)
+                return false;
+
+            var coverageFile = new CoverageFile(path, data);
+            if (!_coverageFileValidator.ValidAndShow(coverageFile))
             {
-                var content = _fileService.ReadFile(path);
-                if (content == null)
-                    return false;
-
-                var data = _coverageDataConverter.Convert(content);
-                if (data == null)
-                    return false;
-
-                var coverageFile = new CoverageFile(path, data);
-                if (!_coverageFileValidator.ValidAndShow(coverageFile))
-                {
-                    return false;
-                }
-
-                var zbGran = _granuleService.GenerateGran(coverageFile.CoverageData);
-                _formData.GranuleSet = zbGran;
-                //TODO: sort
-                //zbGranService.SortZbGran(_zbGran);
+                return false;
             }
+
+            var zbGran = _granuleService.GenerateGran(coverageFile.CoverageData);
+            _formData.GranuleSet = zbGran;
+            //TODO: sort
+            //zbGranService.SortZbGran(_zbGran);
 
             return true;
         }

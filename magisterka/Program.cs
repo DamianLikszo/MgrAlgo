@@ -39,6 +39,7 @@ namespace magisterka
             container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
             container.Register<IFileService, FileService>();
             container.Register<ICoverageDataConverter, CoverageDataConverter>();
+            container.Register<IActionService, ActionsService>();
             container.Register<IFormData, FormData>(Lifestyle.Singleton);
 
             container.Verify();
