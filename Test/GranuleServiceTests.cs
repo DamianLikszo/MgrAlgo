@@ -2,6 +2,7 @@
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Services;
+using Moq;
 using Xunit;
 
 namespace Test
@@ -9,10 +10,31 @@ namespace Test
     public class GranuleServiceTests
     {
         private readonly IGranuleService _granuleService;
+        private readonly Mock<IGranuleComparerForBuildTree> _comparerForBuildTreeMock;
 
         public GranuleServiceTests()
         {
-            _granuleService = new GranuleService();
+            _comparerForBuildTreeMock = new Mock<IGranuleComparerForBuildTree>();
+            _granuleService = new GranuleService(_comparerForBuildTreeMock.Object);
+        }
+
+        [Fact]
+        public void GenerateGran_WhenSendCoverageData_ThenShouldBeSorted()
+        {
+            //Arrange
+            var coverageData = new CoverageData(new List<List<int>>
+            {
+                new List<int> {1, 0, 1},
+                new List<int> {0, 1, 0},
+                new List<int> {1, 1, 1}
+            });
+            
+            //Act
+            _granuleService.GenerateGran(coverageData);
+
+            //Assert
+            _comparerForBuildTreeMock.Verify(x => x.Compare(It.IsAny<Granule>(), It.IsAny<Granule>()),
+                Times.AtLeastOnce);
         }
 
         [Theory]

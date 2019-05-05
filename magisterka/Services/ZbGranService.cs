@@ -25,7 +25,6 @@ namespace magisterka.Services
             var zbGran = new GranuleSet(granuleSetOrg);
             var result = new GranuleSet();
 
-            zbGran.Sort();
             while (zbGran.Granules.Count > 0)
             {
                 var granNew = SearchMin(zbGran);

@@ -37,6 +37,7 @@ namespace magisterka.Models
 
         public int CompareTo(Granule other)
         {
+            //TODO: think about it
             var comparer = new GranuleComparer();
             return comparer.Compare(this, other);
         }

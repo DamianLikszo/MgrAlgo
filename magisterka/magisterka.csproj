@@ -62,8 +62,10 @@
     <Compile Include="Interfaces\IFileReaderService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IFormData.cs" />
+    <Compile Include="Interfaces\IGranuleComparerForBuildTree.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
     <Compile Include="Models\CoverageData.cs" />
+    <Compile Include="NumberOfOnesForGranuleComparer.cs" />
     <Compile Include="Services\ActionsService.cs" />
     <Compile Include="Services\CoverageDataConverter.cs" />
     <Compile Include="Services\FormData.cs" />

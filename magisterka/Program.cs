@@ -11,7 +11,7 @@ namespace magisterka
 {
     static class Program
     {
-        private static Container container;
+        private static Container _container;
 
         /// <summary>
         /// The main entry point for the application.
@@ -22,27 +22,28 @@ namespace magisterka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Bootstrap();
-            Application.Run(container.GetInstance<Form>());
+            Application.Run(_container.GetInstance<Form>());
         }
 
         private static void Bootstrap()
         {
-            container = new Container();
+            _container = new Container();
 
-            container.Register<Interfaces.IFileReaderService, FileReaderService>();
-            container.Register<IGranuleService, GranuleService>();
-            container.Register<IZbGranService, ZbGranService>();
-            container.Register<IDevService, DevService>();
-            container.Register<IMyStreamReader, MyStreamReader>();
-            container.Register<IMyMessageBox, MyMessageBox>();
-            container.Register<ICoverageFileValidator, CoverageFileValidator>();
-            container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
-            container.Register<IFileService, FileService>();
-            container.Register<ICoverageDataConverter, CoverageDataConverter>();
-            container.Register<IActionService, ActionsService>();
-            container.Register<IFormData, FormData>(Lifestyle.Singleton);
+            _container.Register<Interfaces.IFileReaderService, FileReaderService>();
+            _container.Register<IGranuleService, GranuleService>();
+            _container.Register<IZbGranService, ZbGranService>();
+            _container.Register<IDevService, DevService>();
+            _container.Register<IMyStreamReader, MyStreamReader>();
+            _container.Register<IMyMessageBox, MyMessageBox>();
+            _container.Register<ICoverageFileValidator, CoverageFileValidator>();
+            _container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
+            _container.Register<IFileService, FileService>();
+            _container.Register<ICoverageDataConverter, CoverageDataConverter>();
+            _container.Register<IActionService, ActionsService>();
+            _container.Register<IFormData, FormData>(Lifestyle.Singleton);
+            _container.Register<IGranuleComparerForBuildTree, NumberOfOnesForGranuleComparer>();
 
-            container.Verify();
+            _container.Verify();
         }
     }
 }

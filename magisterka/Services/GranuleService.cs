@@ -7,6 +7,13 @@ namespace magisterka.Services
 {
     public class GranuleService : IGranuleService
     {
+        private readonly IGranuleComparerForBuildTree _comparerForBuildTree;
+
+        public GranuleService(IGranuleComparerForBuildTree comparerForBuildTree)
+        {
+            _comparerForBuildTree = comparerForBuildTree;
+        }
+
         //TODO: move to GranSetService
         public GranuleSet GenerateGran(CoverageData coverageData)
         {
@@ -31,6 +38,7 @@ namespace magisterka.Services
                 granuleSet.Add(granule);
             }
 
+            granuleSet.Sort(_comparerForBuildTree);
             return granuleSet;
         }
     }

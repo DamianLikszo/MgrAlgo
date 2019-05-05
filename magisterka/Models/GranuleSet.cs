@@ -64,10 +64,9 @@ namespace magisterka.Models
 
         public List<Granule> GetMax() => Granules.Where(o => o.IsMax).ToList();
 
-        public void Sort()
+        public void Sort(IComparer<Granule> comparer)
         {
-            //TODO: New comparer?
-            Granules.Sort((x, y) => x.Count(p => p == 1).CompareTo(y.Count(p => p == 1)));
+            Granules.Sort(comparer);
         }
     }
 }
