@@ -3,19 +3,13 @@ using magisterka.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using magisterka.Enums;
 
 namespace magisterka.Services
 {
     //TODO: rename to GranSetservice
     public class ZbGranService : IZbGranService
     {
-        private readonly IGranuleService granuleService;
-
-        public ZbGranService(IGranuleService granuleService)
-        {
-            this.granuleService = granuleService;
-        }
-
         public Granule SearchMin(GranuleSet granuleSet)
         {
             if (granuleSet.Granules.Count == 0)
@@ -31,6 +25,7 @@ namespace magisterka.Services
             var zbGran = new GranuleSet(granuleSetOrg);
             var result = new GranuleSet();
 
+            zbGran.Sort();
             while (zbGran.Granules.Count > 0)
             {
                 var granNew = SearchMin(zbGran);
@@ -97,13 +92,6 @@ namespace magisterka.Services
             return result.ToArray();
         }
 
-        public void SortZbGran(GranuleSet granuleSet)
-        {
-            //TODO: check it
-           // zbGran = zbGran.OrderBy(x => x.Inside.Count(p => p == 1));
-            //zbGran.Sort((x, y) => x.Inside.Count(p => p == 1).CompareTo(y.Inside.Count(p => p == 1)));
-        }
-
         private void _getRoute(Granule gran, List<string> listOfRoute, List<string> previous)
         {
             var child = gran.Child;
@@ -142,18 +130,18 @@ namespace magisterka.Services
         private void _buildSortedTreeRef(Granule granNew, Granule gran)
         {
             // NOWE: sprawdzić czy powinno byc equal
-            //TODO: fix it
-            //if (granuleService.IsGreaterOrEqual(granNew, gran))
-            //{
-            //    //duplicat z innej gałęzi max
-            //    if(!gran.Parent.Contains(granNew))
-            //    {
-            //        gran.Parent.Add(granNew);
-            //        granNew.Child.Add(gran);
-            //    }
+            var result = granNew.CompareTo(gran);
+            if(result.Equals(GranuleComparerResult.IsGreater) || result.Equals(GranuleComparerResult.Equal))
+            {
+                //duplicat z innej gałęzi max
+                if (!gran.Parent.Contains(granNew))
+                {
+                    gran.Parent.Add(granNew);
+                    granNew.Child.Add(gran);
+                }
 
-            //    return;
-            //}
+                return;
+            }
 
             foreach (var granChild in gran.Child)
             {

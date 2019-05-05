@@ -31,7 +31,6 @@ namespace magisterka
 
             //TODO: tu chyba tez bedzie check null
             _granuleSet = _formData.GranuleSet;
-            _zbGranService.SortZbGran(_granuleSet);
 
             var treeGran = _zbGranService.BuildSortedTree(_granuleSet);
             //TODO: change path

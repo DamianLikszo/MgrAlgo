@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace magisterka.Models
 {
-    public class Granule : IEnumerable<int>
+    public class Granule : IEnumerable<int>, IComparable<Granule>
     {
         private List<int> Inside { get; set; }
         public List<Granule> Child { get; set; }
@@ -32,6 +33,12 @@ namespace magisterka.Models
         public IEnumerator<int> GetEnumerator()
         {
             return Inside.GetEnumerator();
+        }
+
+        public int CompareTo(Granule other)
+        {
+            var comparer = new GranuleComparer();
+            return comparer.Compare(this, other);
         }
 
         public override string ToString() => "{" + string.Join(", ", Inside) + "}";

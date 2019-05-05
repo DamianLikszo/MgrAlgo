@@ -6,7 +6,7 @@ namespace magisterka.Models
 {
     public class GranuleSet : ICollection<Granule>
     {
-        public IList<Granule> Granules { get; set; }
+        public List<Granule> Granules { get; set; }
 
         public GranuleSet()
         {
@@ -54,7 +54,7 @@ namespace magisterka.Models
         }
 
         public int Count => Granules.Count;
-        public bool IsReadOnly => Granules.IsReadOnly;
+        public bool IsReadOnly => false;
 
         public Granule this[int index]
         {
@@ -63,5 +63,11 @@ namespace magisterka.Models
         }
 
         public List<Granule> GetMax() => Granules.Where(o => o.IsMax).ToList();
+
+        public void Sort()
+        {
+            //TODO: New comparer?
+            Granules.Sort((x, y) => x.Count(p => p == 1).CompareTo(y.Count(p => p == 1)));
+        }
     }
 }

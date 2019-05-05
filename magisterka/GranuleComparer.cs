@@ -1,46 +1,47 @@
-﻿using magisterka.Enums;
+﻿using System.Collections.Generic;
+using magisterka.Enums;
 using magisterka.Models;
 
 namespace magisterka
 {
-    public static class GranuleComparer
+    public class GranuleComparer : IComparer<Granule>
     {
-        public static GranuleComparerResult Compare(Granule gran1, Granule gran2)
+        public int Compare(Granule x, Granule y)
         {
-            if (gran1.Count() != gran2.Count())
+            if (x == null || y == null || x.Count() != y.Count())
             {
-                return GranuleComparerResult.CanNotCompare;
+                return (int)GranuleComparerResult.CanNotCompare;
             }
 
             var allIsLesser = true;
             var allIsGreater = true;
-            for (var i = 0; i < gran1.Count(); i++)
+            for (var i = 0; i < x.Count(); i++)
             {
-                if (gran1[i] > gran2[i])
+                if (x[i] > y[i])
                 {
                     allIsLesser = false;
                 }
-                else if (gran1[i] < gran2[i])
+                else if (x[i] < y[i])
                 {
                     allIsGreater = false;
                 }
 
                 if (!allIsGreater && !allIsLesser)
                 {
-                    return GranuleComparerResult.CanNotCompare;
+                    return (int)GranuleComparerResult.CanNotCompare;
                 }
             }
 
             if (allIsLesser && allIsGreater)
             {
-                return GranuleComparerResult.Equal;
+                return (int)GranuleComparerResult.Equal;
             }
             else if (allIsGreater)
             {
-                return GranuleComparerResult.IsGreater;
+                return (int)GranuleComparerResult.IsGreater;
             }
 
-            return GranuleComparerResult.IsLesser;
+            return (int)GranuleComparerResult.IsLesser;
         }
     }
 }

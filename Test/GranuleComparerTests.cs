@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using magisterka;
 using magisterka.Enums;
 using magisterka.Models;
 using Xunit;
@@ -16,7 +15,7 @@ namespace Test
             // Arrange
 
             // Act
-            var result = GranuleComparer.Compare(gran1, gran2);
+            var result = (GranuleComparerResult) gran1.CompareTo(gran2);
 
             // Assert
             Assert.Equal(expectedResult, result);

@@ -6,7 +6,6 @@ namespace magisterka.Interfaces
     public interface IZbGranService
     {
         Granule SearchMin(GranuleSet granuleSet);
-        void SortZbGran(GranuleSet granuleSet);
         GranuleSet BuildSortedTree(GranuleSet granuleSetOrg);
         string ReadResult(GranuleSet treeGran);
         TreeNode[] DrawTreeView(GranuleSet granuleSet);
