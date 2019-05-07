@@ -39,12 +39,12 @@ namespace Test
 
         [Theory]
         [MemberData(nameof(DataForCheckGenerateGranule))]
-        public void GenerateGran_WhenSendCoverageData_ThenShouldCreateGranuleSet(CoverageData coverageData, GranuleSet expect)
+        public void GenerateGran_WhenSendCoverageData_ThenShouldCreateGranuleSet(CoverageData coverageData, List<Granule> expect)
         {
             //Arrange
 
             //Act
-            var result = _granuleService.GenerateGran(coverageData);
+            var result = _granuleService.GenerateGranules(coverageData);
 
             //Assert
             Assert.Equal(expect, result);
@@ -61,7 +61,7 @@ namespace Test
                     new List<int> {0, 1, 0},
                     new List<int> {1, 1, 1}
                 }),
-                new GranuleSet
+                new List<Granule>
                 {
                     new Granule(new List<int> {1, 0, 1}),
                     new Granule(new List<int> {0, 1, 1}),
@@ -79,7 +79,7 @@ namespace Test
                     new List<int> {1, 1, 1},
                     new List<int> {1, 0, 0},
                 }),
-                new GranuleSet
+                new List<Granule>
                 {
                     new Granule(new List<int> {1, 0, 0, 1, 0}),
                     new Granule(new List<int> {0, 1, 1, 1, 0}),
@@ -97,7 +97,7 @@ namespace Test
                     new List<int> {0, 1, 0, 1},
                     new List<int> {1, 1, 1, 1}
                 }),
-                new GranuleSet
+                new List<Granule>
                 {
                     new Granule(new List<int> {1, 0, 1}),
                     new Granule(new List<int> {0, 1, 1}),
@@ -114,7 +114,7 @@ namespace Test
                     new List<int> {1, 1, 1, 1, 0},
                     new List<int> {1, 0, 0, 0, 1}
                 }),
-                new GranuleSet
+                new List<Granule>
                 {
                     new Granule(new List<int> {1, 0, 0, 0, 0}),
                     new Granule(new List<int> {0, 1, 0, 1, 0}),
@@ -133,7 +133,7 @@ namespace Test
                     new List<int> {1, 0, 1, 1},
                     new List<int> {1, 1, 0, 1}
                 }),
-                new GranuleSet
+                new List<Granule>
                 {
                     new Granule(new List<int> {1, 1, 1, 1, 1}),
                     new Granule(new List<int> {0, 1, 1, 1, 0}),
