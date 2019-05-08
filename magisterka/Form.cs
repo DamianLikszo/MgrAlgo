@@ -31,8 +31,7 @@ namespace magisterka
 
             _granuleSet = _formData.GranuleSet;
 
-            //TODO: change path
-            //txtPath.Text = coverage?.Path ?? "";
+            txtPath.Text = _formData?.PathSource ?? "";
 
             treeResult.Nodes.Clear();
             treeResult.Nodes.AddRange(_zbGranService.DrawTreeView(_granuleSet));

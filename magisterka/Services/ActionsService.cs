@@ -23,6 +23,7 @@ namespace magisterka.Services
             _granuleService = granuleService;
         }
 
+        //TODO: add tests
         public bool Load()
         {
             var path = _fileService.SelectFile();
@@ -44,10 +45,9 @@ namespace magisterka.Services
             }
 
             var zbGran = _granuleService.GenerateGran(coverageFile.CoverageData);
+            _formData.PathSource = path;
             _formData.GranuleSet = zbGran;
-            //TODO: sort
-            //zbGranService.SortZbGran(_zbGran);
-
+            
             return true;
         }
     }
