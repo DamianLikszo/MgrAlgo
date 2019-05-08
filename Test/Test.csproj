@@ -75,6 +75,7 @@
     <Compile Include="FileServiceTests.cs" />
     <Compile Include="GranuleComparerTests.cs" />
     <Compile Include="GranuleServiceTests.cs" />
+    <Compile Include="Helpers\SortGranulesInSameOrderComparer.cs" />
     <Compile Include="NumberOfOnesForGranuleComparerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

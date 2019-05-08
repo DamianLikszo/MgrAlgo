@@ -29,15 +29,13 @@ namespace magisterka
             if (!_actionService.Load())
                 return;
 
-            //TODO: tu chyba tez bedzie check null
             _granuleSet = _formData.GranuleSet;
 
-            var treeGran = _zbGranService.BuildSortedTree(_granuleSet);
             //TODO: change path
             //txtPath.Text = coverage?.Path ?? "";
 
             treeResult.Nodes.Clear();
-            treeResult.Nodes.AddRange(_zbGranService.DrawTreeView(treeGran));
+            treeResult.Nodes.AddRange(_zbGranService.DrawTreeView(_granuleSet));
         }
 
         private void btnEnd_Click(object sender, EventArgs e)

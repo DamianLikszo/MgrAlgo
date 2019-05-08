@@ -7,5 +7,6 @@ namespace magisterka.Interfaces
     {
         GranuleSet GenerateGran(CoverageData coverageData);
         List<Granule> GenerateGranules(CoverageData coverageData);
+        GranuleSet BuildGranuleSet(List<Granule> granules);
     }
 }

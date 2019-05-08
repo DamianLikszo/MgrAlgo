@@ -3,52 +3,12 @@ using magisterka.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using magisterka.Enums;
 
 namespace magisterka.Services
 {
     //TODO: rename to GranSetservice
     public class ZbGranService : IZbGranService
     {
-        public Granule SearchMin(GranuleSet granuleSet)
-        {
-            if (granuleSet.Granules.Count == 0)
-            {
-                return null;
-            }
-
-            return granuleSet.Granules[0];
-        }
-
-        public GranuleSet BuildSortedTree(GranuleSet granuleSetOrg)
-        {
-            var zbGran = new GranuleSet(granuleSetOrg);
-            var result = new GranuleSet();
-
-            while (zbGran.Granules.Count > 0)
-            {
-                var granNew = SearchMin(zbGran);
-
-                if (granNew == null)
-                {
-                    break;
-                }
-
-                zbGran.Remove(granNew);
-
-                if (result.Granules.Count != 0)
-                {
-                    foreach (var granMax in result.GetMax())
-                    {
-                        _buildSortedTreeRef(granNew, granMax);       
-                    }
-                }
-
-                result.Add(granNew);
-            }
-
-            return result;
-        }
 
         public string ReadResult(GranuleSet granuleSet)
         {
@@ -123,28 +83,6 @@ namespace magisterka.Services
             foreach (var item in child)
             {
                 _getBranchTree(item, listOfRoute, previous);
-            }
-        }
-
-        private void _buildSortedTreeRef(Granule granNew, Granule gran)
-        {
-            // NOWE: sprawdzić czy powinno byc equal
-            var result = granNew.CompareTo(gran);
-            if(result.Equals(GranuleComparerResult.IsGreater) || result.Equals(GranuleComparerResult.Equal))
-            {
-                //duplicat z innej gałęzi max
-                if (!gran.Parent.Contains(granNew))
-                {
-                    gran.Parent.Add(granNew);
-                    granNew.Child.Add(gran);
-                }
-
-                return;
-            }
-
-            foreach (var granChild in gran.Child)
-            {
-                _buildSortedTreeRef(granNew, granChild);
             }
         }
     }

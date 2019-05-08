@@ -12,12 +12,7 @@ namespace magisterka.Models
         {
             Granules = new List<Granule>();
         }
-
-        public GranuleSet(GranuleSet zbGran)
-        {
-            Granules = zbGran.Granules.ToList();
-        }
-
+        
         public IEnumerator<Granule> GetEnumerator()
         {
             return Granules.GetEnumerator();
@@ -63,10 +58,5 @@ namespace magisterka.Models
         }
 
         public List<Granule> GetMax() => Granules.Where(o => o.IsMax).ToList();
-
-        public void Sort(IComparer<Granule> comparer)
-        {
-            Granules.Sort(comparer);
-        }
     }
 }
