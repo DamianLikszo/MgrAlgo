@@ -32,7 +32,6 @@ namespace magisterka
             _container.Register<Interfaces.IFileReaderService, FileReaderService>();
             _container.Register<IGranuleService, GranuleService>();
             _container.Register<IZbGranService, ZbGranService>();
-            _container.Register<IDevService, DevService>();
             _container.Register<IMyStreamReader, MyStreamReader>();
             _container.Register<IMyMessageBox, MyMessageBox>();
             _container.Register<ICoverageFileValidator, CoverageFileValidator>();
