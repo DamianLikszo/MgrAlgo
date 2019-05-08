@@ -26,16 +26,16 @@ namespace Test
             //Arrange
             
             //Act
-            var actual = _granuleService.BuildGranuleSet(granules);
+            var result = _granuleService.BuildGranuleSet(granules);
 
-            SortParentAndChild(actual);
+            SortParentAndChild(result);
             SortParentAndChild(expected);
 
-            Assert.Equal(expected, actual);
-            for (var i = 0; i < actual.Count; i++)
+            Assert.Equal(expected, result);
+            for (var i = 0; i < result.Count; i++)
             {
-                Assert.Equal(expected[i].Child, actual[i].Child);
-                Assert.Equal(expected[i].Parent, actual[i].Parent);
+                Assert.Equal(expected[i].Child, result[i].Child);
+                Assert.Equal(expected[i].Parent, result[i].Parent);
             }
         }
 
@@ -57,85 +57,85 @@ namespace Test
             {
                 new List<Granule>
                 {
-                    new Granule(new List<int> {0, 0, 0}),
-                    new Granule(new List<int> {0, 0, 1}),
-                    new Granule(new List<int> {0, 1, 0}),
-                    new Granule(new List<int> {0, 1, 1}),
-                    new Granule(new List<int> {1, 0, 0}),
-                    new Granule(new List<int> {1, 0, 1}),
-                    new Granule(new List<int> {1, 1, 0}),
-                    new Granule(new List<int> {1, 1, 1})
+                    new Granule(new [] {0, 0, 0}),
+                    new Granule(new [] {0, 0, 1}),
+                    new Granule(new [] {0, 1, 0}),
+                    new Granule(new [] {0, 1, 1}),
+                    new Granule(new [] {1, 0, 0}),
+                    new Granule(new [] {1, 0, 1}),
+                    new Granule(new [] {1, 1, 0}),
+                    new Granule(new [] {1, 1, 1})
                 },
                 new GranuleSet
                 {
                     Granules = new List<Granule>
                     {
-                        new Granule(new List<int> {0, 0, 0})
+                        new Granule(new [] {0, 0, 0})
                         {
                             Child = new List<Granule>(),
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {0, 0, 1}), new Granule(new List<int> {0, 1, 0}),
-                                new Granule(new List<int> {1, 0, 0})
+                                new Granule(new [] {0, 0, 1}), new Granule(new [] {0, 1, 0}),
+                                new Granule(new [] {1, 0, 0})
                             }
                         },
-                        new Granule(new List<int> {0, 0, 1})
+                        new Granule(new [] {0, 0, 1})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 0})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {0, 1, 1}), new Granule(new List<int> {1, 0, 1})
+                                new Granule(new [] {0, 1, 1}), new Granule(new [] {1, 0, 1})
                             }
                         },
-                        new Granule(new List<int> {0, 1, 0})
+                        new Granule(new [] {0, 1, 0})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 0})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {0, 1, 1}), new Granule(new List<int> {1, 1, 0})
+                                new Granule(new [] {0, 1, 1}), new Granule(new [] {1, 1, 0})
                             }
                         },
-                        new Granule(new List<int> {0, 1, 1})
+                        new Granule(new [] {0, 1, 1})
                         {
                             Child = new List<Granule>
-                                {new Granule(new List<int> {0, 0, 1}), new Granule(new List<int> {0, 1, 0})},
+                                {new Granule(new [] {0, 0, 1}), new Granule(new [] {0, 1, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 1, 1})
+                                new Granule(new [] {1, 1, 1})
                             }
                         },
-                        new Granule(new List<int> {1, 0, 0})
+                        new Granule(new [] {1, 0, 0})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 0})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 0, 1}), new Granule(new List<int> {1, 1, 0})
+                                new Granule(new [] {1, 0, 1}), new Granule(new [] {1, 1, 0})
                             }
                         },
-                        new Granule(new List<int> {1, 0, 1})
-                        {
-                            Child = new List<Granule>
-                                {new Granule(new List<int> {1, 0, 0}), new Granule(new List<int> {0, 0, 1})},
-                            Parent = new List<Granule>
-                            {
-                                new Granule(new List<int> {1, 1, 1})
-                            }
-                        },
-                        new Granule(new List<int> {1, 1, 0})
+                        new Granule(new [] {1, 0, 1})
                         {
                             Child = new List<Granule>
-                                {new Granule(new List<int> {1, 0, 0}), new Granule(new List<int> {0, 1, 0})},
+                                {new Granule(new [] {1, 0, 0}), new Granule(new [] {0, 0, 1})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 1, 1})
+                                new Granule(new [] {1, 1, 1})
                             }
                         },
-                        new Granule(new List<int> {1, 1, 1})
+                        new Granule(new [] {1, 1, 0})
+                        {
+                            Child = new List<Granule>
+                                {new Granule(new [] {1, 0, 0}), new Granule(new [] {0, 1, 0})},
+                            Parent = new List<Granule>
+                            {
+                                new Granule(new [] {1, 1, 1})
+                            }
+                        },
+                        new Granule(new [] {1, 1, 1})
                         {
                             Child = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 1, 0}), new Granule(new List<int> {1, 0, 1}),
-                                new Granule(new List<int> {0, 1, 1})
+                                new Granule(new [] {1, 1, 0}), new Granule(new [] {1, 0, 1}),
+                                new Granule(new [] {0, 1, 1})
                             },
                             Parent = new List<Granule>()
                         }
@@ -146,62 +146,62 @@ namespace Test
             {
                 new List<Granule>
                 {
-                    new Granule(new List<int> {0, 0, 0, 0}),
-                    new Granule(new List<int> {0, 0, 1, 0}),
-                    new Granule(new List<int> {0, 0, 0, 1}),
-                    new Granule(new List<int> {0, 1, 1, 1}),
-                    new Granule(new List<int> {1, 1, 0, 0}),
-                    new Granule(new List<int> {1, 1, 1, 1})
+                    new Granule(new [] {0, 0, 0, 0}),
+                    new Granule(new [] {0, 0, 1, 0}),
+                    new Granule(new [] {0, 0, 0, 1}),
+                    new Granule(new [] {0, 1, 1, 1}),
+                    new Granule(new [] {1, 1, 0, 0}),
+                    new Granule(new [] {1, 1, 1, 1})
                 },
                 new GranuleSet
                 {
                     Granules = new List<Granule>
                     {
-                        new Granule(new List<int> {0, 0, 0, 0})
+                        new Granule(new [] {0, 0, 0, 0})
                         {
                             Child = new List<Granule>(),
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 1, 0, 0}), new Granule(new List<int> {0, 0, 1, 0}),
-                                new Granule(new List<int> {0, 0, 0, 1})
+                                new Granule(new [] {1, 1, 0, 0}), new Granule(new [] {0, 0, 1, 0}),
+                                new Granule(new [] {0, 0, 0, 1})
                             }
                         },
-                        new Granule(new List<int> {0, 0, 1, 0})
+                        new Granule(new [] {0, 0, 1, 0})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 0, 0})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 0, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {0, 1, 1, 1})
+                                new Granule(new [] {0, 1, 1, 1})
                             }
                         },
-                        new Granule(new List<int> {0, 0, 0, 1})
+                        new Granule(new [] {0, 0, 0, 1})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 0, 0})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 0, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {0, 1, 1, 1})
+                                new Granule(new [] {0, 1, 1, 1})
                             }
                         },
-                        new Granule(new List<int> {0, 1, 1, 1})
+                        new Granule(new [] {0, 1, 1, 1})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 1, 0}), new Granule(new List<int> {0, 0, 0, 1})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 1, 0}), new Granule(new [] {0, 0, 0, 1})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 1, 1, 1})
+                                new Granule(new [] {1, 1, 1, 1})
                             }
                         },
-                        new Granule(new List<int> {1, 1, 0, 0})
+                        new Granule(new [] {1, 1, 0, 0})
                         {
-                            Child = new List<Granule> {new Granule(new List<int> {0, 0, 0, 0})},
+                            Child = new List<Granule> {new Granule(new [] {0, 0, 0, 0})},
                             Parent = new List<Granule>
                             {
-                                new Granule(new List<int> {1, 1, 1, 1})
+                                new Granule(new [] {1, 1, 1, 1})
                             }
                         },
-                        new Granule(new List<int> {1, 1, 1, 1})
+                        new Granule(new [] {1, 1, 1, 1})
                         {
                             Child = new List<Granule>
-                                {new Granule(new List<int> {1, 1, 0, 0}), new Granule(new List<int> {0, 1, 1, 1})},
+                                {new Granule(new [] {1, 1, 0, 0}), new Granule(new [] {0, 1, 1, 1})},
                             Parent = new List<Granule>()
                         }
                     }
@@ -235,10 +235,10 @@ namespace Test
             //Arrange
 
             //Act
-            var actual = _granuleService.GenerateGranules(coverageData);
+            var result = _granuleService.GenerateGranules(coverageData);
 
             //Assert
-            Assert.Equal(expected, actual);
+            Assert.Equal(expected, result);
         }
 
         public static IEnumerable<object[]> DataForCheckGenerateGranule => new List<object[]>
@@ -254,9 +254,9 @@ namespace Test
                 }),
                 new List<Granule>
                 {
-                    new Granule(new List<int> {1, 0, 1}),
-                    new Granule(new List<int> {0, 1, 1}),
-                    new Granule(new List<int> {0, 0, 1})
+                    new Granule(new [] {1, 0, 1}),
+                    new Granule(new [] {0, 1, 1}),
+                    new Granule(new [] {0, 0, 1})
                 }
             },
             new object[]
@@ -272,11 +272,11 @@ namespace Test
                 }),
                 new List<Granule>
                 {
-                    new Granule(new List<int> {1, 0, 0, 1, 0}),
-                    new Granule(new List<int> {0, 1, 1, 1, 0}),
-                    new Granule(new List<int> {0, 0, 1, 1, 0}),
-                    new Granule(new List<int> {0, 0, 0, 1, 0}),
-                    new Granule(new List<int> {1, 0, 0, 1, 1})
+                    new Granule(new [] {1, 0, 0, 1, 0}),
+                    new Granule(new [] {0, 1, 1, 1, 0}),
+                    new Granule(new [] {0, 0, 1, 1, 0}),
+                    new Granule(new [] {0, 0, 0, 1, 0}),
+                    new Granule(new [] {1, 0, 0, 1, 1})
                 }
             },
             new object[]
@@ -290,9 +290,9 @@ namespace Test
                 }),
                 new List<Granule>
                 {
-                    new Granule(new List<int> {1, 0, 1}),
-                    new Granule(new List<int> {0, 1, 1}),
-                    new Granule(new List<int> {0, 0, 1})
+                    new Granule(new [] {1, 0, 1}),
+                    new Granule(new [] {0, 1, 1}),
+                    new Granule(new [] {0, 0, 1})
                 }
             },
             new object[]
@@ -307,11 +307,11 @@ namespace Test
                 }),
                 new List<Granule>
                 {
-                    new Granule(new List<int> {1, 0, 0, 0, 0}),
-                    new Granule(new List<int> {0, 1, 0, 1, 0}),
-                    new Granule(new List<int> {1, 0, 1, 0, 0}),
-                    new Granule(new List<int> {0, 0, 0, 1, 0}),
-                    new Granule(new List<int> {1, 0, 1, 0, 1})
+                    new Granule(new [] {1, 0, 0, 0, 0}),
+                    new Granule(new [] {0, 1, 0, 1, 0}),
+                    new Granule(new [] {1, 0, 1, 0, 0}),
+                    new Granule(new [] {0, 0, 0, 1, 0}),
+                    new Granule(new [] {1, 0, 1, 0, 1})
                 }
             },
             new object[]
@@ -326,11 +326,11 @@ namespace Test
                 }),
                 new List<Granule>
                 {
-                    new Granule(new List<int> {1, 1, 1, 1, 1}),
-                    new Granule(new List<int> {0, 1, 1, 1, 0}),
-                    new Granule(new List<int> {0, 0, 1, 0, 0}),
-                    new Granule(new List<int> {0, 0, 0, 1, 0}),
-                    new Granule(new List<int> {0, 0, 0, 0, 1})
+                    new Granule(new [] {1, 1, 1, 1, 1}),
+                    new Granule(new [] {0, 1, 1, 1, 0}),
+                    new Granule(new [] {0, 0, 1, 0, 0}),
+                    new Granule(new [] {0, 0, 0, 1, 0}),
+                    new Granule(new [] {0, 0, 0, 0, 1})
                 }
             },
         };

@@ -29,9 +29,9 @@ namespace Test
             var result = _coverageDataConverter.Convert(content);
 
             // Assert
-            var expect = new CoverageData(new List<List<int>>
+            var expected = new CoverageData(new List<List<int>>
                 {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
-            Assert.Equal(expect, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]

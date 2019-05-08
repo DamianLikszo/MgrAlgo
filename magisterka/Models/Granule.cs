@@ -13,20 +13,13 @@ namespace magisterka.Models
         public bool IsMax => Parent.Count == 0;
         public bool IsMin => Child.Count == 0;
 
-        public Granule()
+        public Granule(IEnumerable<int> inside)
         {
-            Inside = new List<int>();
+            Inside = new List<int>(inside);
             Parent = new List<Granule>();
             Child = new List<Granule>();
         }
-
-        public Granule(List<int> insideList)
-        {
-            Inside = insideList;
-            Parent = new List<Granule>();
-            Child = new List<Granule>();
-        }
-
+        
         public void AddToInside(int value) => Inside.Add(value);
         public int Count() => Inside.Count;
 

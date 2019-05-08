@@ -18,7 +18,7 @@ namespace Test
         public void Compare_WhenCompareWithNull_ThenShouldReturnMinValue()
         {
             // Arrange
-            var gran = new Granule();
+            var gran = new Granule(new[] {1, 0, 1});
 
             // Act
             var result1 = _comparer.Compare(gran, null);
@@ -26,10 +26,10 @@ namespace Test
             var result3 = _comparer.Compare(null, null);
 
             // Assert
-            var expect = int.MinValue;
-            Assert.Equal(expect, result1);
-            Assert.Equal(expect, result2);
-            Assert.Equal(expect, result3);
+            var expected = int.MinValue;
+            Assert.Equal(expected, result1);
+            Assert.Equal(expected, result2);
+            Assert.Equal(expected, result3);
         }
 
         [Theory]
@@ -72,7 +72,7 @@ namespace Test
                 new Granule(new List<int> {1, 0, 1}),
                 new Granule(new List<int> {1, 0, 0, 0, 1}),
                 0
-            },
+            }
         };
     }
 }

@@ -30,7 +30,7 @@ namespace magisterka.Services
 
             foreach (var row in coverageData)
             {
-                var granule = new Granule();
+                var insideList = new List<int>();
                 var indexes = new List<int>();
 
                 for (var j = 0; j < row.Count; j++)
@@ -42,10 +42,11 @@ namespace magisterka.Services
                 foreach (var checkRow in coverageData)
                 {
                     var result = indexes.All(x => checkRow[x] == 1) ? 1 : 0;
-                    granule.AddToInside(result);
+                    insideList.Add(result);
                 }
 
-                granules.Add(granule);
+                var granule = new Granule(insideList);
+                granules.Add(new Granule(granule));
             }
 
             return granules;

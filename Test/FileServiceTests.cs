@@ -40,8 +40,8 @@ namespace Test
             var result = _fileService.ReadFile(path);
 
             //Assert
-            var expect = new List<string> { "1;2;3;", "1;2;3;", "1;2;3;" };
-            Assert.Equal(expect, result);
+            var expected = new List<string> { "1;2;3;", "1;2;3;", "1;2;3;" };
+            Assert.Equal(expected, result);
         }
 
         [Fact]

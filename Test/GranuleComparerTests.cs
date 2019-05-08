@@ -35,44 +35,44 @@ namespace Test
             // gran1, gran2, expectedResult
             new object[]
             {
-                new Granule(new List<int> {1, 0, 1, 1, 0}),
-                new Granule(new List<int> {1, 0, 1, 1, 0}),
+                new Granule(new [] {1, 0, 1, 1, 0}),
+                new Granule(new [] {1, 0, 1, 1, 0}),
                 GranuleComparerResult.Equal
             },
             new object[]
             {
-                new Granule(new List<int> {0, 0, 1, 0, 0}),
-                new Granule(new List<int> {1, 0, 1, 1, 0}),
+                new Granule(new [] {0, 0, 1, 0, 0}),
+                new Granule(new [] {1, 0, 1, 1, 0}),
                 GranuleComparerResult.IsLesser
             },
             new object[]
             {
-                new Granule(new List<int> {1, 1, 1, 1, 0}),
-                new Granule(new List<int> {1, 0, 1, 1, 0}),
+                new Granule(new [] {1, 1, 1, 1, 0}),
+                new Granule(new [] {1, 0, 1, 1, 0}),
                 GranuleComparerResult.IsGreater
             },
             new object[]
             {
-                new Granule(new List<int> {1, 0, 1}),
-                new Granule(new List<int> {1, 0, 1, 1, 0}),
+                new Granule(new [] {1, 0, 1}),
+                new Granule(new [] {1, 0, 1, 1, 0}),
                 GranuleComparerResult.CanNotCompare
             },
             new object[]
             {
-                new Granule(new List<int> {1, 0, 1, 1, 0}),
-                new Granule(new List<int> {1, 0, 1, 1}),
+                new Granule(new [] {1, 0, 1, 1, 0}),
+                new Granule(new [] {1, 0, 1, 1}),
                 GranuleComparerResult.CanNotCompare
             },
             new object[]
             {
-                new Granule(new List<int> {1, 0, 1, 1, 1}),
-                new Granule(new List<int> {1, 1, 1, 1, 0}),
+                new Granule(new [] {1, 0, 1, 1, 1}),
+                new Granule(new [] {1, 1, 1, 1, 0}),
                 GranuleComparerResult.CanNotCompare
             },
             new object[]
             {
-                new Granule(new List<int> {1, 0, 0, 0, 0}),
-                new Granule(new List<int> {0, 0, 0, 0, 1}),
+                new Granule(new [] {1, 0, 0, 0, 0}),
+                new Granule(new [] {0, 0, 0, 0, 1}),
                 GranuleComparerResult.CanNotCompare
             },
         };
