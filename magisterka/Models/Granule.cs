@@ -6,7 +6,7 @@ namespace magisterka.Models
 {
     public class Granule : IEnumerable<int>, IComparable<Granule>
     {
-        private List<int> Inside { get; set; }
+        private List<int> Inside { get; }
         public List<Granule> Child { get; set; }
         public List<Granule> Parent { get; set; }
 
@@ -30,7 +30,6 @@ namespace magisterka.Models
 
         public int CompareTo(Granule other)
         {
-            //TODO: think about it
             var comparer = new GranuleComparer();
             return comparer.Compare(this, other);
         }
