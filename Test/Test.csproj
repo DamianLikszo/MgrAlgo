@@ -76,7 +76,10 @@
     <Compile Include="GranuleComparerTests.cs" />
     <Compile Include="GranuleServiceTests.cs" />
     <Compile Include="Helpers\SortGranulesInSameOrderComparer.cs" />
+    <Compile Include="Helpers\SortTreeNodeInSameOrderComparer.cs" />
+    <Compile Include="Helpers\TreeNodeComparer.cs" />
     <Compile Include="NumberOfOnesForGranuleComparerTests.cs" />
+    <Compile Include="PresentGranuleSetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

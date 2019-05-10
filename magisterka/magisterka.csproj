@@ -71,7 +71,7 @@
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMyStreamReader.cs" />
-    <Compile Include="Interfaces\IZbGranService.cs" />
+    <Compile Include="Interfaces\IGranuleSetPresenter.cs" />
     <Compile Include="Models\CoverageFile.cs" />
     <Compile Include="Models\Granule.cs" />
     <Compile Include="Models\GranuleSet.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Services\GranuleService.cs" />
     <Compile Include="Wrappers\MyMessageBox.cs" />
     <Compile Include="Wrappers\MyOpenFileDialog.cs" />
-    <Compile Include="Services\ZbGranService.cs" />
+    <Compile Include="Services\GranuleSetPresenter.cs" />
     <Compile Include="Validators\CoverageFileValidator.cs" />
     <Compile Include="Validators\ICoverageFileValidator.cs" />
     <EmbeddedResource Include="Form.resx">

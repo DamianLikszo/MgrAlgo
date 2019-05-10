@@ -3,9 +3,8 @@ using System.Windows.Forms;
 
 namespace magisterka.Interfaces
 {
-    public interface IZbGranService
+    public interface IGranuleSetPresenter
     {
-        string ReadResult(GranuleSet treeGran);
         TreeNode[] DrawTreeView(GranuleSet granuleSet);
     }
 }
