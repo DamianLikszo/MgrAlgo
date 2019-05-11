@@ -46,6 +46,8 @@ namespace Test
             //Assert
             var expected = new List<string> { "1;2;3;", "1;2;3;", "1;2;3;" };
             Assert.Equal(expected, result);
+
+            ms.Close();
         }
 
         [Fact]
@@ -166,6 +168,8 @@ namespace Test
             var expected = string.Join(Environment.NewLine, content) + Environment.NewLine;
             Assert.True(result);
             Assert.Equal(expected, actual);
+
+            ms.Close();
         }
     }
 }
