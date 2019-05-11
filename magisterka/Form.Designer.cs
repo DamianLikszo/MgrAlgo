@@ -47,10 +47,10 @@
             // btnLoad
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnLoad.Location = new System.Drawing.Point(12, 12);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLoad.Location = new System.Drawing.Point(9, 10);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(277, 82);
+            this.btnLoad.Size = new System.Drawing.Size(208, 67);
             this.btnLoad.TabIndex = 0;
             this.btnLoad.Text = "Wczytaj";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -59,10 +59,10 @@
             // btnInfo
             // 
             this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnInfo.Location = new System.Drawing.Point(12, 212);
-            this.btnInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnInfo.Location = new System.Drawing.Point(9, 172);
+            this.btnInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(277, 82);
+            this.btnInfo.Size = new System.Drawing.Size(208, 67);
             this.btnInfo.TabIndex = 1;
             this.btnInfo.Text = "Instrukcja";
             this.btnInfo.UseVisualStyleBackColor = true;
@@ -70,10 +70,10 @@
             // btnEnd
             // 
             this.btnEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnEnd.Location = new System.Drawing.Point(12, 310);
-            this.btnEnd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEnd.Location = new System.Drawing.Point(9, 252);
+            this.btnEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(277, 82);
+            this.btnEnd.Size = new System.Drawing.Size(208, 67);
             this.btnEnd.TabIndex = 2;
             this.btnEnd.Text = "Koniec";
             this.btnEnd.UseVisualStyleBackColor = true;
@@ -83,32 +83,32 @@
             // 
             this.gbGraph.Controls.Add(this.treeResult);
             this.gbGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.gbGraph.Location = new System.Drawing.Point(300, 48);
-            this.gbGraph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbGraph.Location = new System.Drawing.Point(225, 39);
+            this.gbGraph.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbGraph.Name = "gbGraph";
-            this.gbGraph.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbGraph.Size = new System.Drawing.Size(832, 489);
+            this.gbGraph.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbGraph.Size = new System.Drawing.Size(624, 397);
             this.gbGraph.TabIndex = 1;
             this.gbGraph.TabStop = false;
             this.gbGraph.Text = "Wynik:";
             // 
             // treeResult
             // 
-            this.treeResult.Location = new System.Drawing.Point(7, 33);
-            this.treeResult.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeResult.Location = new System.Drawing.Point(5, 27);
             this.treeResult.Name = "treeResult";
-            this.treeResult.Size = new System.Drawing.Size(820, 440);
+            this.treeResult.Size = new System.Drawing.Size(616, 358);
             this.treeResult.TabIndex = 1;
             // 
             // lNameProgram
             // 
             this.lNameProgram.AutoSize = true;
             this.lNameProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.lNameProgram.Location = new System.Drawing.Point(5, 18);
-            this.lNameProgram.MaximumSize = new System.Drawing.Size(244, 60);
-            this.lNameProgram.MinimumSize = new System.Drawing.Size(244, 60);
+            this.lNameProgram.Location = new System.Drawing.Point(4, 15);
+            this.lNameProgram.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lNameProgram.MaximumSize = new System.Drawing.Size(183, 49);
+            this.lNameProgram.MinimumSize = new System.Drawing.Size(183, 49);
             this.lNameProgram.Name = "lNameProgram";
-            this.lNameProgram.Size = new System.Drawing.Size(244, 60);
+            this.lNameProgram.Size = new System.Drawing.Size(183, 49);
             this.lNameProgram.TabIndex = 2;
             this.lNameProgram.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych.";
             // 
@@ -116,9 +116,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.label1.Location = new System.Drawing.Point(5, 98);
+            this.label1.Location = new System.Drawing.Point(4, 80);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(43, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "v. 1.0";
             // 
@@ -126,9 +127,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.label2.Location = new System.Drawing.Point(131, 98);
+            this.label2.Location = new System.Drawing.Point(98, 80);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 20);
+            this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Damian Likszo";
             // 
@@ -137,11 +139,11 @@
             this.gbAbout.Controls.Add(this.label2);
             this.gbAbout.Controls.Add(this.label1);
             this.gbAbout.Controls.Add(this.lNameProgram);
-            this.gbAbout.Location = new System.Drawing.Point(12, 402);
-            this.gbAbout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbAbout.Location = new System.Drawing.Point(9, 327);
+            this.gbAbout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbAbout.Name = "gbAbout";
-            this.gbAbout.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbAbout.Size = new System.Drawing.Size(277, 134);
+            this.gbAbout.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbAbout.Size = new System.Drawing.Size(208, 109);
             this.gbAbout.TabIndex = 3;
             this.gbAbout.TabStop = false;
             // 
@@ -149,29 +151,31 @@
             // 
             this.txtPath.Enabled = false;
             this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtPath.Location = new System.Drawing.Point(475, 12);
-            this.txtPath.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPath.Location = new System.Drawing.Point(356, 10);
+            this.txtPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(657, 30);
+            this.txtPath.Size = new System.Drawing.Size(494, 26);
             this.txtPath.TabIndex = 4;
             // 
             // lPath
             // 
             this.lPath.AutoSize = true;
             this.lPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lPath.Location = new System.Drawing.Point(295, 14);
+            this.lPath.Location = new System.Drawing.Point(221, 11);
+            this.lPath.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lPath.Name = "lPath";
-            this.lPath.Size = new System.Drawing.Size(160, 25);
+            this.lPath.Size = new System.Drawing.Size(127, 20);
             this.lPath.TabIndex = 0;
             this.lPath.Text = "Ścieżka do pliku:";
             // 
             // btnSaveGran
             // 
+            this.btnSaveGran.Enabled = false;
             this.btnSaveGran.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnSaveGran.Location = new System.Drawing.Point(12, 114);
-            this.btnSaveGran.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSaveGran.Location = new System.Drawing.Point(9, 93);
+            this.btnSaveGran.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSaveGran.Name = "btnSaveGran";
-            this.btnSaveGran.Size = new System.Drawing.Size(277, 82);
+            this.btnSaveGran.Size = new System.Drawing.Size(208, 67);
             this.btnSaveGran.TabIndex = 1;
             this.btnSaveGran.Text = "Zapisz Geanule";
             this.btnSaveGran.UseVisualStyleBackColor = true;
@@ -179,9 +183,9 @@
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 549);
+            this.ClientSize = new System.Drawing.Size(858, 446);
             this.Controls.Add(this.lPath);
             this.Controls.Add(this.txtPath);
             this.Controls.Add(this.gbAbout);
@@ -190,7 +194,7 @@
             this.Controls.Add(this.btnSaveGran);
             this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.btnLoad);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form";
             this.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
             this.gbGraph.ResumeLayout(false);

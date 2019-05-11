@@ -26,14 +26,16 @@ namespace magisterka
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
+            CleanForm();
             if (!_actionService.Load())
+            {
                 return;
+            }
 
             GranuleSet = _formData.GranuleSet;
+            txtPath.Text = _formData.PathSource;
+            btnSaveGran.Enabled = true;
 
-            txtPath.Text = _formData?.PathSource ?? "";
-
-            treeResult.Nodes.Clear();
             var treeNodes = _granuleSetPresenter.DrawTreeView(GranuleSet);
             treeResult.Nodes.AddRange(treeNodes);
         }
@@ -45,13 +47,26 @@ namespace magisterka
 
         private void btnSaveGran_Click(object sender, EventArgs e)
         {
-            //TODO: hide if null
             if (GranuleSet == null)
+            {
                 return;
+            }
 
             _fileReaderService.SaveFile(GranuleSet);
         }
 
-        //TODO: Information button
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            //TODO: Information
+        }
+
+        private void CleanForm()
+        {
+            _formData.GranuleSet = null;
+            _formData.PathSource = null;
+            btnSaveGran.Enabled = false;
+            treeResult.Nodes.Clear();
+            txtPath.Text = "";
+        }
     }
 }
