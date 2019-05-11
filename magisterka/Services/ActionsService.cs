@@ -23,20 +23,25 @@ namespace magisterka.Services
             _granuleService = granuleService;
         }
 
-        //TODO: add tests
         public bool Load()
         {
             var path = _fileService.GetPathFromOpenFileDialog();
-            if (path == null)
+            if (string.IsNullOrEmpty(path))
+            {
                 return false;
+            }
 
             var content = _fileService.ReadFile(path);
             if (content == null)
+            {
                 return false;
+            }
 
             var data = _coverageDataConverter.Convert(content);
             if (data == null)
+            {
                 return false;
+            }
 
             var coverageFile = new CoverageFile(path, data);
             if (!_coverageFileValidator.ValidAndShow(coverageFile))
@@ -47,7 +52,7 @@ namespace magisterka.Services
             var zbGran = _granuleService.GenerateGran(coverageFile.CoverageData);
             _formData.PathSource = path;
             _formData.GranuleSet = zbGran;
-            
+
             return true;
         }
     }

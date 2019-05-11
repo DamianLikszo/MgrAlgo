@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionsServiceTests.cs" />
     <Compile Include="CoverageFileValidatorTests.cs" />
     <Compile Include="CoverageDataConverterTests.cs" />
     <Compile Include="FileReaderServiceTests.cs" />
