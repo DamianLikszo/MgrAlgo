@@ -29,17 +29,24 @@ namespace magisterka
         {
             _container = new Container();
 
+            // Wrappers
+            _container.Register<IMyStreamReader, MyStreamReader>();
+            _container.Register<IMyMessageBox, MyMessageBox>();
+            _container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
+            _container.Register<IMySaveFileDialog, MySaveFileDialog>();
+            _container.Register<IMyStreamWriter, MyStreamWriter>();
+
+            // Services
             _container.Register<Interfaces.IFileReaderService, FileReaderService>();
             _container.Register<IGranuleService, GranuleService>();
             _container.Register<IGranuleSetPresenter, GranuleSetPresenter>();
-            _container.Register<IMyStreamReader, MyStreamReader>();
-            _container.Register<IMyMessageBox, MyMessageBox>();
-            _container.Register<ICoverageFileValidator, CoverageFileValidator>();
-            _container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
-            _container.Register<IFileService, FileService>();
-            _container.Register<ICoverageDataConverter, CoverageDataConverter>();
             _container.Register<IActionService, ActionsService>();
+            _container.Register<ICoverageDataConverter, CoverageDataConverter>();
+            _container.Register<IFileService, FileService>();
             _container.Register<IFormData, FormData>(Lifestyle.Singleton);
+
+            // Other
+            _container.Register<ICoverageFileValidator, CoverageFileValidator>();
             _container.Register<IGranuleComparerForBuildTree, NumberOfOnesForGranuleComparer>();
 
             _container.Verify();

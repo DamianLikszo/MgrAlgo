@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="CoverageFileValidatorTests.cs" />
     <Compile Include="CoverageDataConverterTests.cs" />
+    <Compile Include="FileReaderServiceTests.cs" />
     <Compile Include="FileServiceTests.cs" />
     <Compile Include="GranuleComparerTests.cs" />
     <Compile Include="GranuleServiceTests.cs" />

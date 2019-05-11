@@ -26,7 +26,7 @@ namespace magisterka.Services
         //TODO: add tests
         public bool Load()
         {
-            var path = _fileService.SelectFile();
+            var path = _fileService.GetPathFromOpenFileDialog();
             if (path == null)
                 return false;
 

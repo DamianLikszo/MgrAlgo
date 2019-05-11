@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
 
 namespace magisterka.Services
 {
-    public class FileReaderService : Interfaces.IFileReaderService
+    public class FileReaderService : IFileReaderService
     {
         private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IFileService _fileService;
@@ -24,77 +22,89 @@ namespace magisterka.Services
 
         public CoverageFile OpenAndReadFile()
         {
-            CoverageFile result = null;
-
-            var path = _fileService.SelectFile();
-            
-            if(path != null)
+            var path = _fileService.GetPathFromOpenFileDialog();
+            if (string.IsNullOrEmpty(path))
             {
-                var content = _fileService.ReadFile(path);
-                if (content == null)
-                    return null;
-
-                var data = _coverageDataConverter.Convert(content);
-                if (data == null)
-                    return null;
-
-                result = new CoverageFile(path, data);
-                if (!_coverageFileValidator.ValidAndShow(result))
-                {
-                    return null;
-                }
+                return null;
             }
 
+            var content = _fileService.ReadFile(path);
+            if (content == null)
+            {
+                return null;
+            }
+
+            var coverageData = _coverageDataConverter.Convert(content);
+            if (coverageData == null)
+            {
+                return null;
+            }
+
+            var result = new CoverageFile(path, coverageData);
+            return _coverageFileValidator.ValidAndShow(result) ? result : null;
+        }
+
+        public List<string> PreparePrint(GranuleSet granuleSet)
+        {
+            var content = new List<string> { _printHeader(granuleSet) };
+
+            if (granuleSet.Count > 0)
+            {
+                content.AddRange(_printContent(granuleSet));
+            }
+
+            return content;
+        }
+
+        //TODO: other File, Rename
+        public bool SaveFile(GranuleSet granuleSet)
+        {
+            var path = _fileService.GetPathFromSaveFileDialog();
+            if (string.IsNullOrEmpty(path))
+            {
+                return false;
+            }
+
+            var content = PreparePrint(granuleSet);
+            var result = _fileService.SaveFile(path, content);
             return result;
         }
 
-        //TODO: other File
-        public bool SaveFile(List<Granule> data)
+        private List<string> _printContent(GranuleSet granuleSet)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Plik tekstowe|*.csv";
-            saveFileDialog.RestoreDirectory = true;
+            var content = new List<string>();
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            var length = granuleSet[0].Count();
+            for (var i = 0; i < length; i++)
             {
-                using (StreamWriter writer = new StreamWriter(saveFileDialog.OpenFile()))
+                var line = $"u{i + 1}";
+
+                foreach (var granule in granuleSet)
                 {
-                    _printHeader(writer, data);
-
-                    if (data.Count != 0)
-                    {
-                        var length = data[0].Count();
-
-                        for (int i = 0; i < length; i++)
-                        {
-                            writer.Write($"u{i + 1}");
-
-                            foreach (var granula in data)
-                            {
-                                writer.Write(_separator + granula[i].ToString());
-                            }
-
-                            writer.WriteLine();
-                        }
-                    }
-
-                    writer.Close();
+                    line += _separator + granule[i].ToString();
                 }
+
+                content.Add(line);
             }
 
-            return true;
+            return content;
         }
 
-        private void _printHeader(StreamWriter writer, List<Granule> data)
+        private string _printHeader(GranuleSet granuleSet)
         {
-            writer.Write("obiekt/g(obiekt)");
+            var header = "";
 
-            for (int i = 0; i < data.Count; i++)
+            for (var i = 0; i < granuleSet.Count; i++)
             {
-                writer.Write(_separator + $"g(u{i+1})");
+                if (i > 0)
+                {
+                    header += _separator;
+                }
+
+                header += $"g(u{i + 1})";
             }
 
-            writer.WriteLine();
+            return header;
         }
     }
 }

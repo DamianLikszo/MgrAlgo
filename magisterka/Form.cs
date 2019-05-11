@@ -12,7 +12,7 @@ namespace magisterka
         private readonly IFormData _formData;
         private readonly IActionService _actionService;
 
-        private GranuleSet _granuleSet { get; set; }
+        private GranuleSet GranuleSet { get; set; }
 
         public Form(Interfaces.IFileReaderService fileReaderService, IGranuleSetPresenter granuleSetPresenter, IFormData formData,
             IActionService actionService)
@@ -29,12 +29,12 @@ namespace magisterka
             if (!_actionService.Load())
                 return;
 
-            _granuleSet = _formData.GranuleSet;
+            GranuleSet = _formData.GranuleSet;
 
             txtPath.Text = _formData?.PathSource ?? "";
 
             treeResult.Nodes.Clear();
-            var treeNodes = _granuleSetPresenter.DrawTreeView(_granuleSet);
+            var treeNodes = _granuleSetPresenter.DrawTreeView(GranuleSet);
             treeResult.Nodes.AddRange(treeNodes);
         }
 
@@ -45,11 +45,13 @@ namespace magisterka
 
         private void btnSaveGran_Click(object sender, EventArgs e)
         {
-            if (_granuleSet == null)
+            //TODO: hide if null
+            if (GranuleSet == null)
                 return;
 
-            //TODO: fix
-            //_fileReaderService.SaveFile(_zbGran);
+            _fileReaderService.SaveFile(GranuleSet);
         }
+
+        //TODO: Information button
     }
 }

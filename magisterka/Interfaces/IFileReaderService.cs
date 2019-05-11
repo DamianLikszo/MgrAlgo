@@ -1,11 +1,12 @@
-﻿using magisterka.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using magisterka.Models;
 
 namespace magisterka.Interfaces
 {
     public interface IFileReaderService
     {
         CoverageFile OpenAndReadFile();
-        bool SaveFile(List<Granule> data);
+        List<string> PreparePrint(GranuleSet granuleSet);
+        bool SaveFile(GranuleSet granuleSet);
     }
 }
