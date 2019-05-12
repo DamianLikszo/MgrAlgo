@@ -77,7 +77,9 @@
     <Compile Include="FileServiceTests.cs" />
     <Compile Include="GranuleComparerTests.cs" />
     <Compile Include="GranuleServiceTests.cs" />
-    <Compile Include="Helpers\SortGranulesInSameOrderComparer.cs" />
+    <Compile Include="GranuleSetDtoConverterTests.cs" />
+    <Compile Include="Helpers\EnumerableGranuleDtoComparer.cs" />
+    <Compile Include="Helpers\GranuleSetComparer.cs" />
     <Compile Include="Helpers\SortTreeNodeInSameOrderComparer.cs" />
     <Compile Include="Helpers\TreeNodeComparer.cs" />
     <Compile Include="NumberOfOnesForGranuleComparerTests.cs" />

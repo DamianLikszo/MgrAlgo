@@ -6,7 +6,7 @@ namespace magisterka.Models
 {
     public class Granule : IEnumerable<int>, IComparable<Granule>
     {
-        private List<int> Inside { get; }
+        public List<int> Inside { get; }
         public List<Granule> Child { get; set; }
         public List<Granule> Parent { get; set; }
 

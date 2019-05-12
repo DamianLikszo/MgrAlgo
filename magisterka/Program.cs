@@ -44,6 +44,7 @@ namespace magisterka
             _container.Register<ICoverageDataConverter, CoverageDataConverter>();
             _container.Register<IFileService, FileService>();
             _container.Register<IFormData, FormData>(Lifestyle.Singleton);
+            _container.Register<IGranuleSetDtoConverter, GranuleSetDtoConverter>();
 
             // Other
             _container.Register<ICoverageFileValidator, CoverageFileValidator>();

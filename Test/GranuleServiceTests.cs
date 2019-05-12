@@ -28,25 +28,9 @@ namespace Test
             //Act
             var result = _granuleService.BuildGranuleSet(granules);
 
-            SortParentAndChild(result);
-            SortParentAndChild(expected);
-
-            Assert.Equal(expected, result);
-            for (var i = 0; i < result.Count; i++)
-            {
-                Assert.Equal(expected[i].Child, result[i].Child);
-                Assert.Equal(expected[i].Parent, result[i].Parent);
-            }
-        }
-
-        private static void SortParentAndChild(GranuleSet granuleSet)
-        {
-            var sortComparer = new SortGranulesInSameOrderComparer();
-            foreach (var granule in granuleSet)
-            {
-                granule.Child.Sort(sortComparer);
-                granule.Parent.Sort(sortComparer);
-            }
+            //Assert
+            var comparer = new GranuleSetComparer();
+            Assert.Equal(expected, result, comparer);
         }
 
         //TODO: more, hide in class
