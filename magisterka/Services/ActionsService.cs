@@ -29,7 +29,7 @@ namespace magisterka.Services
 
         public bool Load()
         {
-            var path = _fileService.GetPathFromOpenFileDialog();
+            var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
                 return false;
@@ -60,7 +60,7 @@ namespace magisterka.Services
             return true;
         }
 
-        //TODO: add tests, add messages, other file extension, try catch
+        //TODO: add tests, add messages, try catch
         public bool SerializeGranuleSetAndSaveFile()
         {
             var granuleSet = _formData.GranuleSet;
@@ -69,7 +69,7 @@ namespace magisterka.Services
                 return false;
             }
 
-            var path = _fileService.GetPathFromSaveFileDialog();
+            var path = _fileService.GetPathFromSaveFileDialog(FileService.JsonFilter);
             if (string.IsNullOrEmpty(path))
             {
                 return false;
@@ -80,10 +80,10 @@ namespace magisterka.Services
             return _fileService.SaveFile(path, new List<string> {json});
         }
 
-        //TODO: add tests, add messages, other extension, try catch
+        //TODO: add tests, add messages, try catch
         public bool OpenFileAndDeserializeGranuleSet()
         {
-            var path = _fileService.GetPathFromOpenFileDialog();
+            var path = _fileService.GetPathFromOpenFileDialog(FileService.JsonFilter);
             if (string.IsNullOrEmpty(path))
             {
                 return false;

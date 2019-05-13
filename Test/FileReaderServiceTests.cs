@@ -42,7 +42,7 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog()).Returns(path);
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
 
             //Act
             var result = _fileReaderService.OpenAndReadFile();
@@ -57,7 +57,7 @@ namespace Test
             //Arrange
             var path = "path";
             var content = new List<string> { "1;0;1", "1;1;1", "0;0;1" };
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog()).Returns(path);
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
             _fileServiceMock.Setup(x => x.ReadFile(path)).Returns(content);
 
             //Act
@@ -76,7 +76,7 @@ namespace Test
             var coverageData = new CoverageData(new List<List<int>>
                 {new List<int> {1, 0, 1}, new List<int> {1, 1, 1}, new List<int> {0, 0, 1}});
 
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog()).Returns(path);
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
             _fileServiceMock.Setup(x => x.ReadFile(path)).Returns(content);
             _coverageDataConverterMock.Setup(x => x.Convert(content)).Returns(coverageData);
             _coverageFileValidatorMock.Setup(x => x.ValidAndShow(It.IsAny<CoverageFile>())).Returns(false);
@@ -97,7 +97,7 @@ namespace Test
             var coverageData = new CoverageData(new List<List<int>>
                 {new List<int> {1, 0, 1}, new List<int> {1, 1, 1}, new List<int> {0, 0, 1}});
 
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog()).Returns(path);
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
             _fileServiceMock.Setup(x => x.ReadFile(path)).Returns(content);
             _coverageDataConverterMock.Setup(x => x.Convert(content)).Returns(coverageData);
             _coverageFileValidatorMock.Setup(x => x.ValidAndShow(It.IsAny<CoverageFile>())).Returns(true);
@@ -132,7 +132,7 @@ namespace Test
             var path = "path";
             var granuleSet = new GranuleSet()
                 {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
-            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog()).Returns(path);
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
             _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>())).Returns(true);
 
             //Act

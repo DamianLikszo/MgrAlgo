@@ -14,6 +14,9 @@ namespace magisterka.Services
         private readonly IMyOpenFileDialog _openFileDialog;
         private readonly IMySaveFileDialog _saveFileDialog;
 
+        public static readonly string CsvFilter = "Pliki tekstowe|*.csv";
+        public static readonly string JsonFilter = "Pliki tekstowe|*.json";
+        
         public FileService(IMyStreamReader streamReader, IMyMessageBox messageBox, IMyOpenFileDialog openFileDialog,
             IMySaveFileDialog saveFileDialog, IMyStreamWriter streamWriter)
         {
@@ -49,9 +52,13 @@ namespace magisterka.Services
             return result;
         }
         
-        public string GetPathFromOpenFileDialog()
+        //TODO: add tests for filter
+        public string GetPathFromOpenFileDialog(string filter)
         {
-            _openFileDialog.Filter = "Plik tekstowe|*.csv";
+            if (!string.IsNullOrEmpty(filter))
+            {
+                _openFileDialog.Filter = filter;
+            }
             _openFileDialog.Title = "Wybierz plik";
 
             return _openFileDialog.ShowDialog() == DialogResult.OK ? _openFileDialog.FileName : null;
@@ -86,9 +93,13 @@ namespace magisterka.Services
             return true;
         }
 
-        public string GetPathFromSaveFileDialog()
+        //TODO: add tests for filter
+        public string GetPathFromSaveFileDialog(string filter)
         {
-            _saveFileDialog.Filter = "Pliki tekstowe|*.csv";
+            if (!string.IsNullOrEmpty(filter))
+            {
+                _saveFileDialog.Filter = filter;
+            }
             _saveFileDialog.Title = "Wybierz plik";
             _saveFileDialog.RestoreDirectory = true;
 

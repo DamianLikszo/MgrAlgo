@@ -74,7 +74,7 @@ namespace Test
             _myOpenFileDialogMock.Setup(x => x.FileName).Returns(path);
 
             //Act
-            var result = _fileService.GetPathFromOpenFileDialog();
+            var result = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
 
             //Assert
             Assert.Equal(path, result);
@@ -87,7 +87,7 @@ namespace Test
             _myOpenFileDialogMock.Setup(x => x.ShowDialog()).Returns(DialogResult.Cancel);
 
             //Act
-            var result = _fileService.GetPathFromOpenFileDialog();
+            var result = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
 
             //Assert
             Assert.Null(result);
@@ -102,7 +102,7 @@ namespace Test
             _mySaveFileDialogMock.Setup(x => x.FileName).Returns(path);
 
             //Act
-            var result = _fileService.GetPathFromSaveFileDialog();
+            var result = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
 
             //Assert
             Assert.Equal(path, result);
@@ -115,7 +115,7 @@ namespace Test
             _mySaveFileDialogMock.Setup(x => x.ShowDialog()).Returns(DialogResult.Cancel);
 
             //Act
-            var result = _fileService.GetPathFromSaveFileDialog();
+            var result = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
 
             //Assert
             Assert.Null(result);

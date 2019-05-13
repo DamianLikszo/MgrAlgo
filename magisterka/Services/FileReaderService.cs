@@ -22,7 +22,7 @@ namespace magisterka.Services
 
         public CoverageFile OpenAndReadFile()
         {
-            var path = _fileService.GetPathFromOpenFileDialog();
+            var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
                 return null;
@@ -56,10 +56,10 @@ namespace magisterka.Services
             return content;
         }
 
-        //TODO: other File, Rename
+        //TODO: other File, Rename, maybe t
         public bool SaveFile(GranuleSet granuleSet)
         {
-            var path = _fileService.GetPathFromSaveFileDialog();
+            var path = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
                 return false;
