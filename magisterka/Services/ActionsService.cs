@@ -1,6 +1,8 @@
-﻿using magisterka.Interfaces;
+﻿using System.Collections.Generic;
+using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
+using Newtonsoft.Json;
 
 namespace magisterka.Services
 {
@@ -11,16 +13,18 @@ namespace magisterka.Services
         private readonly ICoverageDataConverter _coverageDataConverter;
         private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IGranuleService _granuleService;
+        private readonly IGranuleSetDtoConverter _granuleSetDtoConverter;
 
         public ActionsService(IFormData formData, IFileService fileService,
             ICoverageDataConverter coverageDataConverter, ICoverageFileValidator coverageFileValidator,
-            IGranuleService granuleService)
+            IGranuleService granuleService, IGranuleSetDtoConverter granuleSetDtoConverter)
         {
             _formData = formData;
             _fileService = fileService;
             _coverageDataConverter = coverageDataConverter;
             _coverageFileValidator = coverageFileValidator;
             _granuleService = granuleService;
+            _granuleSetDtoConverter = granuleSetDtoConverter;
         }
 
         public bool Load()
@@ -53,6 +57,51 @@ namespace magisterka.Services
             _formData.PathSource = path;
             _formData.GranuleSet = zbGran;
 
+            return true;
+        }
+
+        //TODO: add tests, add messages, other file extension, try catch
+        public bool SerializeGranuleSetAndSaveFile()
+        {
+            var granuleSet = _formData.GranuleSet;
+            if (granuleSet == null)
+            {
+                return false;
+            }
+
+            var path = _fileService.GetPathFromSaveFileDialog();
+            if (string.IsNullOrEmpty(path))
+            {
+                return false;
+            }
+
+            var granulesDto = _granuleSetDtoConverter.ConvertToDto(granuleSet);
+            var json = JsonConvert.SerializeObject(granulesDto);
+            return _fileService.SaveFile(path, new List<string> {json});
+        }
+
+        //TODO: add tests, add messages, other extension, try catch
+        public bool OpenFileAndDeserializeGranuleSet()
+        {
+            var path = _fileService.GetPathFromOpenFileDialog();
+            if (string.IsNullOrEmpty(path))
+            {
+                return false;
+            }
+
+            var content = _fileService.ReadFile(path);
+            if (content.Count != 1)
+            {
+                //message, error ?
+                return false;
+            }
+
+            var json = content[0];
+            var granulesDto = JsonConvert.DeserializeObject<GranuleDto[]>(json);
+            var granuleSet = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
+
+            _formData.PathSource = path;
+            _formData.GranuleSet = granuleSet;
             return true;
         }
     }
