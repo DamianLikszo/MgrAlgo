@@ -5,8 +5,8 @@ namespace magisterka.Interfaces
 {
     public interface IFileReaderService
     {
-        CoverageFile OpenAndReadFile();
+        CoverageFile OpenAndReadFile(out string error);
         List<string> PreparePrint(GranuleSet granuleSet);
-        bool SaveFile(GranuleSet granuleSet);
+        bool SaveFile(GranuleSet granuleSet, out string error);
     }
 }

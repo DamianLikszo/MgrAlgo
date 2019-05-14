@@ -5,6 +5,6 @@ namespace magisterka.Interfaces
 {
     public interface ICoverageDataConverter
     {
-        CoverageData Convert(List<string> content);
+        CoverageData Convert(List<string> content, out string error);
     }
 }

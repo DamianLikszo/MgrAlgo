@@ -5,8 +5,8 @@ namespace magisterka.Interfaces
     public interface IFileService
     {
         string GetPathFromOpenFileDialog(string filter);
-        List<string> ReadFile(string path);
-        bool SaveFile(string path, List<string> content);
+        List<string> ReadFile(string path, out string error);
+        bool SaveFile(string path, List<string> content, out string error);
         string GetPathFromSaveFileDialog(string filter);
     }
 }

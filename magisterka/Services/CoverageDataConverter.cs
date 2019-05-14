@@ -1,22 +1,16 @@
 ﻿using System.Collections.Generic;
 using magisterka.Interfaces;
 using magisterka.Models;
-using magisterka.Wrappers;
 
 namespace magisterka.Services
 {
     public class CoverageDataConverter :  ICoverageDataConverter
     {
-        private readonly IMyMessageBox _myMessageBox;
         private readonly char _separator = ';';
 
-        public CoverageDataConverter(IMyMessageBox messageBox)
+        public CoverageData Convert(List<string> content, out string error)
         {
-            _myMessageBox = messageBox;
-        }
-
-        public CoverageData Convert(List<string> content)
-        {
+            error = null;
             var data = new List<List<int>>();
 
             foreach (var line in content)
@@ -28,7 +22,7 @@ namespace magisterka.Services
                 {
                     if (!int.TryParse(item, out var column))
                     {
-                        _myMessageBox.Show("Nieprawidłowy zestaw danych. Wiersze zawierają inne dane niż liczby.");
+                        error = "Nieprawidłowy zestaw danych. Wiersze zawierają inne dane niż liczby.";
                         return null;
                     }
 

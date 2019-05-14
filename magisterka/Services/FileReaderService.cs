@@ -20,28 +20,30 @@ namespace magisterka.Services
             _coverageDataConverter = coverageDataConverter;
         }
 
-        public CoverageFile OpenAndReadFile()
+        public CoverageFile OpenAndReadFile(out string error)
         {
+            error = null;
             var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
+                error = "Empty file path.";
                 return null;
             }
 
-            var content = _fileService.ReadFile(path);
+            var content = _fileService.ReadFile(path, out error);
             if (content == null)
             {
                 return null;
             }
 
-            var coverageData = _coverageDataConverter.Convert(content);
+            var coverageData = _coverageDataConverter.Convert(content, out error);
             if (coverageData == null)
             {
                 return null;
             }
 
-            var result = new CoverageFile(path, coverageData);
-            return _coverageFileValidator.ValidAndShow(result) ? result : null;
+            var coverageFile = new CoverageFile(path, coverageData);
+            return _coverageFileValidator.Valid(coverageFile, out error) ? coverageFile : null;
         }
 
         public List<string> PreparePrint(GranuleSet granuleSet)
@@ -57,17 +59,18 @@ namespace magisterka.Services
         }
 
         //TODO: other File, Rename, maybe t
-        public bool SaveFile(GranuleSet granuleSet)
+        public bool SaveFile(GranuleSet granuleSet, out string error)
         {
+            error = null;
             var path = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
+                error = "Empty file path.";
                 return false;
             }
 
             var content = PreparePrint(granuleSet);
-            var result = _fileService.SaveFile(path, content);
-            return result;
+             return _fileService.SaveFile(path, content, out error);
         }
 
         private List<string> _printContent(GranuleSet granuleSet)

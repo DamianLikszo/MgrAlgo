@@ -10,26 +10,24 @@ namespace magisterka.Services
     {
         private readonly IMyStreamReader _streamReader;
         private readonly IMyStreamWriter _streamWriter;
-        private readonly IMyMessageBox _myMessageBox;
         private readonly IMyOpenFileDialog _openFileDialog;
         private readonly IMySaveFileDialog _saveFileDialog;
 
         public static readonly string CsvFilter = "Pliki tekstowe|*.csv";
         public static readonly string JsonFilter = "Pliki tekstowe|*.json";
         
-        public FileService(IMyStreamReader streamReader, IMyMessageBox messageBox, IMyOpenFileDialog openFileDialog,
+        public FileService(IMyStreamReader streamReader, IMyOpenFileDialog openFileDialog,
             IMySaveFileDialog saveFileDialog, IMyStreamWriter streamWriter)
         {
             _streamReader = streamReader;
             _streamWriter = streamWriter;
-            _myMessageBox = messageBox;
             _openFileDialog = openFileDialog;
             _saveFileDialog = saveFileDialog;
         }
 
-        //TODO: maybe out error
-        public List<string> ReadFile(string path)
+        public List<string> ReadFile(string path, out string error)
         {
+            error = null;
             var result = new List<string>();
 
             try
@@ -45,7 +43,7 @@ namespace magisterka.Services
             }
             catch (Exception ex)
             {
-                _myMessageBox.Show(ex.Message);
+                error = ex.Message;
                 return null;
             }
 
@@ -64,11 +62,13 @@ namespace magisterka.Services
             return _openFileDialog.ShowDialog() == DialogResult.OK ? _openFileDialog.FileName : null;
         }
 
-        public bool SaveFile(string path, List<string> content)
+        public bool SaveFile(string path, List<string> content, out string error)
         {
+            error = null;
+
             if (string.IsNullOrEmpty(path))
             {
-                _myMessageBox.Show("Wrong empty file path.");
+                error = "Empty file path.";
                 return false;
             }
 
@@ -86,7 +86,7 @@ namespace magisterka.Services
             }
             catch (Exception ex)
             {
-                _myMessageBox.Show(ex.Message);
+                error = ex.Message;
                 return false;
             }
             

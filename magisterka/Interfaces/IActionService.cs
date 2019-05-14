@@ -2,8 +2,8 @@
 {
     public interface IActionService
     {
-        bool Load();
-        bool SerializeGranuleSetAndSaveFile();
-        bool OpenFileAndDeserializeGranuleSet();
+        bool Load(out string error);
+        bool SerializeGranuleSetAndSaveFile(out string error);
+        bool OpenFileAndDeserializeGranuleSet(out string error);
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
+using magisterka.Wrappers;
 using Newtonsoft.Json;
 
 namespace magisterka.Services
@@ -27,28 +29,30 @@ namespace magisterka.Services
             _granuleSetDtoConverter = granuleSetDtoConverter;
         }
 
-        public bool Load()
+        public bool Load(out string error)
         {
+            error = null;
             var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
+                error = "Empty path file.";
                 return false;
             }
 
-            var content = _fileService.ReadFile(path);
-            if (content == null)
+            var content = _fileService.ReadFile(path, out error);
+            if (!string.IsNullOrEmpty(error))
             {
                 return false;
             }
 
-            var data = _coverageDataConverter.Convert(content);
+            var data = _coverageDataConverter.Convert(content, out error);
             if (data == null)
             {
                 return false;
             }
 
             var coverageFile = new CoverageFile(path, data);
-            if (!_coverageFileValidator.ValidAndShow(coverageFile))
+            if (!_coverageFileValidator.Valid(coverageFile, out error))
             {
                 return false;
             }
@@ -60,49 +64,75 @@ namespace magisterka.Services
             return true;
         }
 
-        //TODO: add tests, add messages, try catch
-        public bool SerializeGranuleSetAndSaveFile()
+        //TODO: add tests
+        public bool SerializeGranuleSetAndSaveFile(out string error)
         {
+            error = null;
             var granuleSet = _formData.GranuleSet;
             if (granuleSet == null)
             {
+                error = "Empty granule set object";
                 return false;
             }
 
             var path = _fileService.GetPathFromSaveFileDialog(FileService.JsonFilter);
             if (string.IsNullOrEmpty(path))
             {
+                error = "Empty file path.";
                 return false;
             }
 
             var granulesDto = _granuleSetDtoConverter.ConvertToDto(granuleSet);
-            var json = JsonConvert.SerializeObject(granulesDto);
-            return _fileService.SaveFile(path, new List<string> {json});
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(granulesDto);
+                return _fileService.SaveFile(path, new List<string> { json }, out error);
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                return false;
+            }
         }
 
-        //TODO: add tests, add messages, try catch
-        public bool OpenFileAndDeserializeGranuleSet()
+        //TODO: add tests
+        public bool OpenFileAndDeserializeGranuleSet(out string error)
         {
+            error = null;
             var path = _fileService.GetPathFromOpenFileDialog(FileService.JsonFilter);
             if (string.IsNullOrEmpty(path))
             {
+                error = "Empty path file.";
                 return false;
             }
 
-            var content = _fileService.ReadFile(path);
+            var content = _fileService.ReadFile(path, out  error);
+            if (content == null)
+            {
+                return false;
+            }
             if (content.Count != 1)
             {
-                //message, error ?
+                error = "Wrong json content.";
                 return false;
             }
 
-            var json = content[0];
-            var granulesDto = JsonConvert.DeserializeObject<GranuleDto[]>(json);
-            var granuleSet = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
+            try
+            {
+                var json = content[0];
+                var granulesDto = JsonConvert.DeserializeObject<GranuleDto[]>(json);
+                var granuleSet = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
 
-            _formData.PathSource = path;
-            _formData.GranuleSet = granuleSet;
-            return true;
+                _formData.PathSource = path;
+                _formData.GranuleSet = granuleSet;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                return false;
+            }
         }
     }
 }

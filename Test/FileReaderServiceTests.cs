@@ -4,6 +4,7 @@ using magisterka.Models;
 using magisterka.Services;
 using magisterka.Validators;
 using Moq;
+using Test.Helpers;
 using Xunit;
 
 namespace Test
@@ -15,7 +16,6 @@ namespace Test
         private readonly Mock<IFileService> _fileServiceMock;
         private readonly Mock<ICoverageDataConverter> _coverageDataConverterMock;
 
-
         public FileReaderServiceTests()
         {
             _coverageFileValidatorMock = new Mock<ICoverageFileValidator>();
@@ -26,70 +26,59 @@ namespace Test
         }
 
         [Fact]
-        public void OpeAndReadFile_WhenPathIsNull_ThenShouldReturnNull()
+        public void OpeAndReadFile_WhenPathIsNull_ThenShouldReturnNullAndError()
         {
             //Arrange
 
             //Act
-            var result = _fileReaderService.OpenAndReadFile();
+            var result = _fileReaderService.OpenAndReadFile(out var error);
 
             //Assert
             Assert.Null(result);
+            Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void OpeAndReadFile_WhenContentIsNull_ThenShouldReturnNull()
+        public void OpeAndReadFile_WhenReadFileFailed_ThenShouldReturnNullAndErrorFromReadFileService()
         {
             //Arrange
             var path = "path";
             _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-
+            string error;
+            _fileServiceMock.Setup(x => x.ReadFile(path, out error))
+                .Callback(CallbackOutErrorHelper.DelegateForObject1);
+            
             //Act
-            var result = _fileReaderService.OpenAndReadFile();
+            var result = _fileReaderService.OpenAndReadFile(out error);
 
             //Assert
             Assert.Null(result);
+            Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
         }
 
         [Fact]
-        public void OpeAndReadFile_WhenCoverageDataIsNull_ThenShouldReturnNull()
-        {
-            //Arrange
-            var path = "path";
-            var content = new List<string> { "1;0;1", "1;1;1", "0;0;1" };
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.ReadFile(path)).Returns(content);
-
-            //Act
-            var result = _fileReaderService.OpenAndReadFile();
-
-            //Assert
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public void OpeAndReadFile_WhenCoverageFileIsWrong_ThenShouldReturnNull()
+        public void OpeAndReadFile_WhenConverterFailed_ThenShouldReturnNullAndErrorFromConverter()
         {
             //Arrange
             var path = "path";
             var content = new List<string> { "1;0;1", "1;1;1", "0;0;1" };
-            var coverageData = new CoverageData(new List<List<int>>
-                {new List<int> {1, 0, 1}, new List<int> {1, 1, 1}, new List<int> {0, 0, 1}});
 
+            string error;
             _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.ReadFile(path)).Returns(content);
-            _coverageDataConverterMock.Setup(x => x.Convert(content)).Returns(coverageData);
-            _coverageFileValidatorMock.Setup(x => x.ValidAndShow(It.IsAny<CoverageFile>())).Returns(false);
+            _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
+            _coverageDataConverterMock.Setup(x => x.Convert(content, out error))
+                .Callback(CallbackOutErrorHelper.DelegateForObject1);
 
             //Act
-            var result = _fileReaderService.OpenAndReadFile();
+            var result = _fileReaderService.OpenAndReadFile(out error);
 
             //Assert
             Assert.Null(result);
+            Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
         }
 
         [Fact]
-        public void OpeAndReadFile_WhenEverythingIsFine_ThenShouldReturnCoverageFile()
+        public void OpeAndReadFile_WhenCoverageFileValidatorReturnFalse_ThenShouldReturnNullAndErrorFromValidator()
         {
             //Arrange
             var path = "path";
@@ -97,49 +86,79 @@ namespace Test
             var coverageData = new CoverageData(new List<List<int>>
                 {new List<int> {1, 0, 1}, new List<int> {1, 1, 1}, new List<int> {0, 0, 1}});
 
+            string error;
             _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.ReadFile(path)).Returns(content);
-            _coverageDataConverterMock.Setup(x => x.Convert(content)).Returns(coverageData);
-            _coverageFileValidatorMock.Setup(x => x.ValidAndShow(It.IsAny<CoverageFile>())).Returns(true);
+            _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
+            _coverageDataConverterMock.Setup(x => x.Convert(content, out error)).Returns(coverageData);
+            _coverageFileValidatorMock.Setup(x => x.Valid(It.IsAny<CoverageFile>(), out error))
+                .Callback(CallbackOutErrorHelper.DelegateForObject1).Returns(false);
 
             //Act
-            var result = _fileReaderService.OpenAndReadFile();
+            var result = _fileReaderService.OpenAndReadFile(out error);
+
+            //Assert
+            Assert.Null(result);
+            Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
+        }
+
+        [Fact]
+        public void OpeAndReadFile_WhenEverythingIsFine_ThenShouldReturnCoverageFileWithoutError()
+        {
+            //Arrange
+            var path = "path";
+            var content = new List<string> { "1;0;1", "1;1;1", "0;0;1" };
+            var coverageData = new CoverageData(new List<List<int>>
+                {new List<int> {1, 0, 1}, new List<int> {1, 1, 1}, new List<int> {0, 0, 1}});
+
+            string error;
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
+            _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
+            _coverageDataConverterMock.Setup(x => x.Convert(content, out error)).Returns(coverageData);
+            _coverageFileValidatorMock.Setup(x => x.Valid(It.IsAny<CoverageFile>(), out error)).Returns(true);
+
+            //Act
+            var result = _fileReaderService.OpenAndReadFile(out error);
 
             //Assert
             Assert.NotNull(result);
             Assert.Equal(path, result.Path);
             Assert.Equal(coverageData, result.CoverageData);
+            Assert.True(string.IsNullOrEmpty(error));
         }
 
         [Fact]
-        public void SaveFile_WhenPathIsNull_ThenShouldReturnFalse()
+        public void SaveFile_WhenPathIsNull_ThenShouldReturnFalseAndError()
         {
             //Arrange
             var granuleSet = new GranuleSet
                 {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
 
             //Act
-            var result = _fileReaderService.SaveFile(granuleSet);
+            var result = _fileReaderService.SaveFile(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
+            Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void SaveFile_WhenEverythingIsFine_ThenShouldReturnTrue()
+        public void SaveFile_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
         {
             //Arrange
             var path = "path";
             var granuleSet = new GranuleSet()
                 {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>())).Returns(true);
+
+            string error;
+            _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>(), out error)).Returns(true);
 
             //Act
-            var result = _fileReaderService.SaveFile(granuleSet);
+            var result = _fileReaderService.SaveFile(granuleSet, out error);
 
             //Assert
             Assert.True(result);
+            Assert.True(string.IsNullOrEmpty(error));
         }
 
         [Fact]

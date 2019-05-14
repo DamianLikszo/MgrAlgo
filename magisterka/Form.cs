@@ -27,8 +27,9 @@ namespace magisterka
         private void btnLoad_Click(object sender, EventArgs e)
         {
             CleanForm();
-            if (!_actionService.Load())
+            if (!_actionService.Load(out var error))
             {
+                //TODO: show error
                 return;
             }
 
@@ -52,7 +53,8 @@ namespace magisterka
                 return;
             }
 
-            _fileReaderService.SaveFile(GranuleSet);
+            _fileReaderService.SaveFile(GranuleSet, out var error);
+            //TODO: show error
         }
 
         private void btnInfo_Click(object sender, EventArgs e)

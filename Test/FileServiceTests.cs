@@ -15,7 +15,6 @@ namespace Test
     {
         private readonly Mock<IMyStreamReader> _myStreamReaderMock;
         private readonly Mock<IMyStreamWriter> _myStreamWriterMock;
-        private readonly Mock<IMyMessageBox> _myMessageBoxMock;
         private readonly Mock<IMyOpenFileDialog> _myOpenFileDialogMock;
         private readonly Mock<IMySaveFileDialog> _mySaveFileDialogMock;
         private readonly IFileService _fileService;
@@ -24,15 +23,14 @@ namespace Test
         {
             _myStreamReaderMock = new Mock<IMyStreamReader>();
             _myStreamWriterMock = new Mock<IMyStreamWriter>();
-            _myMessageBoxMock = new Mock<IMyMessageBox>();
             _myOpenFileDialogMock = new Mock<IMyOpenFileDialog>();
             _mySaveFileDialogMock = new Mock<IMySaveFileDialog>();
-            _fileService = new FileService(_myStreamReaderMock.Object, _myMessageBoxMock.Object,
-                _myOpenFileDialogMock.Object, _mySaveFileDialogMock.Object, _myStreamWriterMock.Object);
+            _fileService = new FileService(_myStreamReaderMock.Object,_myOpenFileDialogMock.Object,
+                _mySaveFileDialogMock.Object, _myStreamWriterMock.Object);
         }
 
         [Fact]
-        public void ReadFile_WhenPutRightFile_ThenShouldReturnContent()
+        public void ReadFile_WhenPutRightFile_ThenShouldReturnContentWithoutError()
         {
             //Arrange
             var path = "path";
@@ -41,28 +39,29 @@ namespace Test
             _myStreamReaderMock.Setup(x => x.GetReader(path)).Returns(new StreamReader(ms));
 
             //Act
-            var result = _fileService.ReadFile(path);
+            var result = _fileService.ReadFile(path, out var error);
 
             //Assert
             var expected = new List<string> { "1;2;3;", "1;2;3;", "1;2;3;" };
             Assert.Equal(expected, result);
+            Assert.True(string.IsNullOrEmpty(error));
 
             ms.Close();
         }
 
         [Fact]
-        public void ReadFile_WhenStreamReaderThrowException_ThenReturnNullAndShowMessage()
+        public void ReadFile_WhenStreamReaderThrowException_ThenReturnNullAndError()
         {
             //Arrange
             var path = "path";
             _myStreamReaderMock.Setup(x => x.GetReader(path)).Throws(new Exception());
 
             //Act
-            var result = _fileService.ReadFile(path);
+            var result = _fileService.ReadFile(path, out var error);
 
             //Assert
             Assert.Null(result);
-            _myMessageBoxMock.Verify(x => x.Show(It.IsAny<string>()), Times.Once);
+            Assert.NotEmpty(error);
         }
 
         [Fact]
@@ -122,21 +121,21 @@ namespace Test
         }
 
         [Fact]
-        public void SaveFile_WhenPathIsEmpty_ThenShouldReturnFalseAndShowMessage()
+        public void SaveFile_WhenPathIsEmpty_ThenShouldReturnFalseAndError()
         {
             //Arrange
             var content = new List<string> {"some line"};
 
             //Act
-            var result = _fileService.SaveFile(null, content);
+            var result = _fileService.SaveFile(null, content, out var error);
 
             //Assert
             Assert.False(result);
-            _myMessageBoxMock.Verify(x => x.Show(It.IsAny<string>()), Times.Once);
+            Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void SaveFile_WhenStreamWriterThrowException_ThenReturnNullAndShowMessage()
+        public void SaveFile_WhenStreamWriterThrowException_ThenReturnNullAndError()
         {
             //Arrange
             var path = "path";
@@ -144,15 +143,15 @@ namespace Test
             _myStreamWriterMock.Setup(x => x.GetStreamWriter(path)).Throws(new Exception());
 
             //Act
-            var result = _fileService.SaveFile(path, content);
+            var result = _fileService.SaveFile(path, content, out var error);
 
             //Assert
             Assert.False(result);
-            _myMessageBoxMock.Verify(x => x.Show(It.IsAny<string>()), Times.Once);
+            Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void SaveFile_WhenEverythingIsFine_ThenShouldReturnTrue()
+        public void SaveFile_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
         {
             //Arrange
             var path = "path";
@@ -161,13 +160,14 @@ namespace Test
             _myStreamWriterMock.Setup(x => x.GetStreamWriter(path)).Returns(new StreamWriter(ms));
             
             //Act
-            var result = _fileService.SaveFile(path, content);
+            var result = _fileService.SaveFile(path, content, out var error);
 
             //Assert
             var actual = Encoding.UTF8.GetString(ms.ToArray());
             var expected = string.Join(Environment.NewLine, content) + Environment.NewLine;
             Assert.True(result);
             Assert.Equal(expected, actual);
+            Assert.True(string.IsNullOrEmpty(error));
 
             ms.Close();
         }
