@@ -20,52 +20,116 @@ namespace Test
             _granuleService = new GranuleService(comparerForBuildTree);
         }
 
-        //TODO:add more tests
-        [Fact]
-        public void ConvertToDto_WhenPutGranuleSet_ThenShouldReturnDto()
+        [Theory]
+        [MemberData(nameof(DataForConvert))]
+        public void ConvertToDto_WhenPutGranuleSet_ThenShouldReturnDto(List<Granule> granules, GranuleDto[] expected)
         {
             //Arrange
-            var granules = new List<Granule>
-                {new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 1, 1}), new Granule(new[] {0, 0, 1})};
             var granuleSet = _granuleService.BuildGranuleSet(granules);
 
             //Act
             var result = _granuleSetDtoConverter.ConvertToDto(granuleSet);
 
             //Assert
-            var expected = new[]
-            {
-                new GranuleDto(new[] {1, 1, 1}) {Child = new[] {new[] {0, 1, 1}}},
-                new GranuleDto(new[] {0, 1, 1}) {Child = new[] {new[] {0, 0, 1}}},
-                new GranuleDto(new[] {0, 0, 1})
-            };
-
             var comparer = new EnumerableGranuleDtoComparer();
             Assert.Equal(expected, result, comparer);
         }
 
-        //TODO: add more tests
-        [Fact]
-        public void ConvertFromDto_WhenPutDto_ThenShouldReturnGranuleSet()
+        [Theory]
+        [MemberData(nameof(DataForConvert))]
+        public void ConvertFromDto_WhenPutDto_ThenShouldReturnGranuleSet(List<Granule> expectedGranules, GranuleDto[] granulesDto)
         {
             //Arrange
-            var granulesDto = new[]
-            {
-                new GranuleDto(new[] {1, 1, 1}) {Child = new[] {new[] {0, 1, 1}}},
-                new GranuleDto(new[] {0, 1, 1}) {Child = new[] {new[] {0, 0, 1}}},
-                new GranuleDto(new[] {0, 0, 1})
-            };
 
             //Act
             var result = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
 
             //Assert
-            var expectedGranules = new List<Granule>
-                {new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 1, 1}), new Granule(new[] {0, 0, 1})};
             var expected = _granuleService.BuildGranuleSet(expectedGranules);
 
             var comparer = new GranuleSetComparer();
             Assert.Equal(expected, result, comparer);
         }
+        
+        public static IEnumerable<object[]> DataForConvert => new List<object[]>
+        {
+            // granules, expectedResult
+            new object[]
+            {
+                // simple
+                new List<Granule>
+                    {new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 1, 1}), new Granule(new[] {0, 0, 1})},
+                new[]
+                {
+                    new GranuleDto(new[] {1, 1, 1}) {Child = new[] {new[] {0, 1, 1}}},
+                    new GranuleDto(new[] {0, 1, 1}) {Child = new[] {new[] {0, 0, 1}}},
+                    new GranuleDto(new[] {0, 0, 1})
+                }
+            },
+            new object[]
+            {
+                // all combinations in 3 digits
+                new List<Granule>
+                {
+                    new Granule(new[] {0, 0, 0}),
+                    new Granule(new[] {0, 0, 1}),
+                    new Granule(new[] {0, 1, 0}),
+                    new Granule(new[] {0, 1, 1}),
+                    new Granule(new[] {1, 0, 0}),
+                    new Granule(new[] {1, 0, 1}),
+                    new Granule(new[] {1, 1, 0}),
+                    new Granule(new[] {1, 1, 1}),
+                },
+                new[]
+                {
+                    new GranuleDto(new[] {1, 1, 1}) {Child = new[] {new[] {0, 1, 1}, new[] {1, 0, 1}, new[] {1, 1, 0}}},
+                    new GranuleDto(new[] {0, 1, 1}) {Child = new[] {new[] {0, 0, 1}, new[] {0, 1, 0}}},
+                    new GranuleDto(new[] {1, 0, 1}) {Child = new[] {new[] {0, 0, 1}, new[] {1, 0, 0}}},
+                    new GranuleDto(new[] {1, 1, 0}) {Child = new[] {new[] {1, 0, 0}, new[] {0, 1, 0}}},
+                    new GranuleDto(new[] {0, 1, 0}) {Child = new[] {new[] {0, 0, 0}}},
+                    new GranuleDto(new[] {1, 0, 0}) {Child = new[] {new[] {0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 1}) {Child = new[] {new[] {0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 0})
+                }
+            },
+            new object[]
+            {
+                //Multiple branches from multi points
+                new List<Granule>
+                {
+                    new Granule(new[] {1, 1, 1, 1, 1, 1, 1, 1}),
+                    new Granule(new[] {0, 1, 1, 1, 1, 1, 1, 1}),
+                    new Granule(new[] {0, 1, 1, 1, 1, 1, 1, 0}),
+                    new Granule(new[] {0, 1, 1, 1, 1, 1, 0, 1}),
+                    new Granule(new[] {0, 1, 1, 1, 1, 1, 0, 0}),
+                    new Granule(new[] {0, 1, 0, 1, 1, 1, 0, 0}),
+                    new Granule(new[] {0, 0, 0, 1, 0, 0, 0, 0}),
+                    new Granule(new[] {0, 0, 0, 1, 0, 1, 0, 0}),
+                    new Granule(new[] {0, 0, 0, 1, 1, 0, 0, 0}),
+                    new Granule(new[] {0, 0, 0, 1, 1, 1, 0, 0}),
+                    new Granule(new[] {0, 0, 1, 0, 0, 0, 0, 0}),
+                    new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 0}),
+                    new Granule(new[] {0, 0, 1, 0, 1, 0, 0, 0}),
+                    new Granule(new[] {0, 0, 1, 0, 1, 1, 0, 0})
+                },
+                new []
+                {
+                    new GranuleDto(new[] {1, 1, 1, 1, 1, 1, 1, 1}) {Child = new[] {new[] {0, 1, 1, 1, 1, 1, 1, 1}}},
+                    new GranuleDto(new[] {0, 1, 1, 1, 1, 1, 1, 1}) {Child = new[] {new[] {0, 1, 1, 1, 1, 1, 0, 1}, new[] {0, 1, 1, 1, 1, 1, 1, 0}}},
+                    new GranuleDto(new[] {0, 1, 1, 1, 1, 1, 0, 1}) {Child = new[] {new[] {0, 1, 1, 1, 1, 1, 0, 0}}},
+                    new GranuleDto(new[] {0, 1, 1, 1, 1, 1, 1, 0}) {Child = new[] {new[] {0, 1, 1, 1, 1, 1, 0, 0}}},
+                    new GranuleDto(new[] {0, 1, 1, 1, 1, 1, 0, 0}) {Child = new[] {new[] {0, 1, 0, 1, 1, 1, 0, 0}, new[] {0, 0, 1, 0, 1, 1, 0, 0}}},
+                    new GranuleDto(new[] {0, 1, 0, 1, 1, 1, 0, 0}) {Child = new[] {new[] {0, 0, 0, 1, 1, 1, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 0, 1, 1, 1, 0, 0}) {Child = new[] {new[] {0, 0, 0, 1, 0, 1, 0, 0}, new[] {0, 0, 0, 1, 1, 0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 0, 1, 0, 1, 0, 0}) {Child = new[] {new[] {0, 0, 0, 1, 0, 0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 0, 1, 0, 0, 0, 0}),
+                    new GranuleDto(new[] {0, 0, 0, 1, 1, 0, 0, 0}) {Child = new[] {new[] {0, 0, 0, 1, 0, 0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 1, 0, 1, 1, 0, 0}) {Child = new[] {new[] {0, 0, 1, 0, 0, 1, 0, 0}, new[] {0, 0, 1, 0, 1, 0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 1, 0, 0, 1, 0, 0}) {Child = new[] {new[] {0, 0, 1, 0, 0, 0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 1, 0, 1, 0, 0, 0}) {Child = new[] {new[] {0, 0, 1, 0, 0, 0, 0, 0}}},
+                    new GranuleDto(new[] {0, 0, 1, 0, 0, 0, 0, 0})
+                }
+            }
+        };
     }
 }
