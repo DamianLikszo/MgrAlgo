@@ -74,6 +74,7 @@
     <Compile Include="Services\CoverageDataConverter.cs" />
     <Compile Include="Services\FormData.cs" />
     <Compile Include="Services\GranuleSetDtoConverter.cs" />
+    <Compile Include="Wrappers\IMyJsonConvert.cs" />
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMySaveFileDialog.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Services\FileReaderService.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Wrappers\IMyStreamWriter.cs" />
+    <Compile Include="Wrappers\MyJsonConvert.cs" />
     <Compile Include="Wrappers\MySaveFileDialog.cs" />
     <Compile Include="Wrappers\MyStreamReader.cs" />
     <Compile Include="Services\GranuleService.cs" />

@@ -16,10 +16,12 @@ namespace magisterka.Services
         private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IGranuleService _granuleService;
         private readonly IGranuleSetDtoConverter _granuleSetDtoConverter;
+        private readonly IMyJsonConvert _myJsonConvert;
 
         public ActionsService(IFormData formData, IFileService fileService,
             ICoverageDataConverter coverageDataConverter, ICoverageFileValidator coverageFileValidator,
-            IGranuleService granuleService, IGranuleSetDtoConverter granuleSetDtoConverter)
+            IGranuleService granuleService, IGranuleSetDtoConverter granuleSetDtoConverter,
+            IMyJsonConvert jsonConvert)
         {
             _formData = formData;
             _fileService = fileService;
@@ -27,6 +29,7 @@ namespace magisterka.Services
             _coverageFileValidator = coverageFileValidator;
             _granuleService = granuleService;
             _granuleSetDtoConverter = granuleSetDtoConverter;
+            _myJsonConvert = jsonConvert;
         }
 
         public bool Load(out string error)
@@ -64,7 +67,6 @@ namespace magisterka.Services
             return true;
         }
 
-        //TODO: add tests
         public bool SerializeGranuleSetAndSaveFile(out string error)
         {
             error = null;
@@ -83,10 +85,9 @@ namespace magisterka.Services
             }
 
             var granulesDto = _granuleSetDtoConverter.ConvertToDto(granuleSet);
-
             try
             {
-                var json = JsonConvert.SerializeObject(granulesDto);
+                var json = _myJsonConvert.SerializeObject(granulesDto);
                 return _fileService.SaveFile(path, new List<string> { json }, out error);
             }
             catch (Exception ex)
@@ -96,7 +97,6 @@ namespace magisterka.Services
             }
         }
 
-        //TODO: add tests
         public bool OpenFileAndDeserializeGranuleSet(out string error)
         {
             error = null;
@@ -121,7 +121,7 @@ namespace magisterka.Services
             try
             {
                 var json = content[0];
-                var granulesDto = JsonConvert.DeserializeObject<GranuleDto[]>(json);
+                var granulesDto = _myJsonConvert.DeserializeObject<GranuleDto[]>(json);
                 var granuleSet = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
 
                 _formData.PathSource = path;

@@ -35,6 +35,7 @@ namespace magisterka
             _container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
             _container.Register<IMySaveFileDialog, MySaveFileDialog>();
             _container.Register<IMyStreamWriter, MyStreamWriter>();
+            _container.Register<IMyJsonConvert, MyJsonConvert>();
 
             // Services
             _container.Register<Interfaces.IFileReaderService, FileReaderService>();
