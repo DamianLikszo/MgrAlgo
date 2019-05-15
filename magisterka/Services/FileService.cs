@@ -50,14 +50,14 @@ namespace magisterka.Services
             return result;
         }
         
-        //TODO: add tests for filter
-        public string GetPathFromOpenFileDialog(string filter)
+        public string GetPathFromOpenFileDialog(string filter = null)
         {
             if (!string.IsNullOrEmpty(filter))
             {
                 _openFileDialog.Filter = filter;
             }
             _openFileDialog.Title = "Wybierz plik";
+            _saveFileDialog.RestoreDirectory = true;
 
             return _openFileDialog.ShowDialog() == DialogResult.OK ? _openFileDialog.FileName : null;
         }
@@ -94,7 +94,7 @@ namespace magisterka.Services
         }
 
         //TODO: add tests for filter
-        public string GetPathFromSaveFileDialog(string filter)
+        public string GetPathFromSaveFileDialog(string filter = null)
         {
             if (!string.IsNullOrEmpty(filter))
             {
