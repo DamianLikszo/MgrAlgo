@@ -33,7 +33,8 @@ namespace Test
             Assert.Equal(expected, result, comparer);
         }
 
-        //TODO: more, hide in class
+        //TODO: more
+        #region Test Data
         public static IEnumerable<object[]> DataForCheckBuildGranuleSet => new List<object[]>
         {
             // List<Granule> granules, GranuleSet granuleSet with relations
@@ -192,6 +193,7 @@ namespace Test
                 }
             },
         };
+        #endregion
 
         [Fact]
         public void GenerateGran_WhenSendCoverageData_ThenShouldBeSorted()
@@ -225,6 +227,7 @@ namespace Test
             Assert.Equal(expected, result);
         }
 
+        #region Test Data
         public static IEnumerable<object[]> DataForCheckGenerateGranule => new List<object[]>
         {
             new object[]
@@ -318,5 +321,6 @@ namespace Test
                 }
             },
         };
+        #endregion
     }
 }

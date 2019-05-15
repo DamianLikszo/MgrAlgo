@@ -50,7 +50,8 @@ namespace Test
             var comparer = new GranuleSetComparer();
             Assert.Equal(expected, result, comparer);
         }
-        
+
+        #region Test Data
         public static IEnumerable<object[]> DataForConvert => new List<object[]>
         {
             // granules, expectedResult
@@ -131,5 +132,6 @@ namespace Test
                 }
             }
         };
+        #endregion
     }
 }

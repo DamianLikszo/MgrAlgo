@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using magisterka;
 using magisterka.Interfaces;
@@ -36,6 +35,7 @@ namespace Test
             Assert.Equal(expected, result, comparer);
         }
 
+        #region Test Data
         public static IEnumerable<object[]> DataForCheckDrawTreeView => new List<object[]>
         {
             // List<Granule> granules, TreeNode[] expected
@@ -291,5 +291,6 @@ namespace Test
                 }
             }
         };
+        #endregion
     }
 }

@@ -46,6 +46,7 @@ namespace Test
             Assert.Equal(expectedResult, result);
         }
 
+        #region Test Data
         public static IEnumerable<object[]> DataForCheckComparer => new List<object[]>
         {
             // gran1, gran2, expectedResult
@@ -74,5 +75,6 @@ namespace Test
                 0
             }
         };
+        #endregion
     }
 }
