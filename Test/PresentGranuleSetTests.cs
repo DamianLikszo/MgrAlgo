@@ -32,15 +32,8 @@ namespace Test
             //Act
             var result = _granuleSetPresenter.DrawTreeView(granuleSet);
 
-            //Assert
-            var sortComparer = new SortTreeNodeInSameOrderComparer();
-            var sortedResult = result.ToList();
-            sortedResult.Sort(sortComparer);
-            var sortedExpected = expected.ToList();
-            sortedExpected.Sort(sortComparer);
-
-            var comparer = new TreeNodeComparer();
-            Assert.Equal(sortedExpected, sortedResult, comparer);
+            var comparer = new EnumerableTreeNodeComparer();
+            Assert.Equal(expected, result, comparer);
         }
 
         public static IEnumerable<object[]> DataForCheckDrawTreeView => new List<object[]>
