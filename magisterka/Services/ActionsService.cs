@@ -9,7 +9,6 @@ namespace magisterka.Services
 {
     public class ActionsService : IActionService
     {
-        private readonly IFormData _formData;
         private readonly IFileService _fileService;
         private readonly ICoverageDataConverter _coverageDataConverter;
         private readonly ICoverageFileValidator _coverageFileValidator;
@@ -18,12 +17,11 @@ namespace magisterka.Services
         private readonly IMyJsonConvert _myJsonConvert;
         private readonly IPrintGranuleService _printGranuleService;
 
-        public ActionsService(IFormData formData, IFileService fileService, IPrintGranuleService printGranuleService,
+        public ActionsService(IFileService fileService, IPrintGranuleService printGranuleService,
             ICoverageDataConverter coverageDataConverter, ICoverageFileValidator coverageFileValidator,
             IGranuleService granuleService, IGranuleSetDtoConverter granuleSetDtoConverter,
             IMyJsonConvert jsonConvert)
         {
-            _formData = formData;
             _fileService = fileService;
             _coverageDataConverter = coverageDataConverter;
             _coverageFileValidator = coverageFileValidator;
@@ -33,7 +31,7 @@ namespace magisterka.Services
             _printGranuleService = printGranuleService;
         }
 
-        public bool Load(out string error)
+        public GranuleSetWithPath Load(out string error)
         {
             error = null;
             var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
@@ -44,38 +42,34 @@ namespace magisterka.Services
                     error = "Empty file path.";
                 }
 
-                return false;
+                return null;
             }
 
             var content = _fileService.ReadFile(path, out error);
             if (!string.IsNullOrEmpty(error))
             {
-                return false;
+                return null;
             }
 
             var data = _coverageDataConverter.Convert(content, out error);
             if (data == null)
             {
-                return false;
+                return null;
             }
 
             var coverageFile = new CoverageFile(path, data);
             if (!_coverageFileValidator.Valid(coverageFile, out error))
             {
-                return false;
+                return null;
             }
 
-            var zbGran = _granuleService.GenerateGran(coverageFile.CoverageData);
-            _formData.PathSource = path;
-            _formData.GranuleSet = zbGran;
-
-            return true;
+            var granuleSet = _granuleService.GenerateGran(coverageFile.CoverageData);
+            return new GranuleSetWithPath(granuleSet, path);
         }
 
-        public bool SaveGranule(out string error)
+        public bool SaveGranule(GranuleSet granuleSet, out string error)
         {
             error = null;
-            var granuleSet = _formData.GranuleSet;
             if (granuleSet == null)
             {
                 error = "Empty granule set object";
@@ -97,10 +91,9 @@ namespace magisterka.Services
             return _fileService.SaveFile(path, content, out error);
         }
 
-        public bool SerializeGranuleSetAndSaveFile(out string error)
+        public bool SerializeGranuleSetAndSaveFile(GranuleSet granuleSet, out string error)
         {
             error = null;
-            var granuleSet = _formData.GranuleSet;
             if (granuleSet == null)
             {
                 error = "Empty granule set object";
@@ -131,7 +124,7 @@ namespace magisterka.Services
             }
         }
 
-        public bool OpenFileAndDeserializeGranuleSet(out string error)
+        public GranuleSetWithPath OpenFileAndDeserializeGranuleSet(out string error)
         {
             error = null;
             var path = _fileService.GetPathFromOpenFileDialog(FileService.JsonFilter);
@@ -142,18 +135,18 @@ namespace magisterka.Services
                     error = "Empty file path.";
                 }
 
-                return false;
+                return null;
             }
 
             var content = _fileService.ReadFile(path, out  error);
             if (content == null)
             {
-                return false;
+                return null;
             }
             if (content.Count != 1)
             {
                 error = "Wrong json content.";
-                return false;
+                return null;
             }
 
             try
@@ -161,15 +154,12 @@ namespace magisterka.Services
                 var json = content[0];
                 var granulesDto = _myJsonConvert.DeserializeObject<GranuleDto[]>(json);
                 var granuleSet = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
-
-                _formData.PathSource = path;
-                _formData.GranuleSet = granuleSet;
-                return true;
+                return new GranuleSetWithPath(granuleSet, path);
             }
             catch (Exception ex)
             {
                 error = ex.Message;
-                return false;
+                return null;
             }
         }
     }

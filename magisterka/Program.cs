@@ -43,7 +43,6 @@ namespace magisterka
             _container.Register<IActionService, ActionsService>();
             _container.Register<ICoverageDataConverter, CoverageDataConverter>();
             _container.Register<IFileService, FileService>();
-            _container.Register<IFormData, FormData>(Lifestyle.Singleton);
             _container.Register<IGranuleSetDtoConverter, GranuleSetDtoConverter>();
 
             // Other

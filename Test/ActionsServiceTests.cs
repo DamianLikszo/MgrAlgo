@@ -14,7 +14,6 @@ namespace Test
     public class ActionsServiceTests
     {
         private readonly ActionsService _actionsService;
-        private readonly IFormData _formData;
         private readonly Mock<IFileService> _fileServiceMock;
         private readonly Mock<ICoverageDataConverter> _coverageDataConverterMock;
         private readonly Mock<ICoverageFileValidator> _coverageFileValidatorMock;
@@ -24,7 +23,6 @@ namespace Test
 
         public ActionsServiceTests()
         {
-            _formData = new FormData();
             _fileServiceMock = new Mock<IFileService>();
             _coverageDataConverterMock = new Mock<ICoverageDataConverter>();
             _coverageFileValidatorMock = new Mock<ICoverageFileValidator>();
@@ -32,13 +30,13 @@ namespace Test
             _granuleSetDtoConverterMock = new Mock<IGranuleSetDtoConverter>();
             _myJsonConvertMock = new Mock<IMyJsonConvert>();
             var printGranuleServiceMock = new Mock<IPrintGranuleService>();
-            _actionsService = new ActionsService(_formData, _fileServiceMock.Object, printGranuleServiceMock.Object,
+            _actionsService = new ActionsService(_fileServiceMock.Object, printGranuleServiceMock.Object,
                 _coverageDataConverterMock.Object, _coverageFileValidatorMock.Object, _granuleServiceMock.Object, 
                 _granuleSetDtoConverterMock.Object, _myJsonConvertMock.Object);
         }
 
         [Fact]
-        public void Load_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        public void Load_WhenDoNotChooseFile_ThenShouldReturnNullWithoutError()
         {
             //Arrange
 
@@ -46,12 +44,12 @@ namespace Test
             var result = _actionsService.Load(out var error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.Null(error);
         }
 
         [Fact]
-        public void Load_WhenPathIsNull_ThenShouldReturnFalseWithError()
+        public void Load_WhenPathIsNull_ThenShouldReturnNullWithError()
         {
             //Arrange
             _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(string.Empty);
@@ -60,12 +58,12 @@ namespace Test
             var result = _actionsService.Load(out var error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void Load_WhenReadFileDoesNotReadContent_ThenShouldReturnFalseWithErrorFromReadFileService()
+        public void Load_WhenReadFileDoesNotReadContent_ThenShouldReturnNullWithErrorFromReadFileService()
         {
             //Arrange
             string error;
@@ -79,12 +77,12 @@ namespace Test
             var result = _actionsService.Load(out error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
         }
 
         [Fact]
-        public void Load_WhenCoverageDataConverterFailed_ThenShouldReturnFalseWithErrorFromConverter()
+        public void Load_WhenCoverageDataConverterFailed_ThenShouldReturnNullWithErrorFromConverter()
         {
             //Arrange
             string error;
@@ -100,12 +98,12 @@ namespace Test
             var result = _actionsService.Load(out error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
         }
 
         [Fact]
-        public void Load_WhenCoverageFileValidatorReturnFalse_ThenShouldReturnFalseWithErrorFromValidator()
+        public void Load_WhenCoverageFileValidatorReturnFalse_ThenShouldReturnNullWithErrorFromValidator()
         {
             //Arrange
             string error;
@@ -124,12 +122,12 @@ namespace Test
             var result = _actionsService.Load(out error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
         }
 
         [Fact]
-        public void Load_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
+        public void Load_WhenEverythingIsFine_ThenShouldReturnObjectWithoutError()
         {
             //Arrange
             string error;
@@ -142,50 +140,26 @@ namespace Test
             _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
             _coverageDataConverterMock.Setup(x => x.Convert(content, out error)).Returns(coverageData);
             _coverageFileValidatorMock.Setup(x => x.Valid(It.IsAny<CoverageFile>(), out error)).Returns(true);
+            _granuleServiceMock.Setup(x => x.GenerateGran(coverageData)).Returns(new GranuleSet());
 
             //Act
             var result = _actionsService.Load(out error);
 
             //Assert
-            Assert.True(result);
+            Assert.NotNull(result);
+            Assert.NotNull(result.GranuleSet);
+            Assert.Equal(path, result.Path);
             Assert.Null(error);
         }
-
-        [Fact]
-        public void Load_WhenEverythingIsFine_ThenShouldSaveResultsInFormDataObjectWithoutError()
-        {
-            //Arrange
-            string error;
-            var path = "path";
-            var content = new List<string> { "1;1;1", "1;0;1", "0;0;1" };
-            var coverageData = new CoverageData(new List<List<int>>
-                {new List<int> {1, 1, 1}, new List<int> {1, 0, 1}, new List<int> {0, 0, 1}});
-            var granuleSet = new GranuleSet
-                {new Granule(new[] {1, 1, 1}), new Granule(new[] {1, 0, 1}), new Granule(new[] {0, 0, 1})};
-
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
-            _coverageDataConverterMock.Setup(x => x.Convert(content, out error)).Returns(coverageData);
-            _coverageFileValidatorMock.Setup(x => x.Valid(It.IsAny<CoverageFile>(), out error)).Returns(true);
-            _granuleServiceMock.Setup(x => x.GenerateGran(coverageData)).Returns(granuleSet);
-
-            //Act
-            _actionsService.Load(out error);
-
-            //Assert
-            Assert.Equal(path, _formData.PathSource);
-            Assert.Equal(granuleSet, _formData.GranuleSet);
-            Assert.Null(error);
-        }
-
 
         [Fact]
         public void SerializeGranuleSetAndSaveFile_WhenGranuleSetIsNull_ThenShouldReturnFalseWithError()
         {
             //Arrange
+            var granuleSet = new GranuleSet();
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(out var error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
@@ -196,10 +170,10 @@ namespace Test
         public void SerializeGranuleSetAndSaveFile_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
         {
             //Arrange
-            _formData.GranuleSet = new GranuleSet();
+            var granuleSet = new GranuleSet();
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(out var error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
@@ -210,11 +184,11 @@ namespace Test
         public void SerializeGranuleSetAndSaveFile_WhenPathIsEmpty_ThenShouldReturnFalseWithError()
         {
             //Arrange
-            _formData.GranuleSet = new GranuleSet();
+            var granuleSet = new GranuleSet();
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(out var error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
@@ -227,12 +201,12 @@ namespace Test
             //Arrange
             var path = "path";
 
-            _formData.GranuleSet = new GranuleSet();
+            var granuleSet = new GranuleSet();
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
             _myJsonConvertMock.Setup(x => x.SerializeObject(It.IsAny<GranuleDto[]>())).Throws<Exception>();
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(out var error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
@@ -246,14 +220,14 @@ namespace Test
             var path = "path";
             var json = "{\"json\"}";
 
-            _formData.GranuleSet = new GranuleSet();
+            var granuleSet = new GranuleSet();
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
             _myJsonConvertMock.Setup(x => x.SerializeObject(It.IsAny<GranuleDto[]>())).Returns(json);
             _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>(), out error))
                 .Callback(CallbackOutErrorHelper.DelegateForObject2);
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(out error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out error);
 
             //Assert
             Assert.False(result);
@@ -268,13 +242,13 @@ namespace Test
             var path = "path";
             var json = "{\"json\"}";
 
-            _formData.GranuleSet = new GranuleSet();
+            var granuleSet = new GranuleSet();
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
             _myJsonConvertMock.Setup(x => x.SerializeObject(It.IsAny<GranuleDto[]>())).Returns(json);
             _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>(), out error)).Returns(true);
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(out error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out error);
 
             //Assert
             Assert.True(result);
@@ -282,7 +256,7 @@ namespace Test
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        public void OpenFileAndDeserializeGranuleSet_WhenDoNotChooseFile_ThenShouldReturnNullWithoutError()
         {
             //Arrange
 
@@ -290,12 +264,12 @@ namespace Test
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out var error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.Null(error);
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenPathIsEmpty_ThenShouldReturnFalseWithError()
+        public void OpenFileAndDeserializeGranuleSet_WhenPathIsEmpty_ThenShouldReturnNullWithError()
         {
             //Arrange
             _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(string.Empty);
@@ -304,12 +278,12 @@ namespace Test
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out var error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenReadFileFailed_ThenShouldReturnFalseWithErrorFromFileService()
+        public void OpenFileAndDeserializeGranuleSet_WhenReadFileFailed_ThenShouldReturnNullWithErrorFromFileService()
         {
             //Arrange
             string error;
@@ -323,12 +297,12 @@ namespace Test
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.Equal(CallbackOutErrorHelper.ErrorMessage, error);
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenReadJsonWithMultipleLines_ThenShouldReturnFalseWithError()
+        public void OpenFileAndDeserializeGranuleSet_WhenReadJsonWithMultipleLines_ThenShouldReturnNullWithError()
         {
             //Arrange
             string error;
@@ -342,12 +316,12 @@ namespace Test
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenJsonConvertThrowException_ThenShouldReturnFalseWithError()
+        public void OpenFileAndDeserializeGranuleSet_WhenJsonConvertThrowException_ThenShouldReturnNullWithError()
         {
             //Arrange
             string error;
@@ -362,12 +336,12 @@ namespace Test
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out error);
 
             //Assert
-            Assert.False(result);
+            Assert.Null(result);
             Assert.NotEmpty(error);
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
+        public void OpenFileAndDeserializeGranuleSet_WhenEverythingIsFine_ThenShouldReturnObjectWithoutError()
         {
             //Arrange
             string error;
@@ -376,34 +350,16 @@ namespace Test
 
             _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
             _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
+            _granuleSetDtoConverterMock.Setup(x => x.ConvertFromDto(It.IsAny<GranuleDto[]>()))
+                .Returns(new GranuleSet());
 
             //Act
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out error);
 
             //Assert
-            Assert.True(result);
-            Assert.Null(error);
-        }
-
-        [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenEverythingIsFine_ThenShouldSaveResultInFormDataWithoutError()
-        {
-            //Arrange
-            string error;
-            var path = "path";
-            var content = new List<string> { "{\"json\"" };
-            var granuleSet = new GranuleSet();
-
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
-            _granuleSetDtoConverterMock.Setup(x => x.ConvertFromDto(It.IsAny<GranuleDto[]>())).Returns(granuleSet);
-
-            //Act
-            _actionsService.OpenFileAndDeserializeGranuleSet(out error);
-
-            //Assert
-            Assert.Equal(granuleSet, _formData.GranuleSet);
-            Assert.Equal(path, _formData.PathSource);
+            Assert.NotNull(result);
+            Assert.NotNull(result.GranuleSet);
+            Assert.Equal(path, result.Path);
             Assert.Null(error);
         }
 
@@ -413,7 +369,7 @@ namespace Test
             //Arrange
 
             //Act
-            var result = _actionsService.SaveGranule(out var error);
+            var result = _actionsService.SaveGranule(null, out var error);
 
             //Assert
             Assert.False(result);
@@ -425,11 +381,11 @@ namespace Test
         public void SaveFile_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
         {
             //Arrange
-            _formData.GranuleSet = new GranuleSet
+            var granuleSet = new GranuleSet
                 {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
 
             //Act
-            var result = _actionsService.SaveGranule(out var error);
+            var result = _actionsService.SaveGranule(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
@@ -440,12 +396,12 @@ namespace Test
         public void SaveFile_WhenPathIsNull_ThenShouldReturnFalseWithError()
         {
             //Arrange
-            _formData.GranuleSet = new GranuleSet
+            var granuleSet = new GranuleSet
                 {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
-            var result = _actionsService.SaveGranule(out var error);
+            var result = _actionsService.SaveGranule(granuleSet, out var error);
 
             //Assert
             Assert.False(result);
@@ -457,7 +413,7 @@ namespace Test
         {
             //Arrange
             var path = "path";
-            _formData.GranuleSet = new GranuleSet()
+            var granuleSet = new GranuleSet()
                 {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
 
@@ -465,7 +421,7 @@ namespace Test
             _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>(), out error)).Returns(true);
 
             //Act
-            var result = _actionsService.SaveGranule(out error);
+            var result = _actionsService.SaveGranule(granuleSet, out error);
 
             //Assert
             Assert.True(result);
