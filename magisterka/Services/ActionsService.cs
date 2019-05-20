@@ -70,6 +70,31 @@ namespace magisterka.Services
             return true;
         }
 
+        public bool SaveGranule(out string error)
+        {
+            error = null;
+            var granuleSet = _formData.GranuleSet;
+            if (granuleSet == null)
+            {
+                error = "Empty granule set object";
+                return false;
+            }
+
+            var path = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
+            if (string.IsNullOrEmpty(path))
+            {
+                if (path == string.Empty)
+                {
+                    error = "Empty file path.";
+                }
+
+                return false;
+            }
+
+            var content = new List<string>();//PreparePrint(granuleSet);
+            return _fileService.SaveFile(path, content, out error);
+        }
+
         public bool SerializeGranuleSetAndSaveFile(out string error)
         {
             error = null;

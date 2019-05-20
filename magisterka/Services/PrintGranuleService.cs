@@ -4,17 +4,11 @@ using magisterka.Models;
 
 namespace magisterka.Services
 {
-    public class FileReaderService : IFileReaderService
+    public class PrintGranuleService : IPrintGranuleService
     {
-        private readonly IFileService _fileService;
         private readonly char _separator = ';';
 
-        public FileReaderService(IFileService fileService)
-        {
-            _fileService = fileService;
-        }
-
-        public List<string> PreparePrint(GranuleSet granuleSet)
+        public List<string> Print(GranuleSet granuleSet)
         {
             var content = new List<string> { _printHeader(granuleSet) };
 
@@ -24,25 +18,6 @@ namespace magisterka.Services
             }
 
             return content;
-        }
-
-        //TODO: other File, Rename, maybe t
-        public bool SaveFile(GranuleSet granuleSet, out string error)
-        {
-            error = null;
-            var path = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
-            if (string.IsNullOrEmpty(path))
-            {
-                if (path == string.Empty)
-                {
-                    error = "Empty file path.";
-                }
-
-                return false;
-            }
-
-            var content = PreparePrint(granuleSet);
-            return _fileService.SaveFile(path, content, out error);
         }
 
         private List<string> _printContent(GranuleSet granuleSet)

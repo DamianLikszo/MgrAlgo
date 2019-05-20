@@ -405,5 +405,70 @@ namespace Test
             Assert.Equal(path, _formData.PathSource);
             Assert.Null(error);
         }
+
+        [Fact]
+        public void SaveFile_WhenGranuleSetIsNull_ThenShouldReturnFalseWithError()
+        {
+            //Arrange
+
+            //Act
+            var result = _actionsService.SaveGranule(out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.NotEmpty(error);
+        }
+
+
+        [Fact]
+        public void SaveFile_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        {
+            //Arrange
+            _formData.GranuleSet = new GranuleSet
+                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+
+            //Act
+            var result = _actionsService.SaveGranule(out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.Null(error);
+        }
+
+        [Fact]
+        public void SaveFile_WhenPathIsNull_ThenShouldReturnFalseWithError()
+        {
+            //Arrange
+            _formData.GranuleSet = new GranuleSet
+                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
+
+            //Act
+            var result = _actionsService.SaveGranule(out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.NotEmpty(error);
+        }
+
+        [Fact]
+        public void SaveFile_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
+        {
+            //Arrange
+            var path = "path";
+            _formData.GranuleSet = new GranuleSet()
+                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
+
+            string error;
+            _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>(), out error)).Returns(true);
+
+            //Act
+            var result = _actionsService.SaveGranule(out error);
+
+            //Assert
+            Assert.True(result);
+            Assert.Null(error);
+        }
     }
 }

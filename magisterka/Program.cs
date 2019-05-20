@@ -5,7 +5,6 @@ using System;
 using System.Windows.Forms;
 using magisterka.Validators;
 using magisterka.Wrappers;
-using ICoverageDataConverter = magisterka.Interfaces.ICoverageDataConverter;
 
 namespace magisterka
 {
@@ -38,7 +37,7 @@ namespace magisterka
             _container.Register<IMyJsonConvert, MyJsonConvert>();
 
             // Services
-            _container.Register<Interfaces.IFileReaderService, FileReaderService>();
+            _container.Register<IPrintGranuleService, PrintGranuleService>();
             _container.Register<IGranuleService, GranuleService>();
             _container.Register<IGranuleSetPresenter, GranuleSetPresenter>();
             _container.Register<IActionService, ActionsService>();

@@ -6,15 +6,12 @@ namespace magisterka
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        private readonly Interfaces.IFileReaderService _fileReaderService;
         private readonly IGranuleSetPresenter _granuleSetPresenter;
         private readonly IFormData _formData;
         private readonly IActionService _actionService;
 
-        public Form(Interfaces.IFileReaderService fileReaderService, IGranuleSetPresenter granuleSetPresenter, IFormData formData,
-            IActionService actionService)
+        public Form(IGranuleSetPresenter granuleSetPresenter, IFormData formData, IActionService actionService)
         {
-            _fileReaderService = fileReaderService;
             _granuleSetPresenter = granuleSetPresenter;
             _actionService = actionService;
             _formData = formData;
@@ -43,9 +40,7 @@ namespace magisterka
 
         private void btnSaveGran_Click(object sender, EventArgs e)
         {
-            //TODO: action service, check granuleset null
-            var granuleSet = _formData.GranuleSet;
-            if (!_fileReaderService.SaveFile(granuleSet, out var error))
+            if (!_actionService.SaveGranule(out var error))
             {
                 if (error != null)
                 {
