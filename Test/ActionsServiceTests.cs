@@ -31,9 +31,10 @@ namespace Test
             _granuleServiceMock = new Mock<IGranuleService>();
             _granuleSetDtoConverterMock = new Mock<IGranuleSetDtoConverter>();
             _myJsonConvertMock = new Mock<IMyJsonConvert>();
-            _actionsService = new ActionsService(_formData, _fileServiceMock.Object, _coverageDataConverterMock.Object,
-                _coverageFileValidatorMock.Object, _granuleServiceMock.Object, _granuleSetDtoConverterMock.Object,
-                _myJsonConvertMock.Object);
+            var printGranuleServiceMock = new Mock<IPrintGranuleService>();
+            _actionsService = new ActionsService(_formData, _fileServiceMock.Object, printGranuleServiceMock.Object,
+                _coverageDataConverterMock.Object, _coverageFileValidatorMock.Object, _granuleServiceMock.Object, 
+                _granuleSetDtoConverterMock.Object, _myJsonConvertMock.Object);
         }
 
         [Fact]

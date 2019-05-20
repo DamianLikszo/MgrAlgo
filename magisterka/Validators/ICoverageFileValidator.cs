@@ -4,6 +4,6 @@ namespace magisterka.Validators
 {
     public interface ICoverageFileValidator
     {
-        bool Valid(CoverageFile coverageFile, out string errorMessage);
+        bool Valid(CoverageFile coverageFile, out string error);
     }
 }

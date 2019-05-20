@@ -5,32 +5,32 @@ namespace magisterka.Validators
 {
     public class CoverageFileValidator : ICoverageFileValidator
     {
-        public bool Valid(CoverageFile coverageFile, out string errorMessage)
+        public bool Valid(CoverageFile coverageFile, out string error)
         {
-            errorMessage = null;
+            error = null;
 
             if (coverageFile == null)
             {
-                errorMessage = "Obiekt jest pusty.";
+                error = "Obiekt jest pusty.";
             }
             else if (string.IsNullOrEmpty(coverageFile.Path))
             {
-                errorMessage = "Ścieżka do pliku jest pusta.";
+                error = "Ścieżka do pliku jest pusta.";
             }
             else if (coverageFile.CoverageData == null || coverageFile.CoverageData.Count == 0)
             {
-                errorMessage = "Wczytany plik nie zawiera poprawnych danych.";
+                error = "Wczytany plik nie zawiera poprawnych danych.";
             }
             else
             {
                 var length = coverageFile.CoverageData[0].Count;
                 if (coverageFile.CoverageData.Any(x => x.Count != length))
                 {
-                    errorMessage = "Wiersze muszą mieć jednakową ilość liczb.";
+                    error = "Wiersze muszą mieć jednakową ilość liczb.";
                 }
             }
             
-            return string.IsNullOrEmpty(errorMessage);
+            return error == null;
         }
     }
 }

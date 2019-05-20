@@ -16,8 +16,9 @@ namespace magisterka.Services
         private readonly IGranuleService _granuleService;
         private readonly IGranuleSetDtoConverter _granuleSetDtoConverter;
         private readonly IMyJsonConvert _myJsonConvert;
+        private readonly IPrintGranuleService _printGranuleService;
 
-        public ActionsService(IFormData formData, IFileService fileService,
+        public ActionsService(IFormData formData, IFileService fileService, IPrintGranuleService printGranuleService,
             ICoverageDataConverter coverageDataConverter, ICoverageFileValidator coverageFileValidator,
             IGranuleService granuleService, IGranuleSetDtoConverter granuleSetDtoConverter,
             IMyJsonConvert jsonConvert)
@@ -29,6 +30,7 @@ namespace magisterka.Services
             _granuleService = granuleService;
             _granuleSetDtoConverter = granuleSetDtoConverter;
             _myJsonConvert = jsonConvert;
+            _printGranuleService = printGranuleService;
         }
 
         public bool Load(out string error)
@@ -91,7 +93,7 @@ namespace magisterka.Services
                 return false;
             }
 
-            var content = new List<string>();//PreparePrint(granuleSet);
+            var content = _printGranuleService.Print(granuleSet);
             return _fileService.SaveFile(path, content, out error);
         }
 
