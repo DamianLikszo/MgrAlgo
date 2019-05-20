@@ -157,6 +157,7 @@ namespace Test
         {
             //Arrange
             var granuleSet = new GranuleSet();
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
             var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out var error);
