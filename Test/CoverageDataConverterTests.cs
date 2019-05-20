@@ -28,7 +28,7 @@ namespace Test
             var expected = new CoverageData(new List<List<int>>
                 {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
             Assert.Equal(expected, result);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
         }
 
         [Fact]

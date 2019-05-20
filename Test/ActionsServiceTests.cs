@@ -37,9 +37,23 @@ namespace Test
         }
 
         [Fact]
-        public void Load_WhenPathIsNull_ThenShouldReturnFalseAdnError()
+        public void Load_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
         {
             //Arrange
+
+            //Act
+            var result = _actionsService.Load(out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.Null(error);
+        }
+
+        [Fact]
+        public void Load_WhenPathIsNull_ThenShouldReturnFalseWithError()
+        {
+            //Arrange
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
             var result = _actionsService.Load(out var error);
@@ -133,7 +147,7 @@ namespace Test
 
             //Assert
             Assert.True(result);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
         }
 
         [Fact]
@@ -160,7 +174,7 @@ namespace Test
             //Assert
             Assert.Equal(path, _formData.PathSource);
             Assert.Equal(granuleSet, _formData.GranuleSet);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
         }
 
 
@@ -178,10 +192,25 @@ namespace Test
         }
 
         [Fact]
+        public void SerializeGranuleSetAndSaveFile_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        {
+            //Arrange
+            _formData.GranuleSet = new GranuleSet();
+
+            //Act
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.Null(error);
+        }
+
+        [Fact]
         public void SerializeGranuleSetAndSaveFile_WhenPathIsEmpty_ThenShouldReturnFalseWithError()
         {
             //Arrange
             _formData.GranuleSet = new GranuleSet();
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
             var result = _actionsService.SerializeGranuleSetAndSaveFile(out var error);
@@ -248,13 +277,27 @@ namespace Test
 
             //Assert
             Assert.True(result);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
+        }
+
+        [Fact]
+        public void OpenFileAndDeserializeGranuleSet_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        {
+            //Arrange
+
+            //Act
+            var result = _actionsService.OpenFileAndDeserializeGranuleSet(out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.Null(error);
         }
 
         [Fact]
         public void OpenFileAndDeserializeGranuleSet_WhenPathIsEmpty_ThenShouldReturnFalseWithError()
         {
             //Arrange
+            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
             var result = _actionsService.OpenFileAndDeserializeGranuleSet(out var error);
@@ -338,7 +381,7 @@ namespace Test
 
             //Assert
             Assert.True(result);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
         }
 
         [Fact]
@@ -360,7 +403,7 @@ namespace Test
             //Assert
             Assert.Equal(granuleSet, _formData.GranuleSet);
             Assert.Equal(path, _formData.PathSource);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
         }
     }
 }

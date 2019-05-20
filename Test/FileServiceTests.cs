@@ -44,7 +44,7 @@ namespace Test
             //Assert
             var expected = new List<string> { "1;2;3;", "1;2;3;", "1;2;3;" };
             Assert.Equal(expected, result);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
 
             ms.Close();
         }
@@ -193,7 +193,7 @@ namespace Test
             var expected = string.Join(Environment.NewLine, content) + Environment.NewLine;
             Assert.True(result);
             Assert.Equal(expected, actual);
-            Assert.True(string.IsNullOrEmpty(error));
+            Assert.Null(error);
 
             ms.Close();
         }

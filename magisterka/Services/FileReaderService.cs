@@ -1,49 +1,17 @@
 ﻿using System.Collections.Generic;
 using magisterka.Interfaces;
 using magisterka.Models;
-using magisterka.Validators;
 
 namespace magisterka.Services
 {
     public class FileReaderService : IFileReaderService
     {
-        private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IFileService _fileService;
-        private readonly ICoverageDataConverter _coverageDataConverter;
         private readonly char _separator = ';';
 
-        public FileReaderService(ICoverageFileValidator coverageFileValidator, IFileService fileService,
-            ICoverageDataConverter coverageDataConverter)
+        public FileReaderService(IFileService fileService)
         {
-            _coverageFileValidator = coverageFileValidator;
             _fileService = fileService;
-            _coverageDataConverter = coverageDataConverter;
-        }
-
-        public CoverageFile OpenAndReadFile(out string error)
-        {
-            error = null;
-            var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
-            if (string.IsNullOrEmpty(path))
-            {
-                error = "Empty file path.";
-                return null;
-            }
-
-            var content = _fileService.ReadFile(path, out error);
-            if (content == null)
-            {
-                return null;
-            }
-
-            var coverageData = _coverageDataConverter.Convert(content, out error);
-            if (coverageData == null)
-            {
-                return null;
-            }
-
-            var coverageFile = new CoverageFile(path, coverageData);
-            return _coverageFileValidator.Valid(coverageFile, out error) ? coverageFile : null;
         }
 
         public List<string> PreparePrint(GranuleSet granuleSet)
