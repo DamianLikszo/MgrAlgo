@@ -4,7 +4,6 @@ using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Validators;
 using magisterka.Wrappers;
-using Newtonsoft.Json;
 
 namespace magisterka.Services
 {
@@ -38,7 +37,11 @@ namespace magisterka.Services
             var path = _fileService.GetPathFromOpenFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
-                error = "Empty path file.";
+                if (path == string.Empty)
+                {
+                    error = "Empty file path.";
+                }
+
                 return false;
             }
 
@@ -80,7 +83,11 @@ namespace magisterka.Services
             var path = _fileService.GetPathFromSaveFileDialog(FileService.JsonFilter);
             if (string.IsNullOrEmpty(path))
             {
-                error = "Empty file path.";
+                if (path == string.Empty)
+                {
+                    error = "Empty file path.";
+                }
+
                 return false;
             }
 
@@ -103,7 +110,11 @@ namespace magisterka.Services
             var path = _fileService.GetPathFromOpenFileDialog(FileService.JsonFilter);
             if (string.IsNullOrEmpty(path))
             {
-                error = "Empty path file.";
+                if (path == string.Empty)
+                {
+                    error = "Empty file path.";
+                }
+
                 return false;
             }
 

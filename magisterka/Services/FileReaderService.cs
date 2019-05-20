@@ -65,12 +65,16 @@ namespace magisterka.Services
             var path = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
             if (string.IsNullOrEmpty(path))
             {
-                error = "Empty file path.";
+                if (path == string.Empty)
+                {
+                    error = "Empty file path.";
+                }
+
                 return false;
             }
 
             var content = PreparePrint(granuleSet);
-             return _fileService.SaveFile(path, content, out error);
+            return _fileService.SaveFile(path, content, out error);
         }
 
         private List<string> _printContent(GranuleSet granuleSet)

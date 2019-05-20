@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using magisterka.Interfaces;
-using magisterka.Models;
 
 namespace magisterka
 {
@@ -11,8 +10,6 @@ namespace magisterka
         private readonly IGranuleSetPresenter _granuleSetPresenter;
         private readonly IFormData _formData;
         private readonly IActionService _actionService;
-
-        private GranuleSet GranuleSet { get; set; }
 
         public Form(Interfaces.IFileReaderService fileReaderService, IGranuleSetPresenter granuleSetPresenter, IFormData formData,
             IActionService actionService)
@@ -26,19 +23,17 @@ namespace magisterka
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            CleanForm();
             if (!_actionService.Load(out var error))
             {
-                //TODO: show error
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+
                 return;
             }
 
-            GranuleSet = _formData.GranuleSet;
-            txtPath.Text = _formData.PathSource;
-            btnSaveGran.Enabled = true;
-
-            var treeNodes = _granuleSetPresenter.DrawTreeView(GranuleSet);
-            treeResult.Nodes.AddRange(treeNodes);
+            RefreshSetFromService();
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
@@ -48,13 +43,15 @@ namespace magisterka
 
         private void btnSaveGran_Click(object sender, EventArgs e)
         {
-            if (GranuleSet == null)
+            //TODO: action service, check granuleset null
+            var granuleSet = _formData.GranuleSet;
+            if (!_fileReaderService.SaveFile(granuleSet, out var error))
             {
-                return;
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
             }
-
-            _fileReaderService.SaveFile(GranuleSet, out var error);
-            //TODO: show error
         }
 
         private void btnInfo_Click(object sender, EventArgs e)
@@ -62,13 +59,46 @@ namespace magisterka
             //TODO: Information
         }
 
-        private void CleanForm()
+        private void btnImportSet_Click(object sender, EventArgs e)
         {
-            _formData.GranuleSet = null;
-            _formData.PathSource = null;
-            btnSaveGran.Enabled = false;
+            if (!_actionService.OpenFileAndDeserializeGranuleSet(out var error))
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+
+                return;
+            }
+
+            RefreshSetFromService();
+        }
+
+        private void btnExportSet_Click(object sender, EventArgs e)
+        {
+            if (!_actionService.SerializeGranuleSetAndSaveFile(out var error))
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+            }
+        }
+
+        private void RefreshSetFromService()
+        {
+            if (_formData.GranuleSet == null || string.IsNullOrEmpty(_formData.PathSource))
+            {
+                return;
+            }
+
+            btnSaveGran.Enabled = true;
+            btnExportSet.Enabled = true;
+
+            txtPath.Text = _formData.PathSource;
+            var treeNodes = _granuleSetPresenter.DrawTreeView(_formData.GranuleSet);
             treeResult.Nodes.Clear();
-            txtPath.Text = "";
+            treeResult.Nodes.AddRange(treeNodes);
         }
     }
 }
