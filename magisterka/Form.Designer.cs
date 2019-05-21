@@ -90,7 +90,7 @@
             this.gbGraph.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbGraph.Name = "gbGraph";
             this.gbGraph.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbGraph.Size = new System.Drawing.Size(832, 643);
+            this.gbGraph.Size = new System.Drawing.Size(832, 656);
             this.gbGraph.TabIndex = 1;
             this.gbGraph.TabStop = false;
             this.gbGraph.Text = "Wynik:";
@@ -100,18 +100,15 @@
             this.treeResult.Location = new System.Drawing.Point(7, 33);
             this.treeResult.Margin = new System.Windows.Forms.Padding(4);
             this.treeResult.Name = "treeResult";
-            this.treeResult.Size = new System.Drawing.Size(820, 604);
+            this.treeResult.Size = new System.Drawing.Size(820, 617);
             this.treeResult.TabIndex = 7;
             // 
             // lNameProgram
             // 
-            this.lNameProgram.AutoSize = true;
             this.lNameProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
             this.lNameProgram.Location = new System.Drawing.Point(5, 18);
-            this.lNameProgram.MaximumSize = new System.Drawing.Size(244, 60);
-            this.lNameProgram.MinimumSize = new System.Drawing.Size(244, 60);
             this.lNameProgram.Name = "lNameProgram";
-            this.lNameProgram.Size = new System.Drawing.Size(244, 60);
+            this.lNameProgram.Size = new System.Drawing.Size(266, 99);
             this.lNameProgram.TabIndex = 2;
             this.lNameProgram.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych.";
             // 
@@ -119,7 +116,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.label1.Location = new System.Drawing.Point(5, 98);
+            this.label1.Location = new System.Drawing.Point(6, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 2;
@@ -129,7 +126,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.label2.Location = new System.Drawing.Point(131, 98);
+            this.label2.Location = new System.Drawing.Point(134, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 20);
             this.label2.TabIndex = 2;
@@ -144,7 +141,7 @@
             this.gbAbout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbAbout.Name = "gbAbout";
             this.gbAbout.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbAbout.Size = new System.Drawing.Size(277, 134);
+            this.gbAbout.Size = new System.Drawing.Size(277, 147);
             this.gbAbout.TabIndex = 3;
             this.gbAbout.TabStop = false;
             // 
@@ -210,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 702);
+            this.ClientSize = new System.Drawing.Size(1144, 716);
             this.Controls.Add(this.btnImportSet);
             this.Controls.Add(this.btnExportSet);
             this.Controls.Add(this.lPath);

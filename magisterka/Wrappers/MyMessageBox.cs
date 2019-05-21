@@ -11,7 +11,7 @@ namespace magisterka.Wrappers
                 return false;
             }
 
-            MessageBox.Show(message);
+            MessageBox.Show(message, "Problem");
             return true;
         }
     }
