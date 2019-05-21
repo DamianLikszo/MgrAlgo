@@ -39,7 +39,7 @@ namespace magisterka.Services
             {
                 if (path == string.Empty)
                 {
-                    error = "Empty file path.";
+                    error = "Ścieżka do pliku jest pusta.";
                 }
 
                 return null;
@@ -72,7 +72,7 @@ namespace magisterka.Services
             error = null;
             if (granuleSet == null)
             {
-                error = "Empty granule set object";
+                error = "Pusty zbiór granul.";
                 return false;
             }
 
@@ -81,7 +81,7 @@ namespace magisterka.Services
             {
                 if (path == string.Empty)
                 {
-                    error = "Empty file path.";
+                    error = "Ścieżka do pliku jest pusta.";
                 }
 
                 return false;
@@ -96,7 +96,7 @@ namespace magisterka.Services
             error = null;
             if (granuleSet == null)
             {
-                error = "Empty granule set object";
+                error = "Pusty zbiór granul.";
                 return false;
             }
 
@@ -105,7 +105,7 @@ namespace magisterka.Services
             {
                 if (path == string.Empty)
                 {
-                    error = "Empty file path.";
+                    error = "Ścieżka do pliku jest pusta.";
                 }
 
                 return false;
@@ -132,7 +132,7 @@ namespace magisterka.Services
             {
                 if (path == string.Empty)
                 {
-                    error = "Empty file path.";
+                    error = "Ścieżka do pliku jest pusta.";
                 }
 
                 return null;
@@ -145,7 +145,7 @@ namespace magisterka.Services
             }
             if (content.Count != 1)
             {
-                error = "Wrong json content.";
+                error = "Nieprawidłowa zawartość pliku json.";
                 return null;
             }
 

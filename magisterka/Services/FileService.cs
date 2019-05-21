@@ -68,7 +68,7 @@ namespace magisterka.Services
 
             if (string.IsNullOrEmpty(path))
             {
-                error = "Empty file path.";
+                error = "Pusta ścieżka do pliku.";
                 return false;
             }
 
@@ -93,7 +93,6 @@ namespace magisterka.Services
             return true;
         }
 
-        //TODO: add tests for filter
         public string GetPathFromSaveFileDialog(string filter = null)
         {
             if (!string.IsNullOrEmpty(filter))
