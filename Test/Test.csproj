@@ -82,7 +82,6 @@
     <Compile Include="Helpers\EnumerableGranuleDtoComparer.cs" />
     <Compile Include="Helpers\GranuleSetComparer.cs" />
     <Compile Include="Helpers\EnumerableTreeNodeComparer.cs" />
-    <Compile Include="NumberOfOnesForGranuleComparerTests.cs" />
     <Compile Include="PresentGranuleSetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

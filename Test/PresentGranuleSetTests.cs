@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using magisterka.Compares;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Services;
@@ -17,8 +16,7 @@ namespace Test
         public PresentGranuleSetTests()
         {
             _granuleSetPresenter = new GranuleSetPresenter();
-            var granuleComparerForBuildTree = new NumberOfOnesForGranuleComparer();
-            _granuleService = new GranuleService(granuleComparerForBuildTree);
+            _granuleService = new GranuleService();
         }
 
         [Theory]

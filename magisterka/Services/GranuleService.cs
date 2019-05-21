@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using magisterka.Compares;
 using magisterka.Enums;
 using magisterka.Models;
 using magisterka.Interfaces;
@@ -9,14 +8,6 @@ namespace magisterka.Services
 {
     public class GranuleService : IGranuleService
     {
-        private readonly IGranuleComparerForBuildTree _comparerForBuildTree;
-
-        public GranuleService(IGranuleComparerForBuildTree comparerForBuildTree)
-        {
-            _comparerForBuildTree = comparerForBuildTree;
-        }
-
-        //TODO: move to GranSetService
         public GranuleSet GenerateGran(CoverageData coverageData)
         {
             var granules = GenerateGranules(coverageData);
@@ -55,11 +46,10 @@ namespace magisterka.Services
         
         public GranuleSet BuildGranuleSet(List<Granule> granules)
         {
-            granules.Sort(_comparerForBuildTree);
-
+            var sortedGranules = granules.OrderBy(x => x.Count(y => y == 1)).ToList();
             var result = new GranuleSet();
 
-            foreach (var addGranule in granules)
+            foreach (var addGranule in sortedGranules)
             {
                 if (result.Count > 0)
                 {

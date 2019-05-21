@@ -23,7 +23,6 @@ namespace Test
             // Arrange
 
             // Act
-            //TODO: other test for check compare granules?
             var result = (GranuleComparerResult) _comparer.Compare(gran1, gran2);
 
             // Assert

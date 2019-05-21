@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using magisterka.Compares;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Services;
@@ -16,8 +15,7 @@ namespace Test
         public GranuleSetDtoConverterTests()
         {
             _granuleSetDtoConverter = new GranuleSetDtoConverter();
-            var comparerForBuildTree = new NumberOfOnesForGranuleComparer();
-            _granuleService = new GranuleService(comparerForBuildTree);
+            _granuleService = new GranuleService();
         }
 
         [Theory]

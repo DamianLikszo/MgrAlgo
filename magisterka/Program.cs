@@ -3,7 +3,6 @@ using magisterka.Services;
 using SimpleInjector;
 using System;
 using System.Windows.Forms;
-using magisterka.Compares;
 using magisterka.Validators;
 using magisterka.Wrappers;
 
@@ -48,7 +47,6 @@ namespace magisterka
 
             // Other
             _container.Register<ICoverageFileValidator, CoverageFileValidator>();
-            _container.Register<IGranuleComparerForBuildTree, NumberOfOnesForGranuleComparer>();
 
             _container.Verify();
         }
