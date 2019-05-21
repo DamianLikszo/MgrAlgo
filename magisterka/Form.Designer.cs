@@ -98,7 +98,7 @@
             // treeResult
             // 
             this.treeResult.Location = new System.Drawing.Point(7, 33);
-            this.treeResult.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeResult.Margin = new System.Windows.Forms.Padding(4);
             this.treeResult.Name = "treeResult";
             this.treeResult.Size = new System.Drawing.Size(820, 604);
             this.treeResult.TabIndex = 7;
@@ -221,7 +221,9 @@
             this.Controls.Add(this.btnSaveGran);
             this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.btnLoad);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "Form";
             this.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
             this.gbGraph.ResumeLayout(false);
