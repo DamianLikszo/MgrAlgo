@@ -32,7 +32,7 @@ namespace Test
         }
 
         [Fact]
-        public void Valid_WhenPutNullLikeCoverageFile_ThenShouldReturnFalseAndError()
+        public void Valid_WhenPutNullLikeCoverageFile_ThenShouldReturnFalseWithError()
         {
             //Arrange
             //Act
@@ -44,7 +44,7 @@ namespace Test
         }
 
         [Fact]
-        public void Valid_WhenPutNullLikePathInCoverageFile_ThenShouldReturnFalseAndError()
+        public void Valid_WhenPutNullLikePathInCoverageFile_ThenShouldReturnFalseWithError()
         {
             //Arrange
             var coverageData = new CoverageData(new List<List<int>>
@@ -60,7 +60,7 @@ namespace Test
         }
 
         [Fact]
-        public void Valid_WhenPutEmptyDataInCoverageFile_ThenShouldReturnFalseAndError()
+        public void Valid_WhenPutEmptyDataInCoverageFile_ThenShouldReturnFalseWithError()
         {
             //Arrange
             var path = "path";
@@ -76,7 +76,7 @@ namespace Test
         }
 
         [Fact]
-        public void Valid_WhenPutDataWithNotEqualColumnsInCoverageFile_ThenShouldReturnFalseAndError()
+        public void Valid_WhenPutDataWithNotEqualColumnsInCoverageFile_ThenShouldReturnFalseWithError()
         {
             //Arrange
             var path = "path";

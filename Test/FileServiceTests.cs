@@ -50,7 +50,7 @@ namespace Test
         }
 
         [Fact]
-        public void ReadFile_WhenStreamReaderThrowException_ThenReturnNullAndError()
+        public void ReadFile_WhenStreamReaderThrowException_ThenReturnNullWithError()
         {
             //Arrange
             var path = "path";
@@ -147,7 +147,7 @@ namespace Test
         }
 
         [Fact]
-        public void SaveFile_WhenPathIsEmpty_ThenShouldReturnFalseAndError()
+        public void SaveFile_WhenPathIsEmpty_ThenShouldReturnFalseWithError()
         {
             //Arrange
             var content = new List<string> {"some line"};
@@ -161,7 +161,7 @@ namespace Test
         }
 
         [Fact]
-        public void SaveFile_WhenStreamWriterThrowException_ThenReturnNullAndError()
+        public void SaveFile_WhenStreamWriterThrowException_ThenReturnNullWithError()
         {
             //Arrange
             var path = "path";

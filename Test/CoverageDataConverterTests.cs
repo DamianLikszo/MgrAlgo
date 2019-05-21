@@ -32,7 +32,7 @@ namespace Test
         }
 
         [Fact]
-        public void ConvertContentToData_WhenPassContentWithWrongChars_ThenShouldReturnNullAndError()
+        public void ConvertContentToData_WhenPassContentWithWrongChars_ThenShouldReturnNullWithError()
         {
             // Arrange
             var content = new List<string> { "1;b;3", "1;2;3", "a;2;3" };
