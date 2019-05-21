@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using magisterka.Interfaces;
 using magisterka.Models;
+using magisterka.Wrappers;
 
 namespace magisterka
 {
@@ -9,77 +10,66 @@ namespace magisterka
     {
         private readonly IGranuleSetPresenter _granuleSetPresenter;
         private readonly IActionService _actionService;
+        private readonly IMyMessageBox _myMessageBox;
 
         public GranuleSetWithPath GranuleSetWithPath { get; set; }
 
-        public Form(IGranuleSetPresenter granuleSetPresenter, IActionService actionService)
+        public Form(IGranuleSetPresenter granuleSetPresenter, IActionService actionService,
+            IMyMessageBox myMessageBox)
         {
             _granuleSetPresenter = granuleSetPresenter;
             _actionService = actionService;
+            _myMessageBox = myMessageBox;
             InitializeComponent();
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        public void btnLoad_Click(object sender, EventArgs e)
         {
             GranuleSetWithPath = _actionService.Load(out var error);
             if (GranuleSetWithPath == null)
             {
-                if (error != null)
-                {
-                    MessageBox.Show(error);
-                }
-
+                _myMessageBox.Show(error);
                 return;
             }
 
             RefreshSetFromService();
         }
 
-        private void btnEnd_Click(object sender, EventArgs e)
+        public void btnEnd_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void btnSaveGran_Click(object sender, EventArgs e)
+        public void btnSaveGran_Click(object sender, EventArgs e)
         {
             if (!_actionService.SaveGranule(GranuleSetWithPath?.GranuleSet, out var error))
             {
-                if (error != null)
-                {
-                    MessageBox.Show(error);
-                }
+                _myMessageBox.Show(error);
             }
         }
 
-        private void btnInfo_Click(object sender, EventArgs e)
+        public void btnInfo_Click(object sender, EventArgs e)
         {
             //TODO: Information
         }
 
-        private void btnImportSet_Click(object sender, EventArgs e)
+        public void btnImportSet_Click(object sender, EventArgs e)
         {
             GranuleSetWithPath = _actionService.OpenFileAndDeserializeGranuleSet(out var error);
             if (GranuleSetWithPath == null)
             {
-                if (error != null)
-                {
-                    MessageBox.Show(error);
-                }
-
+                _myMessageBox.Show(error);
                 return;
             }
 
             RefreshSetFromService();
         }
 
-        private void btnExportSet_Click(object sender, EventArgs e)
+        public void btnExportSet_Click(object sender, EventArgs e)
         {
             if (!_actionService.SerializeGranuleSetAndSaveFile(GranuleSetWithPath?.GranuleSet, out var error))
             {
-                if (error != null)
-                {
-                    MessageBox.Show(error);
-                }
+                _myMessageBox.Show(error);
             }
         }
 

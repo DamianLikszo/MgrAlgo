@@ -6,6 +6,11 @@ namespace magisterka.Wrappers
     {
         public bool Show(string message)
         {
+            if (message == null)
+            {
+                return false;
+            }
+
             MessageBox.Show(message);
             return true;
         }
