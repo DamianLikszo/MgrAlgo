@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using magisterka;
+using magisterka.Compares;
 using magisterka.Enums;
 using magisterka.Models;
 using Xunit;

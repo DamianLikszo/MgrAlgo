@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using magisterka.Compares;
 using magisterka.Enums;
 using magisterka.Models;
 using magisterka.Interfaces;

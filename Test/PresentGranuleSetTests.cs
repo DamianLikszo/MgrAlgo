@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using magisterka;
+using magisterka.Compares;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Services;

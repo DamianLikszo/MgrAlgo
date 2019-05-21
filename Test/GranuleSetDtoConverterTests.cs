@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using magisterka;
+using magisterka.Compares;
 using magisterka.Interfaces;
 using magisterka.Models;
 using magisterka.Services;

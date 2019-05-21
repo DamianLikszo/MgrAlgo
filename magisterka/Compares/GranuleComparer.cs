@@ -2,7 +2,7 @@
 using magisterka.Enums;
 using magisterka.Models;
 
-namespace magisterka
+namespace magisterka.Compares
 {
     public class GranuleComparer : IComparer<Granule>
     {

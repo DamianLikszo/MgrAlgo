@@ -58,18 +58,18 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="GranuleComparer.cs" />
+    <Compile Include="Compares\GranuleComparer.cs" />
     <Compile Include="Interfaces\IActionService.cs" />
     <Compile Include="Interfaces\ICoverageDataConverter.cs" />
     <Compile Include="Interfaces\IPrintGranuleService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
-    <Compile Include="Interfaces\IGranuleComparerForBuildTree.cs" />
+    <Compile Include="Compares\IGranuleComparerForBuildTree.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
     <Compile Include="Interfaces\IGranuleSetDtoConverter.cs" />
     <Compile Include="Models\CoverageData.cs" />
     <Compile Include="Models\GranuleDto.cs" />
     <Compile Include="Models\GranuleSetWithPath.cs" />
-    <Compile Include="NumberOfOnesForGranuleComparer.cs" />
+    <Compile Include="Compares\NumberOfOnesForGranuleComparer.cs" />
     <Compile Include="Services\ActionsService.cs" />
     <Compile Include="Services\CoverageDataConverter.cs" />
     <Compile Include="Services\GranuleSetDtoConverter.cs" />

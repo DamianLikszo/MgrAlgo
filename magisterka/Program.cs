@@ -3,6 +3,7 @@ using magisterka.Services;
 using SimpleInjector;
 using System;
 using System.Windows.Forms;
+using magisterka.Compares;
 using magisterka.Validators;
 using magisterka.Wrappers;
 

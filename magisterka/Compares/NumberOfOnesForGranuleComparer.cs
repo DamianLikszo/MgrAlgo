@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using magisterka.Interfaces;
 using magisterka.Models;
 
-namespace magisterka
+namespace magisterka.Compares
 {
     public class NumberOfOnesForGranuleComparer : IGranuleComparerForBuildTree
     {
