@@ -68,7 +68,7 @@ namespace magisterka.Services
 
             if (string.IsNullOrEmpty(path))
             {
-                error = "Pusta ścieżka do pliku.";
+                error = "Ścieżka do pliku jest pusta.";
                 return false;
             }
 

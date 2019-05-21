@@ -26,7 +26,7 @@ namespace magisterka.Validators
                 var length = coverageFile.CoverageData[0].Count;
                 if (coverageFile.CoverageData.Any(x => x.Count != length))
                 {
-                    error = "Wiersze muszą mieć jednakową ilość liczb.";
+                    error = "Wiersze muszą mieć jednakową ilość kolumn.";
                 }
             }
             
