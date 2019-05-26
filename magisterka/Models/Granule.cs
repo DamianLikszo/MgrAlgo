@@ -21,7 +21,6 @@ namespace magisterka.Models
             Child = new List<Granule>();
         }
         
-        public void AddToInside(int value) => Inside.Add(value);
         public int Count() => Inside.Count;
 
         public IEnumerator<int> GetEnumerator()
