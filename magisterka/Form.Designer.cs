@@ -110,7 +110,7 @@
             this.lNameProgram.Name = "lNameProgram";
             this.lNameProgram.Size = new System.Drawing.Size(266, 99);
             this.lNameProgram.TabIndex = 2;
-            this.lNameProgram.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych.";
+            this.lNameProgram.Text = "Wyznaczenie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych.";
             // 
             // label1
             // 
@@ -222,7 +222,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Form";
-            this.Text = "Wyznaczanie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
+            this.Text = "Wyznaczenie elementów sumowo nieredukowalnych oraz porządku zbiorów otwartych";
             this.gbGraph.ResumeLayout(false);
             this.gbAbout.ResumeLayout(false);
             this.gbAbout.PerformLayout();
