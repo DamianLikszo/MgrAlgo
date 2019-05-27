@@ -174,7 +174,7 @@
             this.btnSaveGran.Name = "btnSaveGran";
             this.btnSaveGran.Size = new System.Drawing.Size(277, 82);
             this.btnSaveGran.TabIndex = 1;
-            this.btnSaveGran.Text = "Zapisz Geanule";
+            this.btnSaveGran.Text = "Zapisz Granule";
             this.btnSaveGran.UseVisualStyleBackColor = true;
             this.btnSaveGran.Click += new System.EventHandler(this.btnSaveGran_Click);
             // 
