@@ -156,11 +156,10 @@ namespace Test
         public void SerializeGranuleSetAndSaveFile_WhenGranuleSetIsNull_ThenShouldReturnFalseWithError()
         {
             //Arrange
-            var granuleSet = new GranuleSet();
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
-            var result = _actionsService.SerializeGranuleSetAndSaveFile(granuleSet, out var error);
+            var result = _actionsService.SerializeGranuleSetAndSaveFile(null, out var error);
 
             //Assert
             Assert.False(result);

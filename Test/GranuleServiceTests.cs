@@ -16,6 +16,19 @@ namespace Test
             _granuleService = new GranuleService();
         }
 
+        [Fact]
+        public void GenerateGran_WhenPutCoverageData_ThenShouldReturnGranuleSet()
+        {
+            //Arrange
+            var coverageData = new CoverageData(new List<List<int>>());
+
+            //Act
+            var result = _granuleService.GenerateGran(coverageData);
+
+            //Assert
+            Assert.NotNull(result);
+        }
+
         [Theory]
         [MemberData(nameof(DataForCheckBuildGranuleSet))]
         public void BuildGranuleSet_WhenSendGranulesList_ThenShouldBuildGranulesSet(List<Granule> granules, GranuleSet expected)
