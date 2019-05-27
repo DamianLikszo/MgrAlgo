@@ -51,14 +51,6 @@ namespace magisterka.Services
 
             foreach (var addGranule in sortedGranules)
             {
-                if (result.Count > 0)
-                {
-                    foreach (var granule in result.GetMax())
-                    {
-                        SetRelations(addGranule, granule);
-                    }
-                }
-
                 var resultReverse = result.Reverse();
                 foreach (var granule in resultReverse)
                 {
