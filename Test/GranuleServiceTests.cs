@@ -415,6 +415,22 @@ namespace Test
             },
             new object[]
             {
+                // simple
+                new CoverageData(new List<List<int>>
+                {
+                    new List<int> {0, 0, 1, 0},
+                    new List<int> {1, 0, 0, 1},
+                    new List<int> {0, 0, 0, 1}
+                }),
+                new List<Granule>
+                {
+                    new Granule(new [] {1, 0, 0}),
+                    new Granule(new [] {0, 1, 0}),
+                    new Granule(new [] {0, 1, 1})
+                }
+            },
+            new object[]
+            {
                 // more Ux than Cx
                 new CoverageData(new List<List<int>>
                 {

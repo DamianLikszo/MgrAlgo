@@ -28,7 +28,9 @@ namespace magisterka.Services
                 for (var j = 0; j < row.Count; j++)
                 {
                     if (row[j] == 1)
+                    {
                         indexes.Add(j);
+                    }
                 }
 
                 foreach (var checkRow in coverageData)
@@ -51,10 +53,17 @@ namespace magisterka.Services
 
             foreach (var addGranule in sortedGranules)
             {
-                var resultReverse = result.Reverse();
+                var resultReverse = result.Reverse().ToList();
                 foreach (var granule in resultReverse)
                 {
-                    SetRelations(addGranule, granule, true);
+                    var compare = (GranuleComparerResult)addGranule.CompareTo(granule);
+                    if (compare != GranuleComparerResult.IsGreater || CheckContainInParent(granule, addGranule))
+                    {
+                        continue;
+                    }
+
+                    addGranule.Child.Add(granule);
+                    granule.Parent.Add(addGranule);
                 }
 
                 result.Add(addGranule);
@@ -73,20 +82,12 @@ namespace magisterka.Services
             foreach (var parent in granule.Parent)
             {
                 if (CheckContainInParent(parent, searchGranule))
+                {
                     return true;
+                }
             }
 
             return false;
-        }
-
-        private void SetRelations(Granule granule1, Granule granule2, bool checkParent = false)
-        {
-            var compare = (GranuleComparerResult) granule1.CompareTo(granule2);
-            if (compare == GranuleComparerResult.IsGreater && (!checkParent || !CheckContainInParent(granule2, granule1)))
-            {
-                granule1.Child.Add(granule2);
-                granule2.Parent.Add(granule1);
-            }
         }
     }
 }
