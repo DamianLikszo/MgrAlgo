@@ -35,13 +35,13 @@ namespace magisterka.Services
             var branch = new List<Granule>(new[] {granule});
             var result = new List<List<Granule>>();
 
-            if (granule.Child.Count == 0)
+            if (granule.Children.Count == 0)
             {
                 result.Add(branch);
                 return result;
             }
 
-            foreach (var child in granule.Child)
+            foreach (var child in granule.Children)
             {
                 var partBranches = _getBranches(child);
 

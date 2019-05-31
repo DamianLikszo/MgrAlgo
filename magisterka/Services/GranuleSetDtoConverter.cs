@@ -36,7 +36,7 @@ namespace magisterka.Services
             {
                 var granuleDto = new GranuleDto(granuleSet[i].Inside.ToArray(), granuleSet[i].ObjectNumber);
 
-                var children = granuleSet[i].Child;
+                var children = granuleSet[i].Children;
                 if (children.Count > 0)
                 {
                     var childrenDto = new int[children.Count][];
@@ -65,7 +65,7 @@ namespace magisterka.Services
                 {
                     var child = granuleSet.First(x => x.Inside.SequenceEqual(item));
 
-                    parent.Child.Add(child);
+                    parent.Children.Add(child);
                     child.Parent.Add(parent);
                 }
             }

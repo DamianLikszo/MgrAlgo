@@ -54,14 +54,14 @@ namespace Test.Helpers
 
         private bool ChildrenAndParentCompare(Granule x, Granule y)
         {
-            if (x.Child.Count != y.Child.Count || x.Parent.Count != y.Parent.Count)
+            if (x.Children.Count != y.Children.Count || x.Parent.Count != y.Parent.Count)
             {
                 return false;
             }
 
-            var xChildren = x.Child.OrderBy(CalculateItemOrder).ToList();
+            var xChildren = x.Children.OrderBy(CalculateItemOrder).ToList();
             var xParents = x.Parent.OrderBy(CalculateItemOrder).ToList();
-            var yChildren = y.Child.OrderBy(CalculateItemOrder).ToList();
+            var yChildren = y.Children.OrderBy(CalculateItemOrder).ToList();
             var yParents = y.Parent.OrderBy(CalculateItemOrder).ToList();
 
             return !xChildren.Where((t, j) => !t.SequenceEqual(yChildren[j])).Any() &&

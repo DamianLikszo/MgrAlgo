@@ -62,7 +62,7 @@ namespace magisterka.Services
                         continue;
                     }
 
-                    addGranule.Child.Add(granule);
+                    addGranule.Children.Add(granule);
                     granule.Parent.Add(addGranule);
                 }
 

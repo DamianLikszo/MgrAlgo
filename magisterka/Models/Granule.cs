@@ -9,18 +9,18 @@ namespace magisterka.Models
     {
         public int ObjectNumber { get; }
         public List<int> Inside { get; }
-        public List<Granule> Child { get; set; }
+        public List<Granule> Children { get; set; }
         public List<Granule> Parent { get; set; }
 
         public bool IsMax => Parent.Count == 0;
-        public bool IsMin => Child.Count == 0;
+        public bool IsMin => Children.Count == 0;
 
         public Granule(IEnumerable<int> inside, int objectNumber)
         {
             ObjectNumber = objectNumber;
             Inside = new List<int>(inside);
             Parent = new List<Granule>();
-            Child = new List<Granule>();
+            Children = new List<Granule>();
         }
         
         public int Count() => Inside.Count;
