@@ -14,11 +14,11 @@ namespace magisterka.Services
 
             foreach (var granuleDto in granulesDto)
             {
-                var granule = new Granule(granuleDto.Inside);
+                var granule = new Granule(granuleDto.Inside, granuleDto.ObjectNumber);
 
-                if (granuleDto.Child != null)
+                if (granuleDto.Children != null)
                 {
-                    relations.Add(granule, granuleDto.Child);
+                    relations.Add(granule, granuleDto.Children);
                 }
 
                 granuleSet.Add(granule);
@@ -34,7 +34,7 @@ namespace magisterka.Services
 
             for (var i = 0; i < granuleSet.Count; i++)
             {
-                var granuleDto = new GranuleDto(granuleSet[i].Inside.ToArray());
+                var granuleDto = new GranuleDto(granuleSet[i].Inside.ToArray(), granuleSet[i].ObjectNumber);
 
                 var children = granuleSet[i].Child;
                 if (children.Count > 0)
@@ -46,7 +46,7 @@ namespace magisterka.Services
                         childrenDto[j] = children[j].Inside.ToArray();
                     }
 
-                    granuleDto.Child = childrenDto;
+                    granuleDto.Children = childrenDto;
                 }
 
                 granulesDto[i] = granuleDto;

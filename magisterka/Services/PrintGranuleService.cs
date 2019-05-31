@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using magisterka.Interfaces;
 using magisterka.Models;
 
@@ -22,14 +23,15 @@ namespace magisterka.Services
 
         private List<string> _printContent(GranuleSet granuleSet)
         {
+            var granulesInPreviousOrder = granuleSet.OrderBy(x => x.ObjectNumber).ToList();
             var content = new List<string>();
 
-            var length = granuleSet[0].Count();
+            var length = granulesInPreviousOrder[0].Count();
             for (var i = 0; i < length; i++)
             {
                 var line = $"u{i + 1}";
 
-                foreach (var granule in granuleSet)
+                foreach (var granule in granulesInPreviousOrder)
                 {
                     line += _separator + granule[i].ToString();
                 }

@@ -2,13 +2,14 @@
 {
     public class GranuleDto 
     {
-        public GranuleDto(int[] inside)
+        public GranuleDto(int[] inside, int objectNumber)
         {
             Inside = inside;
+            ObjectNumber = objectNumber;
         }
 
         public int[] Inside { get; }
-        public int[][] Child { get; set; }
-
+        public int[][] Children { get; set; }
+        public int ObjectNumber { get; }
     }
 }

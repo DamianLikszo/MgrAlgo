@@ -20,7 +20,7 @@ namespace Test
         {
             //Arrange
             var granuleSet = new GranuleSet()
-                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+                {new Granule(new[] {1, 0, 1}, 1), new Granule(new[] {1, 1, 1}, 2), new Granule(new[] {0, 0, 1}, 3)};
 
             //Act
             var result = _fileReaderService.Print(granuleSet);

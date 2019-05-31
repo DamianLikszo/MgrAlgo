@@ -7,6 +7,7 @@ namespace magisterka.Models
 {
     public class Granule : IEnumerable<int>, IComparable<Granule>
     {
+        public int ObjectNumber { get; }
         public List<int> Inside { get; }
         public List<Granule> Child { get; set; }
         public List<Granule> Parent { get; set; }
@@ -14,8 +15,9 @@ namespace magisterka.Models
         public bool IsMax => Parent.Count == 0;
         public bool IsMin => Child.Count == 0;
 
-        public Granule(IEnumerable<int> inside)
+        public Granule(IEnumerable<int> inside, int objectNumber)
         {
+            ObjectNumber = objectNumber;
             Inside = new List<int>(inside);
             Parent = new List<Granule>();
             Child = new List<Granule>();

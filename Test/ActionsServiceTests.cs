@@ -382,7 +382,7 @@ namespace Test
         {
             //Arrange
             var granuleSet = new GranuleSet
-                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+                {new Granule(new[] {1, 0, 1}, 1), new Granule(new[] {1, 1, 1}, 2), new Granule(new[] {0, 0, 1}, 3)};
 
             //Act
             var result = _actionsService.SaveGranule(granuleSet, out var error);
@@ -397,7 +397,7 @@ namespace Test
         {
             //Arrange
             var granuleSet = new GranuleSet
-                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+                {new Granule(new[] {1, 0, 1}, 1), new Granule(new[] {1, 1, 1}, 2), new Granule(new[] {0, 0, 3}, 3)};
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
 
             //Act
@@ -414,7 +414,7 @@ namespace Test
             //Arrange
             var path = "path";
             var granuleSet = new GranuleSet()
-                {new Granule(new[] {1, 0, 1}), new Granule(new[] {1, 1, 1}), new Granule(new[] {0, 0, 1})};
+                {new Granule(new[] {1, 0, 1}, 1), new Granule(new[] {1, 1, 1}, 2), new Granule(new[] {0, 0, 1}, 3)};
             _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
 
             string error;

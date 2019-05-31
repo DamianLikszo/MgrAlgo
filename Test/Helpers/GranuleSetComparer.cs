@@ -28,6 +28,11 @@ namespace Test.Helpers
             
             for (var i = 0; i < xList.Count; i++)
             {
+                if (xList[i].ObjectNumber != yList[i].ObjectNumber)
+                {
+                    return false;
+                }
+
                 if (!xList[i].SequenceEqual(yList[i]))
                 {
                     return false;

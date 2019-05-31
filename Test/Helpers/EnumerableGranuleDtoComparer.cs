@@ -50,17 +50,17 @@ namespace Test.Helpers
 
         private bool ChildrenCompare(GranuleDto x, GranuleDto y)
         {
-            if (x.Child == null && y.Child == null)
+            if (x.Children == null && y.Children == null)
             {
                 return true;
             }
 
-            if (x.Child == null || y.Child == null || x.Child.Length != y.Child.Length)
+            if (x.Children == null || y.Children == null || x.Children.Length != y.Children.Length)
             {
                 return false;
             }
 
-            return x.Child.All(childX => y.Child.Any(p => p.SequenceEqual(childX)));
+            return x.Children.All(childX => y.Children.Any(p => p.SequenceEqual(childX)));
         }
 
         private int CalculateItemOrder(GranuleDto granuleDto)
