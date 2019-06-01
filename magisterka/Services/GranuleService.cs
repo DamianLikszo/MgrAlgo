@@ -57,7 +57,8 @@ namespace magisterka.Services
                 foreach (var granule in resultReverse)
                 {
                     var compare = (GranuleComparerResult)addGranule.CompareTo(granule);
-                    if (compare != GranuleComparerResult.IsGreater || CheckContainInParent(granule, addGranule))
+                    if (compare != GranuleComparerResult.IsGreater && compare != GranuleComparerResult.Equal ||
+                        CheckContainInParent(granule, addGranule))
                     {
                         continue;
                     }

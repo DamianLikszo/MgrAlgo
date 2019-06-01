@@ -377,6 +377,154 @@ namespace Test
                     },
                 }
             },
+            // the same granule
+            new object[]
+            {
+                new List<Granule>
+                {
+                    new Granule(new[] {0, 0}, 1),
+                    new Granule(new[] {0, 1}, 2),
+                    new Granule(new[] {0, 1}, 3),
+                    new Granule(new[] {1, 1}, 4)
+                },
+                new GranuleSet
+                {
+                    new Granule(new[] {0, 0}, 1)
+                    {
+                        Children = new List<Granule>(),
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {0, 1}, 2)
+                        }
+                    },
+                    new Granule(new[] {0, 1}, 2)
+                    {
+                        Children = new List<Granule>()
+                        {
+                            new Granule(new[] {0, 0}, 1)
+                        },
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {0, 1}, 3)
+                        }
+                    },
+                    new Granule(new[] {0, 1}, 3)
+                    {
+                        Children = new List<Granule>()
+                        {
+                            new Granule(new[] {0, 1}, 2)
+                        },
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {1, 1}, 4)
+                        }
+                    },
+                    new Granule(new[] {1, 1}, 4)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {0, 1}, 3)
+                        },
+                        Parent = new List<Granule>()
+                    },
+                }
+            },
+            // from thesis
+            new object[]
+            {
+                new List<Granule>
+                {
+                    new Granule(new[] {1, 1, 0, 1, 0, 0, 0, 0}, 1),
+                    new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 2),
+                    new Granule(new[] {0, 0, 1, 0, 0, 0, 0, 0}, 3),
+                    new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 4),
+                    new Granule(new[] {0, 0, 1, 0, 1, 1, 0, 1}, 5),
+                    new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 6),
+                    new Granule(new[] {1, 1, 1, 1, 0, 0, 1, 0}, 7),
+                    new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 8)
+                },
+                new GranuleSet
+                {
+                    new Granule(new[] {1, 1, 0, 1, 0, 0, 0, 0}, 1)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 4)
+                        },
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {1, 1, 1, 1, 0, 0, 1, 0}, 7)
+                        }
+                    },
+                    new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 2)
+                    {
+                        Children = new List<Granule>(),
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 4)
+                        }
+                    },
+                    new Granule(new[] {0, 0, 1, 0, 0, 0, 0, 0}, 3)
+                    {
+                        Children = new List<Granule>(),
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 6),
+                            new Granule(new[] {1, 1, 1, 1, 0, 0, 1, 0}, 7)
+                        }
+                    },
+                    new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 4)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {0, 1, 0, 1, 0, 0, 0, 0}, 2)
+                        },
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {1, 1, 0, 1, 0, 0, 0, 0}, 1)
+                        }
+                    },
+                    new Granule(new[] {0, 0, 1, 0, 1, 1, 0, 1}, 5)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 8)
+                        },
+                        Parent = new List<Granule>()
+                    },
+                    new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 6)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {0, 0, 1, 0, 0, 0, 0, 0}, 3)
+                        },
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 8)
+                        }
+                    },
+                    new Granule(new[] {1, 1, 1, 1, 0, 0, 1, 0}, 7)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {1, 1, 0, 1, 0, 0, 0, 0}, 1),
+                            new Granule(new[] {0, 0, 1, 0, 0, 0, 0, 0}, 3)
+                        },
+                        Parent = new List<Granule>()
+                    },
+                    new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 8)
+                    {
+                        Children = new List<Granule>
+                        {
+                            new Granule(new[] {0, 0, 1, 0, 0, 1, 0, 1}, 6)
+                        },
+                        Parent = new List<Granule>
+                        {
+                            new Granule(new[] {0, 0, 1, 0, 1, 1, 0, 1}, 5)
+                        }
+                    },
+                }
+            },
         };
         #endregion
         
