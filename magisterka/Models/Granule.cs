@@ -36,7 +36,7 @@ namespace magisterka.Models
             return comparer.Compare(this, other);
         }
 
-        public override string ToString() => "{" + string.Join(", ", Inside) + "}";
+        public override string ToString() => "g(u" + ObjectNumber + ") = {" + string.Join(", ", Inside) + "}";
 
         IEnumerator IEnumerable.GetEnumerator()
         {
