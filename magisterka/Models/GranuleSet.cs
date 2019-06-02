@@ -57,6 +57,6 @@ namespace magisterka.Models
             set => Granules[index] = value;
         }
 
-        public List<Granule> GetMax() => Granules.Where(o => o.IsMax).ToList();
+        public List<Granule> GetMax() => Granules.Where(o => o.IsHighest).ToList();
     }
 }
