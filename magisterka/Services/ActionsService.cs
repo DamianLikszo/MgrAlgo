@@ -143,15 +143,10 @@ namespace magisterka.Services
             {
                 return null;
             }
-            if (content.Count != 1)
-            {
-                error = "Nieprawidłowa zawartość pliku json.";
-                return null;
-            }
 
             try
             {
-                var json = content[0];
+                var json = string.Join("", content);
                 var granulesDto = _myJsonConvert.DeserializeObject<GranuleDto[]>(json);
                 var granuleSet = _granuleSetDtoConverter.ConvertFromDto(granulesDto);
                 return new GranuleSetWithPath(granuleSet, path);

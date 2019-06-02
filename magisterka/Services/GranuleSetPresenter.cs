@@ -12,7 +12,7 @@ namespace magisterka.Services
         {
             var result = new List<TreeNode>();
 
-            foreach (var granule in granuleSet.GetMax())
+            foreach (var granule in granuleSet.GetHighest())
             {
                 var branches = _getBranches(granule);
 
