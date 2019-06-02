@@ -36,37 +36,37 @@ namespace Test
             new object[]
             {
                 new Granule(new [] {1, 0, 1, 1, 0}, 1),
-                new Granule(new [] {1, 0, 1, 1, 0}, 1),
+                new Granule(new [] {1, 0, 1, 1, 0}, 2),
                 GranuleComparerResult.Equal
             },
             new object[]
             {
                 new Granule(new [] {0, 0, 1, 0, 0}, 1),
-                new Granule(new [] {1, 0, 1, 1, 0}, 1),
+                new Granule(new [] {1, 0, 1, 1, 0}, 2),
                 GranuleComparerResult.IsLesser
             },
             new object[]
             {
                 new Granule(new [] {1, 1, 1, 1, 0}, 1),
-                new Granule(new [] {1, 0, 1, 1, 0}, 1),
+                new Granule(new [] {1, 0, 1, 1, 0}, 2),
                 GranuleComparerResult.IsGreater
             },
             new object[]
             {
                 new Granule(new [] {1, 0, 1}, 1),
-                new Granule(new [] {1, 0, 1, 1, 0}, 1),
+                new Granule(new [] {1, 0, 1, 1, 0}, 2),
                 GranuleComparerResult.CanNotCompare
             },
             new object[]
             {
                 new Granule(new [] {1, 0, 1, 1, 0}, 1),
-                new Granule(new [] {1, 0, 1, 1}, 1),
+                new Granule(new [] {1, 0, 1, 1}, 2),
                 GranuleComparerResult.CanNotCompare
             },
             new object[]
             {
                 new Granule(new [] {1, 0, 1, 1, 1}, 1),
-                new Granule(new [] {1, 1, 1, 1, 0}, 1),
+                new Granule(new [] {1, 1, 1, 1, 0}, 2),
                 GranuleComparerResult.CanNotCompare
             },
             new object[]
