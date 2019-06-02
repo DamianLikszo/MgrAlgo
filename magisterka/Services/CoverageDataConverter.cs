@@ -20,6 +20,11 @@ namespace magisterka.Services
 
                 foreach (var item in columns)
                 {
+                    if (string.IsNullOrEmpty(item))
+                    {
+                        continue;
+                    }
+
                     if (!int.TryParse(item, out var column))
                     {
                         error = "Nieprawidłowy zestaw danych. Wiersze zawierają inne dane niż liczby.";

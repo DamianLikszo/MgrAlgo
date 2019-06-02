@@ -37,7 +37,10 @@ namespace magisterka.Services
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
-                        result.Add(line);
+                        if (!string.IsNullOrEmpty(line))
+                        {
+                            result.Add(line);
+                        }
                     }
                 }
             }
