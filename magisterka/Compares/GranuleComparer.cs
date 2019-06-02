@@ -17,11 +17,11 @@ namespace magisterka.Compares
             var allIsGreater = true;
             for (var i = 0; i < x.Count(); i++)
             {
-                if (x[i] > y[i])
+                if (allIsLesser && x[i] > y[i])
                 {
                     allIsLesser = false;
                 }
-                else if (x[i] < y[i])
+                else if (allIsGreater && x[i] < y[i])
                 {
                     allIsGreater = false;
                 }
@@ -36,7 +36,8 @@ namespace magisterka.Compares
             {
                 return (int)GranuleComparerResult.Equal;
             }
-            else if (allIsGreater)
+
+            if (allIsGreater)
             {
                 return (int)GranuleComparerResult.IsGreater;
             }
