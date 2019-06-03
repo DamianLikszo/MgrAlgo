@@ -44,7 +44,7 @@ namespace magisterka.Services
 
         private string _printHeader(GranuleSet granuleSet)
         {
-            var header = "";
+            var header = "" + _separator;
 
             for (var i = 0; i < granuleSet.Count; i++)
             {
