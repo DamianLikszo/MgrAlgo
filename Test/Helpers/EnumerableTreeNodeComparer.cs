@@ -34,7 +34,12 @@ namespace Test.Helpers
 
                 var xArrayNodes = xList[i].Nodes.Cast<TreeNode>().ToArray();
                 var yArrayNodes = yList[i].Nodes.Cast<TreeNode>().ToArray();
-                if (Equals(xArrayNodes, yArrayNodes))
+                if (xArrayNodes.Length != yArrayNodes.Length)
+                {
+                    return false;
+                }
+
+                if (xArrayNodes.Where((t, j) => t.Text != yArrayNodes[j].Text).Any())
                 {
                     return false;
                 }
