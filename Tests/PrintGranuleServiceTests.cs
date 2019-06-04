@@ -26,7 +26,7 @@ namespace Test
             var result = _fileReaderService.Print(granuleSet);
 
             //Assert
-            var expected = new List<string> {"g(u1);g(u2);g(u3)", "u1;1;1;0", "u2;0;1;0", "u3;1;1;1"};
+            var expected = new List<string> {";g(u1);g(u2);g(u3)", "u1;1;1;0", "u2;0;1;0", "u3;1;1;1"};
             Assert.Equal(expected, result);
         }
     }

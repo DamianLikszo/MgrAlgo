@@ -302,25 +302,6 @@ namespace Test
         }
 
         [Fact]
-        public void OpenFileAndDeserializeGranuleSet_WhenReadJsonWithMultipleLines_ThenShouldReturnNullWithError()
-        {
-            //Arrange
-            string error;
-            var path = "path";
-            var content = new List<string>{"{\"js", "on\""};
-
-            _fileServiceMock.Setup(x => x.GetPathFromOpenFileDialog(It.IsAny<string>())).Returns(path);
-            _fileServiceMock.Setup(x => x.ReadFile(path, out error)).Returns(content);
-            
-            //Act
-            var result = _actionsService.OpenFileAndDeserializeGranuleSet(out error);
-
-            //Assert
-            Assert.Null(result);
-            Assert.NotEmpty(error);
-        }
-
-        [Fact]
         public void OpenFileAndDeserializeGranuleSet_WhenJsonConvertThrowException_ThenShouldReturnNullWithError()
         {
             //Arrange
