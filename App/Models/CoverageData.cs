@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace magisterka.Models
+namespace App.Models
 {
     public class CoverageData : IList<List<int>>
     {

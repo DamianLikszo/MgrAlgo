@@ -1,6 +1,6 @@
-﻿using magisterka.Models;
+﻿using App.Models;
 
-namespace magisterka.Interfaces
+namespace App.Interfaces
 {
     public interface IActionService
     {

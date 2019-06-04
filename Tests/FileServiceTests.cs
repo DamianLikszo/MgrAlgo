@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using magisterka.Interfaces;
-using magisterka.Services;
-using magisterka.Wrappers;
+using App.Interfaces;
+using App.Services;
+using App.Wrappers;
 using Moq;
 using Xunit;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using magisterka.Compares;
+using App.Compares;
 
-namespace magisterka.Models
+namespace App.Models
 {
     public class Granule : IEnumerable<int>, IComparable<Granule>
     {

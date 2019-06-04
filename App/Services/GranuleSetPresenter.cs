@@ -1,10 +1,10 @@
-﻿using magisterka.Interfaces;
-using magisterka.Models;
+﻿using App.Interfaces;
+using App.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace magisterka.Services
+namespace App.Services
 {
     public class GranuleSetPresenter : IGranuleSetPresenter
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace magisterka.Wrappers
+namespace App.Wrappers
 {
     public interface IMyOpenFileDialog
     {

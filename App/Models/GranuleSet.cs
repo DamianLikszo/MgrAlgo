@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace magisterka.Models
+namespace App.Models
 {
     public class GranuleSet : ICollection<Granule>
     {

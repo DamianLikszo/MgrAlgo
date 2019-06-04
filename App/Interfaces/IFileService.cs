@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace magisterka.Interfaces
+namespace App.Interfaces
 {
     public interface IFileService
     {

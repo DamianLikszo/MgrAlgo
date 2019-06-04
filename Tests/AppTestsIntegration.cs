@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using magisterka.Models;
-using magisterka.Services;
-using magisterka.Wrappers;
+using App.Models;
+using App.Services;
+using App.Wrappers;
 using Test.Helpers;
 using Xunit;
 

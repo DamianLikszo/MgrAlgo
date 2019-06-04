@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using magisterka.Compares;
-using magisterka.Enums;
-using magisterka.Models;
+using App.Compares;
+using App.Enums;
+using App.Models;
 using Xunit;
 
 namespace Test

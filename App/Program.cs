@@ -1,12 +1,12 @@
-﻿using magisterka.Interfaces;
-using magisterka.Services;
+﻿using App.Interfaces;
+using App.Services;
 using SimpleInjector;
 using System;
 using System.Windows.Forms;
-using magisterka.Validators;
-using magisterka.Wrappers;
+using App.Validators;
+using App.Wrappers;
 
-namespace magisterka
+namespace App
 {
     static class Program
     {

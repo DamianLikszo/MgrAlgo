@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using magisterka.Interfaces;
-using magisterka.Models;
-using magisterka.Validators;
-using magisterka.Wrappers;
+using App.Interfaces;
+using App.Models;
+using App.Validators;
+using App.Wrappers;
 
-namespace magisterka.Services
+namespace App.Services
 {
     public class ActionsService : IActionService
     {

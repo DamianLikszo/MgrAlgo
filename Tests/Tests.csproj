@@ -97,7 +97,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\magisterka\App.csproj">
+    <ProjectReference Include="..\App\App.csproj">
       <Project>{426ED4A1-C25B-44D0-9B06-D7C7508DBFD0}</Project>
       <Name>App</Name>
     </ProjectReference>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using magisterka.Interfaces;
-using magisterka.Models;
-using magisterka.Services;
+using App.Interfaces;
+using App.Models;
+using App.Services;
 using Xunit;
 
 namespace Test

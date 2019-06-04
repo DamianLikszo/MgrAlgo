@@ -1,4 +1,4 @@
-﻿namespace magisterka.Wrappers
+﻿namespace App.Wrappers
 {
     public interface IMyJsonConvert
     {

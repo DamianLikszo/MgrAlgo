@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using magisterka.Interfaces;
-using magisterka.Wrappers;
+using App.Interfaces;
+using App.Wrappers;
 
-namespace magisterka.Services
+namespace App.Services
 {
     public class FileService : IFileService
     {

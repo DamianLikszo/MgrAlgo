@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using magisterka.Enums;
-using magisterka.Models;
+using App.Enums;
+using App.Models;
 
-namespace magisterka.Compares
+namespace App.Compares
 {
     public class GranuleComparer : IComparer<Granule>
     {

@@ -1,4 +1,4 @@
-﻿namespace magisterka
+﻿namespace App
 {
     partial class Form
     {

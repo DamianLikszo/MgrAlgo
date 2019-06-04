@@ -1,6 +1,6 @@
-﻿using magisterka.Models;
+﻿using App.Models;
 
-namespace magisterka.Validators
+namespace App.Validators
 {
     public interface ICoverageFileValidator
     {

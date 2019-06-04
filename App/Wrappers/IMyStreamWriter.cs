@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace magisterka.Wrappers
+namespace App.Wrappers
 {
     public interface IMyStreamWriter
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using magisterka.Interfaces;
-using magisterka.Models;
-using magisterka.Services;
-using magisterka.Validators;
-using magisterka.Wrappers;
+using App.Interfaces;
+using App.Models;
+using App.Services;
+using App.Validators;
+using App.Wrappers;
 using Moq;
 using Test.Helpers;
 using Xunit;

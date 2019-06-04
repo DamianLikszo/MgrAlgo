@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using magisterka.Enums;
-using magisterka.Models;
-using magisterka.Interfaces;
+using App.Enums;
+using App.Models;
+using App.Interfaces;
 
-namespace magisterka.Services
+namespace App.Services
 {
     public class GranuleService : IGranuleService
     {

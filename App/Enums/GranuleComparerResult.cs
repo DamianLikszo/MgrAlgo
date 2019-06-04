@@ -1,4 +1,4 @@
-﻿namespace magisterka.Enums
+﻿namespace App.Enums
 {
     public enum GranuleComparerResult
     {

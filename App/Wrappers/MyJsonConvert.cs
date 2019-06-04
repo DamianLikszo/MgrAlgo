@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace magisterka.Wrappers
+namespace App.Wrappers
 {
     public class MyJsonConvert : IMyJsonConvert
     {

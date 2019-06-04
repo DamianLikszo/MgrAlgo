@@ -1,7 +1,7 @@
-﻿using magisterka.Models;
+﻿using App.Models;
 using System.Windows.Forms;
 
-namespace magisterka.Interfaces
+namespace App.Interfaces
 {
     public interface IGranuleSetPresenter
     {

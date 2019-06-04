@@ -1,4 +1,4 @@
-﻿namespace magisterka.Models
+﻿namespace App.Models
 {
     public class GranuleSetWithPath
     {

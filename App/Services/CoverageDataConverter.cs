@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using magisterka.Interfaces;
-using magisterka.Models;
+using App.Interfaces;
+using App.Models;
 
-namespace magisterka.Services
+namespace App.Services
 {
     public class CoverageDataConverter :  ICoverageDataConverter
     {

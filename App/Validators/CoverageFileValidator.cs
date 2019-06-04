@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using magisterka.Models;
+using App.Models;
 
-namespace magisterka.Validators
+namespace App.Validators
 {
     public class CoverageFileValidator : ICoverageFileValidator
     {

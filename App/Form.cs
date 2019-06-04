@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using magisterka.Interfaces;
-using magisterka.Models;
-using magisterka.Wrappers;
+using App.Interfaces;
+using App.Models;
+using App.Wrappers;
 
-namespace magisterka
+namespace App
 {
     public partial class Form : System.Windows.Forms.Form
     {

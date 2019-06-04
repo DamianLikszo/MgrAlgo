@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using magisterka.Models;
-using magisterka.Validators;
+using App.Models;
+using App.Validators;
 using Xunit;
 
 namespace Test
