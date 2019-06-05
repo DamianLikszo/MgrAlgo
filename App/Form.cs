@@ -25,13 +25,14 @@ namespace App
 
         public void btnLoad_Click(object sender, EventArgs e)
         {
-            GranuleSetWithPath = _actionService.Load(out var error);
-            if (GranuleSetWithPath == null)
+            var granuleSet = _actionService.Load(out var error);
+            if (granuleSet == null)
             {
                 _myMessageBox.Show(error);
                 return;
             }
 
+            GranuleSetWithPath = granuleSet;
             RefreshSetFromService();
         }
 
@@ -55,13 +56,14 @@ namespace App
 
         public void btnImportSet_Click(object sender, EventArgs e)
         {
-            GranuleSetWithPath = _actionService.OpenFileAndDeserializeGranuleSet(out var error);
-            if (GranuleSetWithPath == null)
+            var granuleSet = _actionService.OpenFileAndDeserializeGranuleSet(out var error);
+            if (granuleSet == null)
             {
                 _myMessageBox.Show(error);
                 return;
             }
 
+            GranuleSetWithPath = granuleSet;
             RefreshSetFromService();
         }
 
