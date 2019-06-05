@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleInjector, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.4.6.0\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
@@ -65,14 +62,11 @@
     <Compile Include="Interfaces\IPrintGranuleService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
-    <Compile Include="Interfaces\IGranuleSetDtoConverter.cs" />
     <Compile Include="Models\CoverageData.cs" />
     <Compile Include="Models\GranuleDto.cs" />
     <Compile Include="Models\GranuleSetWithPath.cs" />
     <Compile Include="Services\ActionsService.cs" />
     <Compile Include="Services\CoverageDataConverter.cs" />
-    <Compile Include="Services\GranuleSetDtoConverter.cs" />
-    <Compile Include="Wrappers\IMyJsonConvert.cs" />
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMySaveFileDialog.cs" />
@@ -86,7 +80,6 @@
     <Compile Include="Services\PrintGranuleService.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Wrappers\IMyStreamWriter.cs" />
-    <Compile Include="Wrappers\MyJsonConvert.cs" />
     <Compile Include="Wrappers\MySaveFileDialog.cs" />
     <Compile Include="Wrappers\MyStreamReader.cs" />
     <Compile Include="Services\GranuleService.cs" />

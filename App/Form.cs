@@ -49,27 +49,6 @@ namespace App
             }
         }
 
-        public void btnImportSet_Click(object sender, EventArgs e)
-        {
-            var granuleSet = _actionService.OpenFileAndDeserializeGranuleSet(out var error);
-            if (granuleSet == null)
-            {
-                _myMessageBox.Show(error);
-                return;
-            }
-
-            GranuleSetWithPath = granuleSet;
-            RefreshSetFromService();
-        }
-
-        public void btnExportSet_Click(object sender, EventArgs e)
-        {
-            if (!_actionService.SerializeGranuleSetAndSaveFile(GranuleSetWithPath?.GranuleSet, out var error))
-            {
-                _myMessageBox.Show(error);
-            }
-        }
-
         private void RefreshSetFromService()
         {
             if (GranuleSetWithPath == null)
@@ -78,7 +57,6 @@ namespace App
             }
 
             btnSaveGran.Enabled = true;
-            btnExportSet.Enabled = true;
 
             txtPath.Text = GranuleSetWithPath.Path;
             var treeNodes = _granuleSetPresenter.DrawTreeView(GranuleSetWithPath.GranuleSet);

@@ -39,8 +39,6 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.lPath = new System.Windows.Forms.Label();
             this.btnSaveGran = new System.Windows.Forms.Button();
-            this.btnExportSet = new System.Windows.Forms.Button();
-            this.btnImportSet = new System.Windows.Forms.Button();
             this.gbGraph.SuspendLayout();
             this.gbAbout.SuspendLayout();
             this.SuspendLayout();
@@ -166,38 +164,11 @@
             this.btnSaveGran.UseVisualStyleBackColor = true;
             this.btnSaveGran.Click += new System.EventHandler(this.btnSaveGran_Click);
             // 
-            // btnExportSet
-            // 
-            this.btnExportSet.Enabled = false;
-            this.btnExportSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnExportSet.Location = new System.Drawing.Point(12, 283);
-            this.btnExportSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnExportSet.Name = "btnExportSet";
-            this.btnExportSet.Size = new System.Drawing.Size(277, 82);
-            this.btnExportSet.TabIndex = 3;
-            this.btnExportSet.Text = "Eksportuj Zbiór";
-            this.btnExportSet.UseVisualStyleBackColor = true;
-            this.btnExportSet.Click += new System.EventHandler(this.btnExportSet_Click);
-            // 
-            // btnImportSet
-            // 
-            this.btnImportSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnImportSet.Location = new System.Drawing.Point(12, 197);
-            this.btnImportSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnImportSet.Name = "btnImportSet";
-            this.btnImportSet.Size = new System.Drawing.Size(277, 82);
-            this.btnImportSet.TabIndex = 2;
-            this.btnImportSet.Text = "Importuj Zbiór";
-            this.btnImportSet.UseVisualStyleBackColor = true;
-            this.btnImportSet.Click += new System.EventHandler(this.btnImportSet_Click);
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 668);
-            this.Controls.Add(this.btnImportSet);
-            this.Controls.Add(this.btnExportSet);
             this.Controls.Add(this.lPath);
             this.Controls.Add(this.txtPath);
             this.Controls.Add(this.gbAbout);
@@ -230,8 +201,6 @@
         private System.Windows.Forms.Label lPath;
         private System.Windows.Forms.Button btnSaveGran;
         private System.Windows.Forms.TreeView treeResult;
-        private System.Windows.Forms.Button btnExportSet;
-        private System.Windows.Forms.Button btnImportSet;
         private System.Windows.Forms.Label lNameProgram;
     }
 }

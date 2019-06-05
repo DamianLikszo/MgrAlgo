@@ -6,7 +6,5 @@ namespace App.Interfaces
     {
         GranuleSetWithPath Load(out string error);
         bool SaveGranule(GranuleSet granuleSet, out string error);
-        bool SerializeGranuleSetAndSaveFile(GranuleSet granuleSet, out string error);
-        GranuleSetWithPath OpenFileAndDeserializeGranuleSet(out string error);
     }
 }

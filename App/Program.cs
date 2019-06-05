@@ -34,7 +34,6 @@ namespace App
             _container.Register<IMyOpenFileDialog, MyOpenFileDialog>();
             _container.Register<IMySaveFileDialog, MySaveFileDialog>();
             _container.Register<IMyStreamWriter, MyStreamWriter>();
-            _container.Register<IMyJsonConvert, MyJsonConvert>();
 
             // Services
             _container.Register<IPrintGranuleService, PrintGranuleService>();
@@ -43,7 +42,6 @@ namespace App
             _container.Register<IActionService, ActionsService>();
             _container.Register<ICoverageDataConverter, CoverageDataConverter>();
             _container.Register<IFileService, FileService>();
-            _container.Register<IGranuleSetDtoConverter, GranuleSetDtoConverter>();
 
             // Other
             _container.Register<ICoverageFileValidator, CoverageFileValidator>();
