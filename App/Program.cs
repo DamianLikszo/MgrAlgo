@@ -5,6 +5,8 @@ using System;
 using System.Windows.Forms;
 using App.Validators;
 using App.Wrappers;
+using magisterka.Interfaces;
+using magisterka.Services;
 
 namespace App
 {
@@ -42,6 +44,7 @@ namespace App
             _container.Register<IActionService, ActionsService>();
             _container.Register<ICoverageDataConverter, CoverageDataConverter>();
             _container.Register<IFileService, FileService>();
+            _container.Register<IPrintGranSetService, PrintGranSetService>();
 
             // Other
             _container.Register<ICoverageFileValidator, CoverageFileValidator>();

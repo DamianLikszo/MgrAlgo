@@ -59,6 +59,7 @@
     <Compile Include="Compares\GranuleComparer.cs" />
     <Compile Include="Interfaces\IActionService.cs" />
     <Compile Include="Interfaces\ICoverageDataConverter.cs" />
+    <Compile Include="Interfaces\IPrintGranSetService.cs" />
     <Compile Include="Interfaces\IPrintGranuleService.cs" />
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Models\GranuleSetWithPath.cs" />
     <Compile Include="Services\ActionsService.cs" />
     <Compile Include="Services\CoverageDataConverter.cs" />
+    <Compile Include="Services\PrintGranSetService.cs" />
     <Compile Include="Wrappers\IMyMessageBox.cs" />
     <Compile Include="Wrappers\IMyOpenFileDialog.cs" />
     <Compile Include="Wrappers\IMySaveFileDialog.cs" />

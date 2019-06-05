@@ -13,6 +13,7 @@ namespace App
         private readonly IMyMessageBox _myMessageBox;
 
         public GranuleSetWithPath GranuleSetWithPath { get; set; }
+        public TreeNode[] Chains { get; set; }
 
         public Form(IGranuleSetPresenter granuleSetPresenter, IActionService actionService,
             IMyMessageBox myMessageBox)
@@ -57,11 +58,20 @@ namespace App
             }
 
             btnSaveGran.Enabled = true;
+            btnSaveChains.Enabled = true;
 
             txtPath.Text = GranuleSetWithPath.Path;
-            var treeNodes = _granuleSetPresenter.DrawTreeView(GranuleSetWithPath.GranuleSet);
+            Chains = _granuleSetPresenter.DrawTreeView(GranuleSetWithPath.GranuleSet);
             treeResult.Nodes.Clear();
-            treeResult.Nodes.AddRange(treeNodes);
+            treeResult.Nodes.AddRange(Chains);
+        }
+
+        private void btnSaveGranSet_Click(object sender, EventArgs e)
+        {
+            if (!_actionService.SaveMaxChains(Chains, out var error))
+            {
+                _myMessageBox.Show(error);
+            }
         }
     }
 }

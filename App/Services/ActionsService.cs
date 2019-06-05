@@ -1,6 +1,8 @@
-﻿using App.Interfaces;
+﻿using System.Windows.Forms;
+using App.Interfaces;
 using App.Models;
 using App.Validators;
+using magisterka.Interfaces;
 
 namespace App.Services
 {
@@ -11,15 +13,17 @@ namespace App.Services
         private readonly ICoverageFileValidator _coverageFileValidator;
         private readonly IGranuleService _granuleService;
         private readonly IPrintGranuleService _printGranuleService;
+        private readonly IPrintGranSetService _printGranSetService;
 
         public ActionsService(IFileService fileService, IPrintGranuleService printGranuleService,
             ICoverageDataConverter coverageDataConverter, ICoverageFileValidator coverageFileValidator,
-            IGranuleService granuleService)
+            IGranuleService granuleService, IPrintGranSetService printGranSetService)
         {
             _fileService = fileService;
             _coverageDataConverter = coverageDataConverter;
             _coverageFileValidator = coverageFileValidator;
             _granuleService = granuleService;
+            _printGranSetService = printGranSetService;
             _printGranuleService = printGranuleService;
         }
 
@@ -80,6 +84,30 @@ namespace App.Services
             }
 
             var content = _printGranuleService.Print(granuleSet);
+            return _fileService.SaveFile(path, content, out error);
+        }
+
+        public bool SaveMaxChains(TreeNode[] chains, out string error)
+        {
+            error = null;
+            if (chains == null || chains.Length == 0)
+            {
+                error = "Brak łańcuchów maksymalnych.";
+                return false;
+            }
+
+            var path = _fileService.GetPathFromSaveFileDialog(FileService.CsvFilter);
+            if (string.IsNullOrEmpty(path))
+            {
+                if (path == string.Empty)
+                {
+                    error = "Ścieżka do pliku jest pusta.";
+                }
+
+                return false;
+            }
+
+            var content = _printGranSetService.Print(chains);
             return _fileService.SaveFile(path, content, out error);
         }
     }

@@ -39,6 +39,7 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.lPath = new System.Windows.Forms.Label();
             this.btnSaveGran = new System.Windows.Forms.Button();
+            this.btnSaveChains = new System.Windows.Forms.Button();
             this.gbGraph.SuspendLayout();
             this.gbAbout.SuspendLayout();
             this.SuspendLayout();
@@ -155,14 +156,27 @@
             // 
             this.btnSaveGran.Enabled = false;
             this.btnSaveGran.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnSaveGran.Location = new System.Drawing.Point(12, 98);
+            this.btnSaveGran.Location = new System.Drawing.Point(12, 107);
             this.btnSaveGran.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSaveGran.Name = "btnSaveGran";
             this.btnSaveGran.Size = new System.Drawing.Size(277, 82);
             this.btnSaveGran.TabIndex = 1;
-            this.btnSaveGran.Text = "Zapisz Granule";
+            this.btnSaveGran.Text = "Zapisz Tabele Granul";
             this.btnSaveGran.UseVisualStyleBackColor = true;
             this.btnSaveGran.Click += new System.EventHandler(this.btnSaveGran_Click);
+            // 
+            // btnSaveChains
+            // 
+            this.btnSaveChains.Enabled = false;
+            this.btnSaveChains.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
+            this.btnSaveChains.Location = new System.Drawing.Point(12, 203);
+            this.btnSaveChains.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSaveChains.Name = "btnSaveChains";
+            this.btnSaveChains.Size = new System.Drawing.Size(277, 82);
+            this.btnSaveChains.TabIndex = 1;
+            this.btnSaveChains.Text = "Zapisz Wynik";
+            this.btnSaveChains.UseVisualStyleBackColor = true;
+            this.btnSaveChains.Click += new System.EventHandler(this.btnSaveGranSet_Click);
             // 
             // Form
             // 
@@ -174,6 +188,7 @@
             this.Controls.Add(this.gbAbout);
             this.Controls.Add(this.gbGraph);
             this.Controls.Add(this.btnEnd);
+            this.Controls.Add(this.btnSaveChains);
             this.Controls.Add(this.btnSaveGran);
             this.Controls.Add(this.btnLoad);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -202,6 +217,7 @@
         private System.Windows.Forms.Button btnSaveGran;
         private System.Windows.Forms.TreeView treeResult;
         private System.Windows.Forms.Label lNameProgram;
+        private System.Windows.Forms.Button btnSaveChains;
     }
 }
 
