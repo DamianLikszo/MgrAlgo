@@ -49,11 +49,6 @@ namespace App
             }
         }
 
-        public void btnInfo_Click(object sender, EventArgs e)
-        {
-            //TODO: Information
-        }
-
         public void btnImportSet_Click(object sender, EventArgs e)
         {
             var granuleSet = _actionService.OpenFileAndDeserializeGranuleSet(out var error);

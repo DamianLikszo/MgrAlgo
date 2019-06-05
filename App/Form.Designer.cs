@@ -29,19 +29,18 @@
         private void InitializeComponent()
         {
             this.btnLoad = new System.Windows.Forms.Button();
-            this.btnInfo = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
             this.gbGraph = new System.Windows.Forms.GroupBox();
             this.treeResult = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gbAbout = new System.Windows.Forms.GroupBox();
+            this.lNameProgram = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.lPath = new System.Windows.Forms.Label();
             this.btnSaveGran = new System.Windows.Forms.Button();
             this.btnExportSet = new System.Windows.Forms.Button();
             this.btnImportSet = new System.Windows.Forms.Button();
-            this.lNameProgram = new System.Windows.Forms.Label();
             this.gbGraph.SuspendLayout();
             this.gbAbout.SuspendLayout();
             this.SuspendLayout();
@@ -57,18 +56,6 @@
             this.btnLoad.Text = "Wczytaj";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
-            // btnInfo
-            // 
-            this.btnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold);
-            this.btnInfo.Location = new System.Drawing.Point(12, 381);
-            this.btnInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(277, 82);
-            this.btnInfo.TabIndex = 4;
-            this.btnInfo.Text = "Instrukcja";
-            this.btnInfo.UseVisualStyleBackColor = true;
-            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // btnEnd
             // 
@@ -136,6 +123,16 @@
             this.gbAbout.TabIndex = 3;
             this.gbAbout.TabStop = false;
             // 
+            // lNameProgram
+            // 
+            this.lNameProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
+            this.lNameProgram.Location = new System.Drawing.Point(5, 18);
+            this.lNameProgram.Name = "lNameProgram";
+            this.lNameProgram.Size = new System.Drawing.Size(266, 34);
+            this.lNameProgram.TabIndex = 2;
+            this.lNameProgram.Text = "Praca magisterska";
+            this.lNameProgram.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // txtPath
             // 
             this.txtPath.Enabled = false;
@@ -194,16 +191,6 @@
             this.btnImportSet.UseVisualStyleBackColor = true;
             this.btnImportSet.Click += new System.EventHandler(this.btnImportSet_Click);
             // 
-            // lNameProgram
-            // 
-            this.lNameProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic);
-            this.lNameProgram.Location = new System.Drawing.Point(5, 18);
-            this.lNameProgram.Name = "lNameProgram";
-            this.lNameProgram.Size = new System.Drawing.Size(266, 34);
-            this.lNameProgram.TabIndex = 2;
-            this.lNameProgram.Text = "Praca magisterska";
-            this.lNameProgram.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -217,7 +204,6 @@
             this.Controls.Add(this.gbGraph);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnSaveGran);
-            this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.btnLoad);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -235,7 +221,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.Button btnInfo;
         private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.GroupBox gbGraph;
         private System.Windows.Forms.Label label1;
