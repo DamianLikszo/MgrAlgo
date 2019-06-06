@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace magisterka.Interfaces
+namespace App.Interfaces
 {
     public interface IPrintGranSetService
     {

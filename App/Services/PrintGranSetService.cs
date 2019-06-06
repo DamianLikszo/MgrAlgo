@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using magisterka.Interfaces;
+using App.Interfaces;
 
-namespace magisterka.Services
+namespace App.Services
 {
     public class PrintGranSetService : IPrintGranSetService
     {

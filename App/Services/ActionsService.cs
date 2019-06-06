@@ -2,7 +2,6 @@
 using App.Interfaces;
 using App.Models;
 using App.Validators;
-using magisterka.Interfaces;
 
 namespace App.Services
 {

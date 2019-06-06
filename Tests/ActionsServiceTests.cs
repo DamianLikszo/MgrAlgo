@@ -3,7 +3,6 @@ using App.Interfaces;
 using App.Models;
 using App.Services;
 using App.Validators;
-using magisterka.Interfaces;
 using Moq;
 using Test.Helpers;
 using Xunit;

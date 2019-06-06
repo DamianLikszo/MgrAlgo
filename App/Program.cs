@@ -5,8 +5,6 @@ using System;
 using System.Windows.Forms;
 using App.Validators;
 using App.Wrappers;
-using magisterka.Interfaces;
-using magisterka.Services;
 
 namespace App
 {
