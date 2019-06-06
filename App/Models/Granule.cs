@@ -12,8 +12,8 @@ namespace App.Models
         public List<Granule> Children { get; set; }
         public List<Granule> Parent { get; set; }
 
-        public bool IsHighest => Parent.Count == 0;
-        public bool IsLowest => Children.Count == 0;
+        public bool IsMax => Parent.Count == 0;
+        public bool IsMin => Children.Count == 0;
 
         public Granule(IEnumerable<int> inside, int objectNumber)
         {

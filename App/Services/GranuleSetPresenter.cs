@@ -12,7 +12,7 @@ namespace App.Services
         {
             var result = new List<TreeNode>();
 
-            foreach (var granule in granuleSet.GetHighest())
+            foreach (var granule in granuleSet.GetMax())
             {
                 var branches = _getBranches(granule);
 

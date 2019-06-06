@@ -57,7 +57,7 @@ namespace App.Models
             set => Granules[index] = value;
         }
 
-        public List<Granule> GetHighest() => Granules.Where(o => o.IsHighest).ToList();
-        public List<Granule> GetLowest() => Granules.Where(o => o.IsLowest).ToList();
+        public List<Granule> GetMax() => Granules.Where(o => o.IsMax).ToList();
+        public List<Granule> GetMin() => Granules.Where(o => o.IsMin).ToList();
     }
 }
