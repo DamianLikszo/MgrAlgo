@@ -31,6 +31,23 @@ namespace Test
             Assert.Null(error);
         }
 
+
+        [Fact]
+        public void ConvertContentToData_WhenPassContentWithSeparatorOnEndOfLine_ThenShouldConvertToDataWithoutError()
+        {
+            // Arrange
+            var content = new List<string> { "1;2;3;", "1;2;3", "1;2;3" };
+
+            // Act
+            var result = _coverageDataConverter.Convert(content, out var error);
+
+            // Assert
+            var expected = new CoverageData(new List<List<int>>
+                {new List<int> {1, 2, 3}, new List<int> {1, 2, 3}, new List<int> {1, 2, 3}});
+            Assert.Equal(expected, result);
+            Assert.Null(error);
+        }
+
         [Fact]
         public void ConvertContentToData_WhenPassContentWithWrongChars_ThenShouldReturnNullWithError()
         {

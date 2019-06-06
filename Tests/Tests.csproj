@@ -75,6 +75,7 @@
     <Compile Include="CoverageFileValidatorTests.cs" />
     <Compile Include="CoverageDataConverterTests.cs" />
     <Compile Include="AppTestsIntegration.cs" />
+    <Compile Include="PrintGranSetServiceTests.cs" />
     <Compile Include="PrintGranuleServiceTests.cs" />
     <Compile Include="FileServiceTests.cs" />
     <Compile Include="GranuleComparerTests.cs" />

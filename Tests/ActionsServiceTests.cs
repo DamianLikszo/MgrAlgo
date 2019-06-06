@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using App.Interfaces;
 using App.Models;
 using App.Services;
@@ -148,7 +149,7 @@ namespace Test
         }
 
         [Fact]
-        public void SaveFile_WhenGranuleSetIsNull_ThenShouldReturnFalseWithError()
+        public void SaveGranule_WhenGranuleSetIsNull_ThenShouldReturnFalseWithError()
         {
             //Arrange
 
@@ -162,7 +163,7 @@ namespace Test
 
 
         [Fact]
-        public void SaveFile_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        public void SaveGranule_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
         {
             //Arrange
             var granuleSet = new GranuleSet
@@ -177,7 +178,7 @@ namespace Test
         }
 
         [Fact]
-        public void SaveFile_WhenPathIsNull_ThenShouldReturnFalseWithError()
+        public void SaveGranule_WhenPathIsNull_ThenShouldReturnFalseWithError()
         {
             //Arrange
             var granuleSet = new GranuleSet
@@ -193,7 +194,7 @@ namespace Test
         }
 
         [Fact]
-        public void SaveFile_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
+        public void SaveGranule_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
         {
             //Arrange
             var path = "path";
@@ -206,6 +207,80 @@ namespace Test
 
             //Act
             var result = _actionsService.SaveGranule(granuleSet, out error);
+
+            //Assert
+            Assert.True(result);
+            Assert.Null(error);
+        }
+
+        [Fact]
+        public void SaveMaxChains_WhenChainsIsNull_ThenShouldReturnFalseWithError()
+        {
+            //Arrange
+
+            //Act
+            var result = _actionsService.SaveMaxChains(null, out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.NotEmpty(error);
+        }
+
+
+        [Fact]
+        public void SaveMaxChains_WhenDoNotChooseFile_ThenShouldReturnFalseWithoutError()
+        {
+            //Arrange
+            var chains = new []
+            {
+                new TreeNode("1", new [] {new TreeNode("1.1"), new TreeNode("1.2"),}),
+                new TreeNode("2", new TreeNode[0])
+            };
+  
+            //Act
+            var result = _actionsService.SaveMaxChains(chains, out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.Null(error);
+        }
+
+        [Fact]
+        public void SaveMaxChains_WhenPathIsNull_ThenShouldReturnFalseWithError()
+        {
+            //Arrange
+            var chains = new[]
+            {
+                new TreeNode("1", new [] {new TreeNode("1.1"), new TreeNode("1.2"),}),
+                new TreeNode("2", new TreeNode[0])
+            };
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(string.Empty);
+
+            //Act
+            var result = _actionsService.SaveMaxChains(chains, out var error);
+
+            //Assert
+            Assert.False(result);
+            Assert.NotEmpty(error);
+        }
+
+        [Fact]
+        public void SaveMaxChains_WhenEverythingIsFine_ThenShouldReturnTrueWithoutError()
+        {
+            //Arrange
+            var path = "path";
+            var chains = new[]
+            {
+                new TreeNode("1", new [] {new TreeNode("1.1"), new TreeNode("1.2"),}),
+                new TreeNode("2", new TreeNode[0])
+            };
+            _fileServiceMock.Setup(x => x.GetPathFromSaveFileDialog(It.IsAny<string>())).Returns(path);
+
+            string error;
+            _fileServiceMock.Setup(x => x.SaveFile(path, It.IsAny<List<string>>(), out error)).Returns(true);
+
+            //Act
+            var result = _actionsService.SaveMaxChains(chains, out error);
 
             //Assert
             Assert.True(result);
