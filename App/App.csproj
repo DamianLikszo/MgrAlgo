@@ -64,7 +64,6 @@
     <Compile Include="Interfaces\IFileService.cs" />
     <Compile Include="Interfaces\IGranuleService.cs" />
     <Compile Include="Models\CoverageData.cs" />
-    <Compile Include="Models\GranuleDto.cs" />
     <Compile Include="Models\GranuleSetWithPath.cs" />
     <Compile Include="Services\ActionsService.cs" />
     <Compile Include="Services\CoverageDataConverter.cs" />

@@ -3,6 +3,7 @@ using App.Interfaces;
 using App.Models;
 using App.Services;
 using App.Validators;
+using magisterka.Interfaces;
 using Moq;
 using Test.Helpers;
 using Xunit;
@@ -24,8 +25,10 @@ namespace Test
             _coverageFileValidatorMock = new Mock<ICoverageFileValidator>();
             _granuleServiceMock = new Mock<IGranuleService>();
             var printGranuleServiceMock = new Mock<IPrintGranuleService>();
+            var printGranSetServiceMock = new Mock<IPrintGranSetService>();
             _actionsService = new ActionsService(_fileServiceMock.Object, printGranuleServiceMock.Object,
-                _coverageDataConverterMock.Object, _coverageFileValidatorMock.Object, _granuleServiceMock.Object);
+                _coverageDataConverterMock.Object, _coverageFileValidatorMock.Object, _granuleServiceMock.Object,
+                printGranSetServiceMock.Object);
         }
 
         [Fact]

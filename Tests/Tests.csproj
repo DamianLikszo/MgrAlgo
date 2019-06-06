@@ -80,7 +80,6 @@
     <Compile Include="GranuleComparerTests.cs" />
     <Compile Include="GranuleServiceTests.cs" />
     <Compile Include="Helpers\CallbackOutErrorHelper.cs" />
-    <Compile Include="Helpers\EnumerableGranuleDtoComparer.cs" />
     <Compile Include="Helpers\GranuleSetComparer.cs" />
     <Compile Include="Helpers\EnumerableTreeNodeComparer.cs" />
     <Compile Include="PresentGranuleSetTests.cs" />
